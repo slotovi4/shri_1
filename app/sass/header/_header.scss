@@ -1,0 +1,28 @@
+.header {
+  padding: 33px 40px;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  &__logo {
+    width: 108px;
+    height: 27px;
+    background-image: url("../img/logo.png");
+    margin-right: 21px;
+  }
+
+  &__menu {
+  }
+
+  &__link {
+    line-height: 1.25rem;
+    color: rgba($primary-color, 0.6);
+    padding-right: 22px;
+    font-weight: 600;
+
+    &_active {
+      color: $primary-color;
+    }
+  }
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" href="css/main.min.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header__logo"></div>
+        <div class="header__menu">
+            <a class="header__link header__link_active" href="#">События</a>
+            <a class="header__link" href="#">Сводка</a>
+            <a class="header__link" href="#">Устройства</a>
+            <a class="header__link" href="#">Сценарии</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 class="container__title">Лента событий</h1>
+
+    </main>
+
+    <script>
+        let request = new XMLHttpRequest();
+        request.open('GET', 'events.json', true);
+
+        request.onload = function () {
+            if (request.status >= 200 && request.status < 400) {
+                let data = JSON.parse(request.responseText);
+                let events = data.events;
+
+                events.forEach(function (el) {
+                    /* Get Data */
+                    let type = el.type,
+                        title = el.title,
+                        source = el.source,
+                        time = el.time,
+                        description = el.description,
+                        icon = el.icon,
+                        size = el.size;
+
+                    /* Template */
+                    let content = document.querySelector('template').content,
+                        block = content.querySelector('#event'),
+                        blockIcon = content.querySelector('#event-icon'),
+                        blockHeader = content.querySelector('#event-header'),
+                        blockTitle = content.querySelector('.event__title'),
+                        blockSource = content.querySelector('.event__source'),
+                        blockTime = content.querySelector('.event__time'),
+                        blockDesc = content.querySelector('.event__desc');
+
+                    /* Fill Template */
+                    block.className = 'event event_size-' + size;
+                    blockIcon.className = 'event__icon event__icon_' + icon;
+                    blockHeader.className = 'event-header event-header_' + type;
+                    blockTitle.textContent = title;
+                    blockSource.textContent = source;
+                    blockTime.textContent = time;
+                    blockDesc.textContent = description;
+
+
+                    document.querySelector('.container').appendChild(content.cloneNode(true));
+                });
+
+            } else {
+                throw "Error: data not received";
+            }
+        };
+
+        request.send();
+    </script>
+
+    <template>
+        <div id="event" class="event">
+            <div id="event-header">
+                <div id='event-icon' class="event__icon"></div>
+                <h3 class="event__title"></h3>
+                <span class="event__source"></span>
+                <span class="event__time"></span>
+            </div>
+            <div class="event-info">
+                <span class="event__desc"></span>
+            </div>
+        </div>
+    </template>
+</body>
+
+</html>
