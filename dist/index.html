@@ -49,17 +49,21 @@
                     /* Template */
                     let content = document.querySelector('template').content,
                         block = content.querySelector('#event'),
-                        blockIcon = content.querySelector('#event-icon'),
-                        //blockHeader = content.querySelector('#event-header'),
+                        blockIcon = content.querySelector('.event__icon'),
                         blockTitle = content.querySelector('.event__title'),
                         blockSource = content.querySelector('.event__source'),
                         blockTime = content.querySelector('.event__time'),
-                        blockDesc = content.querySelector('.event__desc');
+                        blockDesc = content.querySelector('.event__desc'),
+                        blockClose = content.querySelector('.event__close');
+                    //blockCont = content.querySelector('.event__continue');
 
                     /* Fill Template */
                     block.className = 'event event_size-' + size + ' event_type-' + type;
-                    blockIcon.className = 'event__icon event__icon_' + icon;
-                    //blockHeader.className = 'event-header event-header_' + type;
+                    //blockIcon.className = 'event__icon event__icon_' + icon;
+                    blockIcon.setAttribute('src', 'img/' + icon + '.svg');
+                    blockIcon.setAttribute('alt', icon);
+                    blockClose.className = 'event__close event__close_type-' + type;
+                    //blockCont.className = 'event__continue event__continue_type-' + type;
                     blockTitle.textContent = title;
                     blockSource.textContent = source;
                     blockTime.textContent = time;
@@ -79,15 +83,22 @@
 
     <template>
         <div id="event" class="event">
+            <div class="event__close"></div>
             <div class="event-header">
-                <div id='event-icon' class="event__icon"></div>
+                <img src="" alt="" class="event__icon">
                 <h3 class="event__title"></h3>
             </div>
-            <span class="event__source"></span>
-            <span class="event__time"></span>
+
+            <div class="event-system">
+                <span class="event__source"></span>
+                <span class="event__time"></span>
+            </div>
+
             <div class="event-info">
                 <span class="event__desc"></span>
             </div>
+
+            <div class="event__continue"></div>
         </div>
     </template>
 </body>
