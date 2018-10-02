@@ -12,14 +12,16 @@
     margin-right: 21px;
   }
 
-  &__menu {
-  }
-
   &__link {
     line-height: 1.25rem;
     color: rgba($primary-color, 0.6);
     padding-right: 22px;
     font-weight: 600;
+    transition: all 0.3s ease-out;
+
+    &:hover {
+      color: red;
+    }
 
     &_active {
       color: $primary-color;

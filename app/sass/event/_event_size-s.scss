@@ -1,0 +1,13 @@
+.event_size-s {
+  grid-column: span 2;
+
+  & .event__source {
+    display: block;
+    margin-top: 20px;
+  }
+
+  & .event__time {
+    display: block;
+    margin-top: 20px;
+  }
+}

@@ -1,0 +1,9 @@
+.event_size-l {
+  grid-column: span 4;
+  grid-row-end: span 3;
+
+  & .event-system {
+    display: flex;
+    justify-content: space-between;
+  }
+}

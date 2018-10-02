@@ -44,7 +44,8 @@
                         time = el.time,
                         description = el.description,
                         icon = el.icon,
-                        size = el.size;
+                        size = el.size,
+                        data = el.data;
 
                     /* Template */
                     let content = document.querySelector('template').content,
@@ -54,20 +55,36 @@
                         blockSource = content.querySelector('.event__source'),
                         blockTime = content.querySelector('.event__time'),
                         blockDesc = content.querySelector('.event__desc'),
-                        blockClose = content.querySelector('.event__close');
-                    //blockCont = content.querySelector('.event__continue');
+                        blockClose = content.querySelector('.event__close'),
+                        blockImage = content.querySelector('.event__image'),
+                        blockInfo = content.querySelector('.event-info');
+
+                    /* Custom Data */
+                    blockImage.setAttribute('src', '');
+                    blockImage.setAttribute('alt', '');
+
+                    if (data) {
+                        let dType = data.type;
+
+                        /*!!! Temporary Solution*/
+                        if (dType == 'graph') {
+                            blockImage.setAttribute('src', 'img/graph.png');
+                            blockImage.setAttribute('alt', 'graph');
+                        }
+                    }
 
                     /* Fill Template */
                     block.className = 'event event_size-' + size + ' event_type-' + type;
-                    //blockIcon.className = 'event__icon event__icon_' + icon;
                     blockIcon.setAttribute('src', 'img/' + icon + '.svg');
                     blockIcon.setAttribute('alt', icon);
                     blockClose.className = 'event__close event__close_type-' + type;
-                    //blockCont.className = 'event__continue event__continue_type-' + type;
                     blockTitle.textContent = title;
                     blockSource.textContent = source;
                     blockTime.textContent = time;
                     blockDesc.textContent = description;
+
+                    //hide event info block if empry data
+                    !description ? blockInfo.classList.add('event-info_hide') : blockInfo.classList.remove('event-info_hide');
 
 
                     document.querySelector('.container').appendChild(content.cloneNode(true));
@@ -85,7 +102,7 @@
         <div id="event" class="event">
             <div class="event__close"></div>
             <div class="event-header">
-                <img src="" alt="" class="event__icon">
+                <img class="event__icon" src="" alt="">
                 <h3 class="event__title"></h3>
             </div>
 
@@ -96,6 +113,7 @@
 
             <div class="event-info">
                 <span class="event__desc"></span>
+                <img class="event__image" src="" alt="">
             </div>
 
             <div class="event__continue"></div>

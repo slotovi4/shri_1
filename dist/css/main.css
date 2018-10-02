@@ -29,7 +29,10 @@ a {
     line-height: 1.25rem;
     color: rgba(51, 51, 51, 0.6);
     padding-right: 22px;
-    font-weight: 600; }
+    font-weight: 600;
+    transition: all 0.3s ease-out; }
+    .header__link:hover {
+      color: red; }
     .header__link_active {
       color: #333333; }
 
@@ -40,7 +43,8 @@ a {
   grid-template-columns: repeat(6, 1fr);
   grid-auto-flow: dense;
   justify-content: center;
-  grid-gap: 20px; }
+  grid-gap: 20px;
+  align-items: flex-start; }
   .container__title {
     font-size: 2.25rem;
     line-height: 2.5rem;
@@ -54,7 +58,8 @@ a {
   border-radius: 20px;
   transition: all 0.3s ease-out;
   cursor: pointer;
-  position: relative; }
+  position: relative;
+  height: auto; }
   .event:hover {
     box-shadow: 0 2px 6px 0 rgba(197, 186, 186, 0.5); }
   .event:hover .event__continue,
@@ -71,12 +76,6 @@ a {
     .event_type-critical .event-header,
     .event_type-critical .event-system {
       color: white; }
-  .event_size-l {
-    grid-column: span 4; }
-  .event_size-m {
-    grid-column: span 3; }
-  .event_size-s {
-    grid-column: span 2; }
   .event__icon {
     width: 52px;
     height: 52px;
@@ -94,6 +93,13 @@ a {
   .event__time {
     font-size: 1.125rem;
     line-height: 1.31rem; }
+  .event__desc {
+    color: black;
+    font-size: 1.25rem;
+    line-height: 1.4rem; }
+  .event__image {
+    display: inline-block;
+    margin-top: 30px; }
   .event__close {
     width: 14px;
     height: 14px;
@@ -118,7 +124,7 @@ a {
   display: flex;
   align-items: center;
   padding: 20px 20px 0 20px;
-  margin-bottom: 10px; }
+  margin-bottom: 16px; }
 
 .event-system {
   padding: 0 20px 20px 20px; }
@@ -128,3 +134,27 @@ a {
   padding: 20px;
   border-radius: 18px;
   background-color: #fafafa; }
+  .event-info_hide {
+    display: none; }
+
+.event_size-l {
+  grid-column: span 4;
+  grid-row-end: span 3; }
+  .event_size-l .event-system {
+    display: flex;
+    justify-content: space-between; }
+
+.event_size-m {
+  grid-column: span 3; }
+  .event_size-m .event-system {
+    display: flex;
+    justify-content: space-between; }
+
+.event_size-s {
+  grid-column: span 2; }
+  .event_size-s .event__source {
+    display: block;
+    margin-top: 20px; }
+  .event_size-s .event__time {
+    display: block;
+    margin-top: 20px; }

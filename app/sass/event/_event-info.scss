@@ -3,4 +3,8 @@
   padding: 20px;
   border-radius: 18px;
   background-color: $event-color;
+
+  &_hide {
+    display: none;
+  }
 }

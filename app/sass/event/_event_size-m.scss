@@ -1,0 +1,8 @@
+.event_size-m {
+  grid-column: span 3;
+
+  & .event-system {
+    display: flex;
+    justify-content: space-between;
+  }
+}
