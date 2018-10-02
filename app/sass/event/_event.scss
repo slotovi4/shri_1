@@ -1,0 +1,48 @@
+.event {
+  //grid-row: span 1;
+  border-radius: 20px;
+  padding: 20px;
+  transition: all 0.3s ease-out;
+  cursor: pointer;
+  position: relative;
+
+  &_type-info {
+    background-color: $event-color;
+
+    &:hover {
+      background: #f3f3f3;
+    }
+  }
+
+  &:hover {
+    box-shadow: 0 2px 6px 0 rgba(197, 186, 186, 0.5);
+  }
+
+  &_type-critical {
+    background-color: $event-critical;
+    color: white;
+  }
+
+  &_size-l {
+    grid-column: span 4;
+  }
+
+  &_size-m {
+    grid-column: span 3;
+  }
+
+  &_size-s {
+    grid-column: span 2;
+  }
+
+  &__icon {
+    width: 52px;
+    height: 52px;
+    display: inline-block;
+  }
+
+  &__title {
+    margin: 0;
+    display: inline-block;
+  }
+}
