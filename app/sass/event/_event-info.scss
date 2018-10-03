@@ -3,6 +3,7 @@
   padding: 20px;
   border-radius: 18px;
   background-color: $event-color;
+  flex: 0 0 auto;
 
   &_hide {
     display: none;

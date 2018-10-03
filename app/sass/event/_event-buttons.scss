@@ -1,0 +1,33 @@
+.event-buttons {
+  display: inline-block;
+  width: 100%;
+  margin-top: 30px;
+
+  &_hide {
+    display: none;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 132px;
+    width: 100%;
+    height: 54px;
+    border-radius: 8px;
+    color: black;
+    font-weight: 600;
+    font-size: 1.25rem;
+    float: left;
+    line-height: 1.4rem;
+
+    &_active {
+      background-color: #ffd93e;
+    }
+
+    &_inactive {
+      background-color: #e5e5e5;
+      margin-left: 18px;
+    }
+  }
+}

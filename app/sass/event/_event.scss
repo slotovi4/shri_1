@@ -3,6 +3,9 @@
   transition: all 0.3s ease-out;
   cursor: pointer;
   position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 
   &:hover {
     box-shadow: 0 2px 6px 0 rgba(197, 186, 186, 0.5);
@@ -41,17 +44,17 @@
   &__title {
     margin: 0;
     padding-left: 18px;
-    display: inline-block;
     font-size: 1.5rem;
     line-height: 1.75rem;
     font-weight: 600;
+
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
 
-  &__source {
-    font-size: 1.125rem;
-    line-height: 1.31rem;
-  }
-
+  &__source,
   &__time {
     font-size: 1.125rem;
     line-height: 1.31rem;
@@ -61,11 +64,30 @@
     color: black;
     font-size: 1.25rem;
     line-height: 1.4rem;
+    display: inline-block;
+    width: 100%;
+    padding-right: 40px;
   }
 
   &__image {
     display: inline-block;
     margin-top: 30px;
+    width: 100%;
+
+    &_hide {
+      display: none;
+    }
+  }
+
+  &__temperature,
+  &__humidity {
+    color: black;
+    font-size: 1.125rem;
+    line-height: 1.31rem;
+  }
+
+  &__humidity {
+    padding-left: 50px;
   }
 
   &__close {

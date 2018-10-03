@@ -24,7 +24,6 @@
 
     <main class="container">
         <h1 class="container__title">Лента событий</h1>
-
     </main>
 
     <script>
@@ -57,19 +56,73 @@
                         blockDesc = content.querySelector('.event__desc'),
                         blockClose = content.querySelector('.event__close'),
                         blockImage = content.querySelector('.event__image'),
+                        blockTemp = content.querySelector('.event__temperature'),
+                        blockHumi = content.querySelector('.event__humidity'),
+                        blockClimate = content.querySelector('.event-climate'),
+                        blockMusic = content.querySelector('.event-music'),
+                        blockMusImg = content.querySelector('.event-music__image'),
+                        blockMusName = content.querySelector('.event-music__name'),
+                        blockMusTime = content.querySelector('.event-music__time'),
+                        blockMusVolume = content.querySelector('.event-music-controlls__volume-value'),
+                        blockButt = content.querySelector('.event-buttons'),
+                        blockButtAct = content.querySelector('.event-buttons__button_active'),
+                        blockButtIna = content.querySelector('.event-buttons__button_inactive'),
                         blockInfo = content.querySelector('.event-info');
 
                     /* Custom Data */
-                    blockImage.setAttribute('src', '');
-                    blockImage.setAttribute('alt', '');
+                    //hide blocks
+                    blockImage.classList.add('event__image_hide');
+                    blockClimate.classList.add('event-climate_hide');
+                    blockMusic.classList.add('event-music_hide');
+                    blockButt.classList.add('event-buttons_hide');
 
                     if (data) {
-                        let dType = data.type;
+                        let dType = data.type,
+                            dTemp = data.temperature,
+                            dHumi = data.humidity,
+                            dAlbum = data.albumcover,
+                            dArtist = data.artist,
+                            dTrack = data.track,
+                            dVolume = data.volume,
+                            dButton = data.buttons,
+                            dImage = data.image;
 
-                        /*!!! Temporary Solution*/
+                        /* Temporary Solution */
+                        //Image
                         if (dType == 'graph') {
                             blockImage.setAttribute('src', 'img/graph.png');
                             blockImage.setAttribute('alt', 'graph');
+                            blockImage.classList.remove('event__image_hide');
+                        } else if (dImage == 'get_it_from_mocks_:3.jpg') {
+                            blockImage.setAttribute('src', 'img/image.jpg');
+                            blockImage.setAttribute('alt', 'image.jpg');
+                            blockImage.classList.remove('event__image_hide');
+                        }
+
+                        //Climate
+                        if (dTemp) blockTemp.innerHTML = 'Температура: <b>' + dTemp + ' C</b>';
+                        if (dHumi) blockHumi.innerHTML = 'Влажность: <b>' + dHumi + '%</b>';
+                        if (dTemp || dHumi) blockClimate.classList.remove('event-climate_hide'); //show event climate block
+
+                        //Music
+                        if (dTrack) {
+                            let dLength = data.track.length,
+                                dName = data.track.name;
+
+                            if (dAlbum) blockMusImg.style.backgroundImage = 'url(' + dAlbum + ')';
+                            if (dName) blockMusName.textContent = dArtist + ' - ' + dName;
+                            if (dLength) blockMusTime.textContent = dLength;
+                            if (dVolume) blockMusVolume.textContent = dVolume + '%';
+
+                            blockMusic.classList.remove('event-music_hide'); //show event music block
+                        }
+
+                        //Buttons
+                        if (dButton) {
+                            if (dButton[0]) blockButtAct.textContent = dButton[0];
+                            if (dButton[1]) blockButtIna.textContent = dButton[1];
+
+                            blockButt.classList.remove('event-buttons_hide'); //show event buttons block
                         }
                     }
 
@@ -85,7 +138,6 @@
 
                     //hide event info block if empry data
                     !description ? blockInfo.classList.add('event-info_hide') : blockInfo.classList.remove('event-info_hide');
-
 
                     document.querySelector('.container').appendChild(content.cloneNode(true));
                 });
@@ -113,6 +165,29 @@
 
             <div class="event-info">
                 <span class="event__desc"></span>
+                <div class="event-climate">
+                    <span class="event__temperature"></span>
+                    <span class="event__humidity"></span>
+                </div>
+                <div class="event-music">
+                    <div class="event-music-tracker">
+                        <div class="event-music__image"></div>
+                        <span class="event-music__name"></span>
+                        <div class="event-music__track"></div>
+                        <span class="event-music__time"></span>
+                    </div>
+
+                    <div class="event-music-controlls">
+                        <div class="event-music-controlls__prev"></div>
+                        <div class="event-music-controlls__next"></div>
+                        <div class="event-music-controlls__volume"></div>
+                        <div class="event-music-controlls__volume-value"></div>
+                    </div>
+                </div>
+                <div class="event-buttons">
+                    <span class="event-buttons__button event-buttons__button_active"></span>
+                    <span class="event-buttons__button event-buttons__button_inactive"></span>
+                </div>
                 <img class="event__image" src="" alt="">
             </div>
 
