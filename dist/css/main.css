@@ -194,6 +194,10 @@ a {
   .event_size-l .event-system {
     display: flex;
     justify-content: space-between; }
+  .event_size-l .event__desc {
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+    color: #333333; }
 
 .event_size-m {
   grid-column: span 3; }
@@ -424,7 +428,8 @@ a {
     .event__title {
       font-size: 1.15rem;
       font-family: Helvetica, Arial sans-serif; }
-    .event__desc {
+    .event__desc,
+    .event_size-l .event__desc {
       font-size: 1.5rem;
       line-height: 1.85rem;
       color: #333333;

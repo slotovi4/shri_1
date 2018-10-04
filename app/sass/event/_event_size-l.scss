@@ -6,4 +6,10 @@
     display: flex;
     justify-content: space-between;
   }
+
+  & .event__desc {
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+    color: $primary-color;
+  }
 }
