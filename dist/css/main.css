@@ -285,7 +285,6 @@ a {
   .event-music-controlls__prev, .event-music-controlls__next {
     width: 53px;
     height: 52px;
-    background: url("../img/prev.svg");
     display: inline-block;
     border-radius: 50%;
     transition: all 0.3s ease-out;
