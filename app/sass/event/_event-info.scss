@@ -2,8 +2,9 @@
   transition: all 0.3s ease-out;
   padding: 20px;
   border-radius: 18px;
-  background-color: $event-color;
+  background: $event-color;
   flex: 0 0 auto;
+  width: 100%;
 
   &_hide {
     display: none;
