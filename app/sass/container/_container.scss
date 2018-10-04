@@ -1,5 +1,5 @@
 .container {
-  max-width: 1035px;
+  max-width: 1075px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -7,7 +7,7 @@
   justify-content: center;
   grid-gap: 20px;
   align-items: flex-start;
-  padding-bottom: 80px;
+  padding: 0 20px 80px 20px;
 
   &__title {
     font-size: 2.25rem;

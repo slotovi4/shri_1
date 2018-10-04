@@ -1,0 +1,165 @@
+@media screen and (min-width: 1056px) {
+  .event-music__track {
+    width: calc(100% - 46px);
+  }
+
+  .event-music__time {
+    right: -46px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  html {
+    font-size: 14px;
+  }
+
+  .event__icon {
+    width: 35px;
+    height: 32px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  html {
+    font-size: 12px;
+  }
+
+  .header {
+    padding: 22px 20px 18px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background-color: white;
+    z-index: 1001;
+    border: none;
+
+    &__menu {
+      visibility: hidden;
+      position: fixed;
+      background-color: rgba($primary-color, 0.8);
+      top: 0;
+      left: 0;
+      width: 100%;
+      transform: translate3d(0, -100%, 0);
+      transition: all 0.5s ease-out;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      z-index: 90;
+    }
+
+    &__link {
+      padding: 0;
+      line-height: 30px;
+      color: white;
+
+      &_active {
+        color: #ffd93e;
+      }
+    }
+  }
+
+  .header-mobile-btn {
+    display: block;
+    z-index: 100;
+
+    &__line_close {
+      background-color: white;
+    }
+  }
+
+  .container {
+    padding-bottom: 20px;
+    margin-top: 70px;
+
+    &__title {
+      font-size: 2rem;
+      margin-top: 0;
+    }
+  }
+
+  .event {
+    margin-bottom: 16px;
+    width: 100%;
+
+    &__title {
+      font-size: 1.15rem;
+      font-family: Helvetica, Arial sans-serif;
+    }
+
+    &__desc {
+      font-size: 1.5rem;
+      line-height: 1.85rem;
+      color: $primary-color;
+      padding-right: 0;
+      font-family: Helvetica, Arial sans-serif;
+    }
+
+    &__humidity {
+      padding-left: 0;
+    }
+
+    &__close,
+    &__continue {
+      display: none;
+    }
+
+    &__source,
+    &__time {
+      font-size: 1rem;
+      line-height: 1.15rem;
+    }
+  }
+
+  .event_size-s {
+    .event-system {
+      display: flex;
+      justify-content: space-between;
+
+      & .event__source {
+        margin: 0;
+      }
+    }
+  }
+
+  .event-climate {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .event-header {
+    padding: 16px 16px 0 16px;
+  }
+
+  .event-system {
+    padding: 0 16px 18px 16px;
+  }
+
+  .event-info {
+    padding: 16px 16px 20px 16px;
+  }
+
+  .event-buttons {
+    display: flex;
+  }
+
+  .footer {
+    padding: 20px;
+    height: auto;
+    flex-direction: column;
+    text-align: center;
+
+    &__right-section {
+      margin-top: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+}

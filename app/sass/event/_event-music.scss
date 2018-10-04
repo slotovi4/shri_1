@@ -15,8 +15,8 @@
     background-position: center;
     background-size: contain;
     border-radius: 10px;
-    margin-right: 16px;
-    float: left;
+    left: 0;
+    position: absolute;
   }
 
   &__name {
@@ -24,17 +24,21 @@
     line-height: 1.4rem;
     color: black;
     display: inline-block;
-    margin-bottom: 9px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    white-space: nowrap;
+    padding-bottom: 20px;
   }
 
   &__track {
-    display: inline-block;
+    display: flex;
     background-color: #979797;
     height: 1px;
     max-width: 350px;
-    width: 100%;
-    //width: calc(100% - 110px);
+    width: calc(100% - 30px);
     position: relative;
+    align-items: center;
 
     &::after {
       content: "";
@@ -52,9 +56,8 @@
 
   &__time {
     position: absolute;
-    right: 0;
-    bottom: 0;
     color: rgba(#a1a1a1, 0.84);
     font-size: 0.875rem;
+    right: -30px;
   }
 }

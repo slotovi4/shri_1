@@ -27,4 +27,11 @@
       color: $primary-color;
     }
   }
+
+  &__menu {
+    &_show {
+      visibility: visible !important;
+      transform: translateZ(0) !important;
+    }
+  }
 }

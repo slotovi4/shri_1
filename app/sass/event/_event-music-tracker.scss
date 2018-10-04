@@ -1,7 +1,8 @@
 .event-music-tracker {
   height: 52px;
   position: relative;
-  display: inline-block;
   width: 100%;
-  padding-right: 28px;
+  display: flex;
+  flex-direction: column;
+  padding-left: 70px;
 }
