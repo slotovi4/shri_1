@@ -346,6 +346,16 @@ a {
       background-color: #e5e5e5;
       margin-left: 18px; }
 
+.event-cam {
+  overflow: hidden; }
+  .event-cam__image {
+    touch-action: none;
+    background-repeat: repeat-x;
+    height: 430px;
+    background-size: contain; }
+    .event-cam__image_hide {
+      display: none !important; }
+
 .footer {
   display: flex;
   width: 100%;

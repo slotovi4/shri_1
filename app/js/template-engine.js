@@ -43,6 +43,7 @@ function templateEngine(jsonData) {
           blockButtIna = content.querySelector(
             ".event-buttons__button_inactive"
           ),
+          blockCam = content.querySelector(".event-cam__image"),
           blockInfo = content.querySelector(".event-info");
 
         /* Custom Data */
@@ -51,6 +52,7 @@ function templateEngine(jsonData) {
         blockClimate.classList.add("event-climate_hide");
         blockMusic.classList.add("event-music_hide");
         blockButt.classList.add("event-buttons_hide");
+        blockCam.classList.add("event-cam__image_hide");
 
         if (data) {
           let dType = data.type,
@@ -70,9 +72,9 @@ function templateEngine(jsonData) {
             blockImage.setAttribute("alt", "graph");
             blockImage.classList.remove("event__image_hide");
           } else if (dImage == "get_it_from_mocks_:3.jpg") {
-            blockImage.setAttribute("src", "img/image.jpg");
-            blockImage.setAttribute("alt", "image.jpg");
-            blockImage.classList.remove("event__image_hide");
+            blockCam.id = "cam"; //add cam
+            blockCam.style.backgroundImage = "url(img/image.jpg)";
+            blockCam.classList.remove("event-cam__image_hide");
           }
 
           //Climate

@@ -76,6 +76,7 @@ function templateEngine(jsonData) {
           blockButtIna = content.querySelector(
             ".event-buttons__button_inactive"
           ),
+          blockCam = content.querySelector(".event-cam__image"),
           blockInfo = content.querySelector(".event-info");
 
         /* Custom Data */
@@ -84,6 +85,7 @@ function templateEngine(jsonData) {
         blockClimate.classList.add("event-climate_hide");
         blockMusic.classList.add("event-music_hide");
         blockButt.classList.add("event-buttons_hide");
+        blockCam.classList.add("event-cam__image_hide");
 
         if (data) {
           let dType = data.type,
@@ -103,9 +105,9 @@ function templateEngine(jsonData) {
             blockImage.setAttribute("alt", "graph");
             blockImage.classList.remove("event__image_hide");
           } else if (dImage == "get_it_from_mocks_:3.jpg") {
-            blockImage.setAttribute("src", "img/image.jpg");
-            blockImage.setAttribute("alt", "image.jpg");
-            blockImage.classList.remove("event__image_hide");
+            blockCam.id = "cam"; //add cam
+            blockCam.style.backgroundImage = "url(img/image.jpg)";
+            blockCam.classList.remove("event-cam__image_hide");
           }
 
           //Climate
@@ -164,3 +166,71 @@ function templateEngine(jsonData) {
 
   request.send();
 }
+
+/* Event Handling: Drag & Pinch & Rotate In #cam Image */
+window.onload = function() {
+  let cam = document.querySelector("#cam");
+
+  let conXstart; //start X touch position
+  let imgBackPosition; //img background X position
+  let imgLeft, imgRight, imgTop, imgBot; //img L/R/T/B position
+  let imgCenterX, imgCenterY; //img X&Y center position
+  let touchAngle; //touch rotate angle
+  let touchedPoints = [];
+
+  if (window.PointerEvent) {
+    cam.addEventListener("pointerdown", startController, false);
+    cam.addEventListener("pointermove", moveController, false);
+    cam.addEventListener("pointerup", stopController, false);
+  }
+
+  function startController(e) {
+    /* Get Position Info */
+    conXstart = e.clientX;
+    imgBackPosition = parseInt(this.style.backgroundPositionX);
+
+    touchedPoints.push({
+      pointerId: e.pointerId,
+      x: e.clientX,
+      y: e.clientY
+    });
+
+    /* Calculate Center Image */
+    imgLeft = this.getBoundingClientRect().left;
+    imgRight = this.getBoundingClientRect().right;
+    imgTop = this.getBoundingClientRect().top;
+    imgBot = this.getBoundingClientRect().bottom;
+
+    imgWight = parseInt(imgRight - imgLeft);
+    imgHeight = parseInt(imgBot - imgTop);
+
+    imgCenterX = parseInt((imgLeft + imgRight) / 2);
+    imgCenterY = parseInt((imgTop + imgBot) / 2);
+  }
+
+  function moveController(e) {
+    if (touchedPoints.length < 2) {
+      /* Left & Right Move */
+      let xPos = e.clientX;
+      let moveValue = parseInt(xPos - conXstart);
+
+      !imgBackPosition
+        ? (this.style.backgroundPositionX = moveValue + "px")
+        : (this.style.backgroundPositionX = imgBackPosition + moveValue + "px");
+    } else if (touchedPoints.length == 2) {
+      /* если на панели 2 пальца... */
+
+      /* Rotate */
+      touchAngle = parseInt(
+        Math.atan2(e.clientX - imgCenterX, -(e.clientY - imgCenterY)) *
+          (180 / Math.PI)
+      );
+
+      this.style.transform = "rotate(" + touchAngle + "deg)";
+    }
+  }
+
+  function stopController(e) {
+    touchedPoints = [];
+  }
+};

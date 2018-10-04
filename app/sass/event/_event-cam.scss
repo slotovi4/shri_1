@@ -1,0 +1,14 @@
+.event-cam {
+  overflow: hidden;
+
+  &__image {
+    touch-action: none;
+    background-repeat: repeat-x;
+    height: 430px;
+    background-size: contain;
+
+    &_hide {
+      display: none !important;
+    }
+  }
+}
