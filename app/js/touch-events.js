@@ -12,7 +12,7 @@ function touchEvents() {
 
     let i;
 
-    if (window.PointerEvent) {
+    if (window.PointerEvent && cam) {
       cam.addEventListener("pointerdown", startController, false);
       cam.addEventListener("pointermove", moveController, false);
       cam.addEventListener("pointerup", stopController, false);
