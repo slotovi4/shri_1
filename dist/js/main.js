@@ -245,9 +245,10 @@ window.onload = function() {
       if (point.pointerId == e.pointerId) {
         //if current point move
         point.move = true;
-        return true;
       } else if (point.move == true) return false; //если двигается и второй
     });
+
+    return true;
   }
   //}
 };
