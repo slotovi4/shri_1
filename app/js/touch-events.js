@@ -17,7 +17,6 @@ window.onload = function() {
     }
 
     function startController(e) {
-      alert("touch");
       /* Get Position Info */
       conXstart = e.clientX;
       imgBackPosition = parseInt(this.style.backgroundPositionX);
@@ -43,6 +42,7 @@ window.onload = function() {
     }
 
     function moveController(e) {
+      alert("move");
       if (touchedPoints.length < 2) {
         /* Left & Right Move */
         let xPos = e.clientX;
