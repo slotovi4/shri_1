@@ -178,7 +178,6 @@ window.onload = function() {
     let imgCenterX, imgCenterY; //img X&Y center position
     let touchAngle; //touch rotate angle
     let touchedPoints = [];
-
     let prevDiff = -1;
 
     if (window.PointerEvent) {
@@ -192,14 +191,6 @@ window.onload = function() {
       conXstart = e.clientX;
       imgBackPosition = parseInt(this.style.backgroundPositionX);
 
-      /* touchedPoints.push({
-        pointerId: e.pointerId,
-        x: e.clientX,
-        y: e.clientY,
-        move: false,
-        sideX: false,
-        sideY: false
-      }); */
       e.move = false;
       touchedPoints.push(e);
 
@@ -229,9 +220,8 @@ window.onload = function() {
         }
       }
 
+      //if one active touch
       if (touchedPoints.length < 2) {
-        //if one active touch
-
         /* Left & Right Move */
         let xPos = e.clientX;
         let moveValue = parseInt(xPos - conXstart);
@@ -242,7 +232,6 @@ window.onload = function() {
               imgBackPosition + moveValue + "px");
       } else if (touchedPoints.length == 2) {
         //if two active touches
-
         let oneTouchMove = checkRotatePoints(e); //check rotate status (one touch move & one stay)
 
         if (oneTouchMove) {
@@ -252,13 +241,9 @@ window.onload = function() {
               (180 / Math.PI)
           );
 
-          this.style.transform = "rotate(" + touchAngle + "deg)";
+          this.style.filter = "brightness(" + touchAngle + "%)";
         } else {
           /* Zoom */
-          //определяю направление тача(рост и уменьшение осей)
-          //getPointMoveSige(e);
-
-          //let checkedZoom = checkZoom(e);
 
           // Calculate the distance between the two pointers
           let curDiff = Math.abs(
@@ -285,14 +270,7 @@ window.onload = function() {
             " y= " +
             touchedPoints[0].sideY +
             " zoom = " +
-            checkedZoom;
-
-          let p;
-          checkedZoom ? (p = 1.5) : (p = 0.5);
-
-          this.style.transform = "scale(" + p + ")"; */
-          //вызываю функцию проверки массива, будет отпределять зум картинки
-          //two touches move
+            checkedZoom; */
         }
       } else {
         touchedPoints = [];
@@ -320,28 +298,5 @@ window.onload = function() {
 
       return status;
     }
-
-    //определяю направление тача(рост и уменьшение осей) & записываю данные
-    /* function getPointMoveSige(e) {
-      touchedPoints.forEach(function(point) {
-        if (point.pointerId == e.pointerId) {
-          //если рост по оси
-          point.x < e.clientX ? (point.sideX = true) : (point.sideX = false);
-          point.y < e.clientY ? (point.sideY = true) : (point.sideY = false);
-        }
-      });
-    } */
-
-    //проверка на зум(отдаление и приближение координат touch)
-    /* function checkZoom(e) {
-      let zoom;
-      if (
-        (touchedPoints[0].sideX == true && touchedPoints[1].sideX == false) ||
-        (touchedPoints[0].sideY == true && touchedPoints[1].sideY == false)
-      )
-        zoom = true;
-      else zoom = false;
-      return zoom;
-    } */
   }
 };
