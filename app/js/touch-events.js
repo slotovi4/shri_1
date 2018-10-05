@@ -10,7 +10,6 @@ window.onload = function() {
     let touchAngle; //touch rotate angle
     let touchedPoints = [];
     let prevDiff = -1;
-    let eventActive = false;
 
     if (window.PointerEvent) {
       cam.addEventListener("pointerdown", startController, false);
@@ -68,38 +67,34 @@ window.onload = function() {
 
         if (oneTouchMove === true) {
           /* Rotate */
-          if (!eventActive) {
-            eventActive = true;
-            touchAngle = parseInt(
-              Math.atan2(e.clientX - imgCenterX, -(e.clientY - imgCenterY)) *
-                (180 / Math.PI)
-            );
+          touchAngle = parseInt(
+            Math.atan2(e.clientX - imgCenterX, -(e.clientY - imgCenterY)) *
+              (180 / Math.PI)
+          );
 
-            this.style.filter = "brightness(" + touchAngle + "%)";
-          }
+          this.style.filter = "brightness(" + touchAngle + "%)";
         } else {
           /* Zoom */
-          if (!eventActive) {
-            eventActive = true;
-            // Calculate the distance between the two pointers
-            let curDiff = Math.abs(
-              touchedPoints[0].clientX - touchedPoints[1].clientX
-            );
 
-            if (prevDiff > 0) {
-              if (curDiff > prevDiff) {
-                this.style.transform = "scale(1.5)";
-              }
-              if (curDiff < prevDiff) {
-                this.style.transform = "scale(0.5)";
-              }
+          // Calculate the distance between the two pointers
+          let curDiff = Math.abs(
+            touchedPoints[0].clientX - touchedPoints[1].clientX
+          );
+
+          if (prevDiff > 0) {
+            if (curDiff > prevDiff) {
+              this.style.transform = "scale(1.5)";
             }
+            if (curDiff < prevDiff) {
+              this.style.transform = "scale(0.5)";
+            }
+          }
 
-            // Cache the distance for the next move event
-            prevDiff = curDiff;
+          // Cache the distance for the next move event
+          prevDiff = curDiff;
 
-            /* let p = cam.querySelector(".event-cam-debug");
-            p.textContent =
+          /* let p = cam.querySelector(".event-cam-debug");
+          p.textContent =
             oneTouchMove +
             " x = " +
             touchedPoints[0].sideX +
@@ -107,7 +102,6 @@ window.onload = function() {
             touchedPoints[0].sideY +
             " zoom = " +
             checkedZoom; */
-          }
         }
       } /* else {
         touchedPoints = [];
@@ -116,7 +110,6 @@ window.onload = function() {
 
     //удаление тача при up-е
     function stopController(e) {
-      eventActive = false;
       for (let i = 0; i < touchedPoints.length; i++) {
         if (touchedPoints[i].pointerId == e.pointerId) {
           touchedPoints.splice(i, 1);
