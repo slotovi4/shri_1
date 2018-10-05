@@ -99,9 +99,14 @@ window.onload = function() {
           this.style.transform = "rotate(" + touchAngle + "deg)";
         } else {
           //определяю направление тача(рост и уменьшение осей)
-          let res = getPointMoveSige(e);
+          getPointMoveSige(e);
 
-          p.textContent = touchedPoints.length + " " + res;
+          p.textContent =
+            touchedPoints.length +
+            " x = " +
+            touchedPoints[0].sideX +
+            " y= " +
+            touchedPoints[0].sideY;
 
           //записываю данные в массив
           //вызываю функцию проверки массива, будет отпределять зум картинки
@@ -140,8 +145,6 @@ window.onload = function() {
           //если рост по оси
           point.x < e.clientX ? (point.sideX = true) : (point.sideX = false);
           point.y < e.clientY ? (point.sideY = true) : (point.sideY = false);
-
-          return [point.sideX, point.sideY];
         }
       });
     }
