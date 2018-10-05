@@ -267,17 +267,20 @@ window.onload = function() {
 
           this.style.transform = "rotate(" + touchAngle + "deg)";
         } else {
+          /* Zoom */
           //определяю направление тача(рост и уменьшение осей)
           getPointMoveSige(e);
+
+          let checkedZoom = checkZoom(e);
 
           p.textContent =
             touchedPoints.length +
             " x = " +
             touchedPoints[0].sideX +
             " y= " +
-            touchedPoints[0].sideY;
-
-          //записываю данные в массив
+            touchedPoints[0].sideY +
+            " zoom = " +
+            checkedZoom;
           //вызываю функцию проверки массива, будет отпределять зум картинки
           //two touches move
         }
@@ -307,8 +310,8 @@ window.onload = function() {
       return status;
     }
 
+    //определяю направление тача(рост и уменьшение осей) & записываю данные
     function getPointMoveSige(e) {
-      //определяю направление тача(рост и уменьшение осей)
       touchedPoints.forEach(function(point) {
         if (point.pointerId == e.pointerId) {
           //если рост по оси
@@ -316,6 +319,18 @@ window.onload = function() {
           point.y < e.clientY ? (point.sideY = true) : (point.sideY = false);
         }
       });
+    }
+
+    //проверка на зум(отдаление и приближение координат touch)
+    function checkZoom(e) {
+      let zoom;
+      if (
+        (touchedPoints[0].sideX == true && touchedPoints[1].sideX == false) ||
+        (touchedPoints[0].sideY == true && touchedPoints[1].sideY == false)
+      )
+        zoom = true;
+      else zoom = false;
+      return zoom;
     }
   }
 };
