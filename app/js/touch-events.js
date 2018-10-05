@@ -63,16 +63,16 @@ window.onload = function() {
               imgBackPosition + moveValue + "px");
       } else if (touchedPoints.length == 2) {
         //if two active touches
-        let oneTouchMove = checkRotatePoints(e); //check rotate status (one touch move & one stay)
+        let oneTouchMove = checkВrightness(e); //check brightness status (one touch move & one stay)
 
         if (oneTouchMove) {
           /* Rotate */
-          touchAngle = parseInt(
+          /* touchAngle = parseInt(
             Math.atan2(e.clientX - imgCenterX, -(e.clientY - imgCenterY)) *
               (180 / Math.PI)
-          );
+          ); */
 
-          this.style.filter = "brightness(" + touchAngle + "%)";
+          this.style.filter = "brightness(" + (e.clientY - imgCenterY) + "%)";
         } else {
           /* Zoom */
 
@@ -119,7 +119,7 @@ window.onload = function() {
     }
 
     //проверка на то что если только один палец из двух двигается то вращаем
-    function checkRotatePoints(e) {
+    function checkВrightness(e) {
       let status = false;
       touchedPoints.forEach(function(point) {
         //если это второй палец и он не двигается то
