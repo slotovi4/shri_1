@@ -73,7 +73,7 @@ window.onload = function() {
 
         let oneTouchMove = checkRotatePoints(e); //check rotate status (one touch move & one stay)
 
-        if (oneTouchMove === true) {
+        if (oneTouchMove) {
           /* Rotate */
           touchAngle = parseInt(
             Math.atan2(e.clientX - imgCenterX, -(e.clientY - imgCenterY)) *
@@ -94,10 +94,10 @@ window.onload = function() {
           );
 
           if (prevDiff > 0) {
-            if (curDiff > prevDiff && curDiff - prevDiff > 30) {
+            if (curDiff > prevDiff) {
               this.style.transform = "scale(1.5)";
             }
-            if (curDiff < prevDiff && curDiff - prevDiff < 30) {
+            if (curDiff < prevDiff) {
               this.style.transform = "scale(0.5)";
             }
           }
@@ -139,12 +139,11 @@ window.onload = function() {
 
     //проверка на то что если только один палец из двух двигается то вращаем
     function checkRotatePoints(e) {
-      let status;
+      let status = false;
       touchedPoints.forEach(function(point) {
         //если это второй палец и он не двигается то
         if (point.pointerId != e.pointerId && point.move == false)
           status = true;
-        else status = false;
       });
 
       return status;
