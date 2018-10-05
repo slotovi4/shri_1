@@ -217,8 +217,6 @@ window.onload = function() {
     }
 
     function moveController(e) {
-      console.log(touchedPoints);
-
       // Find this event in the cache and update its record with this event
       for (let i = 0; i < touchedPoints.length; i++) {
         if (touchedPoints[i].pointerId == e.pointerId) {
@@ -265,10 +263,10 @@ window.onload = function() {
           );
 
           if (prevDiff > 0) {
-            if (curDiff > prevDiff) {
+            if (curDiff > prevDiff && curDiff - prevDiff > 30) {
               this.style.transform = "scale(1.5)";
             }
-            if (curDiff < prevDiff) {
+            if (curDiff < prevDiff && curDiff - prevDiff < 30) {
               this.style.transform = "scale(0.5)";
             }
           }
@@ -298,6 +296,7 @@ window.onload = function() {
       }
     }
 
+    //удаление тача при up-е
     function stopController(e) {
       for (let i = 0; i < touchedPoints.length; i++) {
         if (touchedPoints[i].pointerId == e.pointerId) {
@@ -309,19 +308,12 @@ window.onload = function() {
 
     //проверка на то что если только один палец из двух двигается то вращаем
     function checkRotatePoints(e) {
-      let status = false;
+      let status;
       touchedPoints.forEach(function(point) {
         //если это второй палец и он не двигается то
-        if (point.pointerId != e.pointerId && point.move == false) {
+        if (point.pointerId != e.pointerId && point.move == false)
           status = true;
-        }
-        /* if (point.pointerId == e.pointerId) {
-          //if current point move
-          point.move = true;
-        } else {
-          //если не двигается второй
-          if (point.move == false) status = true;
-        } */
+        else status = false;
       });
 
       return status;
