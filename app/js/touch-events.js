@@ -83,10 +83,12 @@ window.onload = function() {
 
           if (prevDiff > 0) {
             if (curDiff > prevDiff) {
-              this.style.transform = "scale(1.5)";
+              this.style.transform =
+                "scale(" + 1 + (curDiff - prevDiff) * 0.5 + ")";
             }
             if (curDiff < prevDiff) {
-              this.style.transform = "scale(0.5)";
+              this.style.transform =
+                "scale(" + 1 + (prevDiff - curDiff) * 0.5 + ")";
             }
           }
 
