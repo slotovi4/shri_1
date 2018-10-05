@@ -89,7 +89,7 @@ window.onload = function() {
 
         //p.textContent = touchedPoints.length + " " + oneTouchMove;
 
-        if (oneTouchMove) {
+        if (oneTouchMove === true) {
           /* Rotate */
           touchAngle = parseInt(
             Math.atan2(e.clientX - imgCenterX, -(e.clientY - imgCenterY)) *
@@ -112,6 +112,8 @@ window.onload = function() {
             touchedPoints[0].sideY +
             " zoom = " +
             checkedZoom;
+
+          this.style.transform = "scale(" + e.clientX * 0.1 + ")";
           //вызываю функцию проверки массива, будет отпределять зум картинки
           //two touches move
         }
