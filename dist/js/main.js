@@ -199,6 +199,8 @@ window.onload = function() {
         sideY: false
       });
 
+      console.log(touchedPoints);
+
       /* Calculate Center Image */
       imgLeft = this.getBoundingClientRect().left;
       imgRight = this.getBoundingClientRect().right;
@@ -231,8 +233,6 @@ window.onload = function() {
         //if two active touches
 
         let oneTouchMove = checkRotatePoints(e); //check rotate status (one touch move & one stay)
-
-        //p.textContent = touchedPoints.length + " " + oneTouchMove;
 
         if (oneTouchMove === true) {
           /* Rotate */
@@ -271,7 +271,12 @@ window.onload = function() {
     }
 
     function stopController(e) {
-      touchedPoints = [];
+      let delKey;
+      touchedPoints.forEach(function(point, i) {
+        if (point.pointerId == e.pointerId) delKey = i;
+      });
+
+      touchedPoints.splice(delKey, 1);
     }
 
     //проверка на то что если только один палец из двух двигается то вращаем
