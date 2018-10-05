@@ -67,12 +67,12 @@ window.onload = function() {
 
         if (oneTouchMove) {
           /* Rotate */
-          /* touchAngle = parseInt(
+          touchAngle = parseInt(
             Math.atan2(e.clientX - imgCenterX, -(e.clientY - imgCenterY)) *
               (180 / Math.PI)
-          ); */
+          );
 
-          this.style.filter = "brightness(" + (e.clientY - imgCenterY) + "%)";
+          this.style.filter = "brightness(" + touchAngle + "%)";
         } else {
           /* Zoom */
 
