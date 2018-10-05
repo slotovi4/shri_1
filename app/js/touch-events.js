@@ -65,7 +65,7 @@ window.onload = function() {
         //if two active touches
         let oneTouchMove = checkВrightness(e); //check brightness status (one touch move & one stay)
 
-        if (oneTouchMove) {
+        if (oneTouchMove === true) {
           /* Rotate */
           touchAngle = parseInt(
             Math.atan2(e.clientX - imgCenterX, -(e.clientY - imgCenterY)) *
@@ -103,9 +103,9 @@ window.onload = function() {
             " zoom = " +
             checkedZoom; */
         }
-      } else {
+      } /* else {
         touchedPoints = [];
-      }
+      } */
     }
 
     //удаление тача при up-е
