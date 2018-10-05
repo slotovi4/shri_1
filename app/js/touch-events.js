@@ -1,5 +1,5 @@
 /* Event Handling: Drag & Pinch & Rotate In #cam Image */
-window.onload = function() {
+function touchEvents() {
   if ("ontouchstart" in document.documentElement) {
     let cam = document.querySelector("#cam");
 
@@ -145,4 +145,4 @@ window.onload = function() {
       return zoom;
     }
   }
-};
+}
