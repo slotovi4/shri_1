@@ -50,7 +50,10 @@ window.onload = function() {
     function moveController(e) {
       // Find this event in the cache and update its record with this event
       for (let i = 0; i < touchedPoints.length; i++) {
-        if (touchedPoints[i].pointerId == e.pointerId) {
+        if (
+          touchedPoints[i].pointerId == e.pointerId &&
+          Math.abs(e.clientX - touchedPoints[i].clientX) > 30
+        ) {
           e.move = true;
           touchedPoints[i] = e;
           break;
