@@ -247,14 +247,19 @@ window.onload = function() {
 
     //проверка на то что если только один палец из двух двигается то вращаем
     function checkRotatePoints(e) {
+      let status;
       touchedPoints.forEach(function(point) {
         if (point.pointerId == e.pointerId) {
           //if current point move
           point.move = true;
-        } else if (point.move == true) return false; //если двигается и второй
+          status = true;
+        } else {
+          //если двигается и второй
+          if (point.move == true) status = false;
+        }
       });
 
-      return true;
+      return status;
     }
   }
 };
