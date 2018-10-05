@@ -93,7 +93,7 @@ window.onload = function() {
 
           checkedZoom ? i++ : i--;
 
-          this.style.transform = "scale(" + (1 + i * 0.1) + ")";
+          this.style.transform = "scale(" + (1 + i) + ")";
           //вызываю функцию проверки массива, будет отпределять зум картинки
           //two touches move
         }
