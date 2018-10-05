@@ -193,7 +193,8 @@ window.onload = function() {
     touchedPoints.push({
       pointerId: e.pointerId,
       x: e.clientX,
-      y: e.clientY
+      y: e.clientY,
+      move: false
     });
 
     /* Calculate Center Image */
@@ -210,7 +211,6 @@ window.onload = function() {
   }
 
   function moveController(e) {
-    console.log(touchedPoints);
     if (touchedPoints.length < 2) {
       /* Left & Right Move */
       let xPos = e.clientX;
@@ -220,20 +220,34 @@ window.onload = function() {
         ? (this.style.backgroundPositionX = moveValue + "px")
         : (this.style.backgroundPositionX = imgBackPosition + moveValue + "px");
     } else if (touchedPoints.length == 2) {
+      let oneTouchMove = checkRotatePoints(e);
       /* если на панели 2 пальца... */
 
-      /* Rotate */
-      touchAngle = parseInt(
-        Math.atan2(e.clientX - imgCenterX, -(e.clientY - imgCenterY)) *
-          (180 / Math.PI)
-      );
+      if (oneTouchMove) {
+        /* Rotate */
+        touchAngle = parseInt(
+          Math.atan2(e.clientX - imgCenterX, -(e.clientY - imgCenterY)) *
+            (180 / Math.PI)
+        );
 
-      this.style.transform = "rotate(" + touchAngle + "deg)";
+        this.style.transform = "rotate(" + touchAngle + "deg)";
+      } else touchedPoints = [];
     }
   }
 
   function stopController(e) {
     touchedPoints = [];
+  }
+
+  //проверка на то что если только один палец из двух двигается то вращаем
+  function checkRotatePoints(e) {
+    touchedPoints.forEach(function(point) {
+      if (point.pointerId == e.pointerId) {
+        //if current point move
+        point.move = true;
+        return true;
+      } else if (point.move == true) return false; //если двигается и второй
+    });
   }
   //}
 };
