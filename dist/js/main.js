@@ -211,8 +211,8 @@ window.onload = function() {
     }
 
     function moveController(e) {
+      //debug
       let p = cam.querySelector(".event-cam-debug");
-      p.textContent = touchedPoints.length;
 
       if (touchedPoints.length < 2) {
         /* Left & Right Move */
@@ -225,6 +225,8 @@ window.onload = function() {
               imgBackPosition + moveValue + "px");
       } else if (touchedPoints.length == 2) {
         let oneTouchMove = checkRotatePoints(e);
+
+        p.textContent = touchedPoints.length + " " + oneTouchMove;
         /* если на панели 2 пальца... */
 
         if (oneTouchMove) {
