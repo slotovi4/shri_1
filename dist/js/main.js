@@ -168,7 +168,7 @@ function templateEngine(jsonData) {
 }
 
 /* Event Handling: Drag & Pinch & Rotate In #cam Image */
-function touchEvents() {
+window.onload = function() {
   if ("ontouchstart" in document.documentElement) {
     let cam = document.querySelector("#cam");
 
@@ -181,7 +181,7 @@ function touchEvents() {
 
     let i;
 
-    if (window.PointerEvent && cam) {
+    if (window.PointerEvent) {
       cam.addEventListener("pointerdown", startController, false);
       cam.addEventListener("pointermove", moveController, false);
       cam.addEventListener("pointerup", stopController, false);
@@ -314,4 +314,4 @@ function touchEvents() {
       return zoom;
     }
   }
-}
+};
