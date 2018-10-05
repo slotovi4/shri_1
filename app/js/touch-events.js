@@ -10,8 +10,6 @@ window.onload = function() {
     let touchAngle; //touch rotate angle
     let touchedPoints = [];
 
-    let i;
-
     if (window.PointerEvent) {
       cam.addEventListener("pointerdown", startController, false);
       cam.addEventListener("pointermove", moveController, false);
@@ -91,9 +89,10 @@ window.onload = function() {
             " zoom = " +
             checkedZoom;
 
-          checkedZoom ? i++ : i--;
+          let p;
+          checkedZoom ? (p = 1.5) : (p = 0.5);
 
-          this.style.transform = "scale(" + (1 + i) + ")";
+          this.style.transform = "scale(" + p + ")";
           //вызываю функцию проверки массива, будет отпределять зум картинки
           //two touches move
         }
