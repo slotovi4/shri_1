@@ -212,31 +212,7 @@ window.onload = function() {
       imgCenterY = parseInt((imgTop + imgBot) / 2);
     }
 
-    /* let oldX = false,
-      oldY = false; */
-
     function moveController(e) {
-      /* let sss = e.clientX,
-        sss2 = e.clientY;
-
-      if (oldX == false && oldY == false) {
-        oldX = touchedPoints[0].x;
-        oldY = touchedPoints[0].y;
-      }
-
-      if (
-        Math.abs(sss / imgLeft) < Math.abs(oldX / imgLeft) &&
-        Math.abs(sss2 / imgTop) < Math.abs(oldY / imgTop)
-      ) {
-        console.log("unzoom");
-        oldX = sss;
-        oldY = sss2;
-      } else {
-        console.log("zoom");
-        oldX = sss;
-        oldY = sss2;
-      } */
-
       //debug
       let p = cam.querySelector(".event-cam-debug");
 
@@ -274,7 +250,7 @@ window.onload = function() {
           let checkedZoom = checkZoom(e);
 
           p.textContent =
-            touchedPoints.length +
+            oneTouchMove +
             " x = " +
             touchedPoints[0].sideX +
             " y= " +
@@ -297,15 +273,14 @@ window.onload = function() {
 
     //проверка на то что если только один палец из двух двигается то вращаем
     function checkRotatePoints(e) {
-      let status;
+      let status = false;
       touchedPoints.forEach(function(point) {
         if (point.pointerId == e.pointerId) {
           //if current point move
           point.move = true;
-          status = true;
         } else {
-          //если двигается и второй
-          if (point.move == true) status = false;
+          //если не двигается второй
+          if (point.move == false) status = true;
         }
       });
 
