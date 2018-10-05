@@ -186,6 +186,7 @@ window.onload = function() {
     }
 
     function startController(e) {
+      alert("touch");
       /* Get Position Info */
       conXstart = e.clientX;
       imgBackPosition = parseInt(this.style.backgroundPositionX);
