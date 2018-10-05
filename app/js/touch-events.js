@@ -25,7 +25,9 @@ window.onload = function() {
         pointerId: e.pointerId,
         x: e.clientX,
         y: e.clientY,
-        move: false
+        move: false,
+        sideX: false,
+        sideY: false
       });
 
       /* Calculate Center Image */
@@ -41,11 +43,37 @@ window.onload = function() {
       imgCenterY = parseInt((imgTop + imgBot) / 2);
     }
 
+    /* let oldX = false,
+      oldY = false; */
+
     function moveController(e) {
+      /* let sss = e.clientX,
+        sss2 = e.clientY;
+
+      if (oldX == false && oldY == false) {
+        oldX = touchedPoints[0].x;
+        oldY = touchedPoints[0].y;
+      }
+
+      if (
+        Math.abs(sss / imgLeft) < Math.abs(oldX / imgLeft) &&
+        Math.abs(sss2 / imgTop) < Math.abs(oldY / imgTop)
+      ) {
+        console.log("unzoom");
+        oldX = sss;
+        oldY = sss2;
+      } else {
+        console.log("zoom");
+        oldX = sss;
+        oldY = sss2;
+      } */
+
       //debug
       let p = cam.querySelector(".event-cam-debug");
 
       if (touchedPoints.length < 2) {
+        //if one active touch
+
         /* Left & Right Move */
         let xPos = e.clientX;
         let moveValue = parseInt(xPos - conXstart);
@@ -55,10 +83,11 @@ window.onload = function() {
           : (this.style.backgroundPositionX =
               imgBackPosition + moveValue + "px");
       } else if (touchedPoints.length == 2) {
-        let oneTouchMove = checkRotatePoints(e);
+        //if two active touches
 
-        p.textContent = touchedPoints.length + " " + oneTouchMove;
-        /* если на панели 2 пальца... */
+        let oneTouchMove = checkRotatePoints(e); //check rotate status (one touch move & one stay)
+
+        //p.textContent = touchedPoints.length + " " + oneTouchMove;
 
         if (oneTouchMove) {
           /* Rotate */
@@ -68,7 +97,18 @@ window.onload = function() {
           );
 
           this.style.transform = "rotate(" + touchAngle + "deg)";
-        } else touchedPoints = [];
+        } else {
+          //определяю направление тача(рост и уменьшение осей)
+          let res = getPointMoveSige(e);
+
+          p.textContent = touchedPoints.length + " " + res;
+
+          //записываю данные в массив
+          //вызываю функцию проверки массива, будет отпределять зум картинки
+          //two touches move
+        }
+      } else {
+        touchedPoints = [];
       }
     }
 
@@ -91,6 +131,19 @@ window.onload = function() {
       });
 
       return status;
+    }
+
+    function getPointMoveSige(e) {
+      //определяю направление тача(рост и уменьшение осей)
+      touchedPoints.forEach(function(point) {
+        if (point.pointerId == e.pointerId) {
+          //если рост по оси
+          point.x < e.clientX ? (point.sideX = true) : (point.sideX = false);
+          point.y < e.clientY ? (point.sideY = true) : (point.sideY = false);
+
+          return [point.sideX, point.sideY];
+        }
+      });
     }
   }
 };
