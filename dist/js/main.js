@@ -211,7 +211,9 @@ window.onload = function() {
     }
 
     function moveController(e) {
-      alert("move");
+      let p = cam.querySelector(".event-cam-debug");
+      p.textContent = touchedPoints.length;
+
       if (touchedPoints.length < 2) {
         /* Left & Right Move */
         let xPos = e.clientX;
