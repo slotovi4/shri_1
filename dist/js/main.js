@@ -179,6 +179,8 @@ window.onload = function() {
     let touchAngle; //touch rotate angle
     let touchedPoints = [];
 
+    let prevDiff = -1;
+
     if (window.PointerEvent) {
       cam.addEventListener("pointerdown", startController, false);
       cam.addEventListener("pointermove", moveController, false);
@@ -190,16 +192,16 @@ window.onload = function() {
       conXstart = e.clientX;
       imgBackPosition = parseInt(this.style.backgroundPositionX);
 
-      touchedPoints.push({
+      /* touchedPoints.push({
         pointerId: e.pointerId,
         x: e.clientX,
         y: e.clientY,
         move: false,
         sideX: false,
         sideY: false
-      });
-
-      console.log(touchedPoints);
+      }); */
+      e.move = false;
+      touchedPoints.push(e);
 
       /* Calculate Center Image */
       imgLeft = this.getBoundingClientRect().left;
@@ -215,8 +217,16 @@ window.onload = function() {
     }
 
     function moveController(e) {
-      //debug
-      let p = cam.querySelector(".event-cam-debug");
+      console.log(touchedPoints);
+
+      // Find this event in the cache and update its record with this event
+      for (let i = 0; i < touchedPoints.length; i++) {
+        if (touchedPoints[i].pointerId == e.pointerId) {
+          e.move = true;
+          touchedPoints[i] = e;
+          break;
+        }
+      }
 
       if (touchedPoints.length < 2) {
         //if one active touch
@@ -245,10 +255,28 @@ window.onload = function() {
         } else {
           /* Zoom */
           //определяю направление тача(рост и уменьшение осей)
-          getPointMoveSige(e);
+          //getPointMoveSige(e);
 
-          let checkedZoom = checkZoom(e);
+          //let checkedZoom = checkZoom(e);
 
+          // Calculate the distance between the two pointers
+          let curDiff = Math.abs(
+            touchedPoints[0].clientX - touchedPoints[1].clientX
+          );
+
+          if (prevDiff > 0) {
+            if (curDiff > prevDiff) {
+              this.style.transform = "scale(1.5)";
+            }
+            if (curDiff < prevDiff) {
+              this.style.transform = "scale(0.5)";
+            }
+          }
+
+          // Cache the distance for the next move event
+          prevDiff = curDiff;
+
+          /* let p = cam.querySelector(".event-cam-debug");
           p.textContent =
             oneTouchMove +
             " x = " +
@@ -261,7 +289,7 @@ window.onload = function() {
           let p;
           checkedZoom ? (p = 1.5) : (p = 0.5);
 
-          this.style.transform = "scale(" + p + ")";
+          this.style.transform = "scale(" + p + ")"; */
           //вызываю функцию проверки массива, будет отпределять зум картинки
           //two touches move
         }
@@ -271,32 +299,36 @@ window.onload = function() {
     }
 
     function stopController(e) {
-      let delKey;
-      touchedPoints.forEach(function(point, i) {
-        if (point.pointerId == e.pointerId) delKey = i;
-      });
-
-      touchedPoints.splice(delKey, 1);
+      for (let i = 0; i < touchedPoints.length; i++) {
+        if (touchedPoints[i].pointerId == e.pointerId) {
+          touchedPoints.splice(i, 1);
+          break;
+        }
+      }
     }
 
     //проверка на то что если только один палец из двух двигается то вращаем
     function checkRotatePoints(e) {
       let status = false;
       touchedPoints.forEach(function(point) {
-        if (point.pointerId == e.pointerId) {
+        //если это второй палец и он не двигается то
+        if (point.pointerId != e.pointerId && point.move == false) {
+          status = true;
+        }
+        /* if (point.pointerId == e.pointerId) {
           //if current point move
           point.move = true;
         } else {
           //если не двигается второй
           if (point.move == false) status = true;
-        }
+        } */
       });
 
       return status;
     }
 
     //определяю направление тача(рост и уменьшение осей) & записываю данные
-    function getPointMoveSige(e) {
+    /* function getPointMoveSige(e) {
       touchedPoints.forEach(function(point) {
         if (point.pointerId == e.pointerId) {
           //если рост по оси
@@ -304,10 +336,10 @@ window.onload = function() {
           point.y < e.clientY ? (point.sideY = true) : (point.sideY = false);
         }
       });
-    }
+    } */
 
     //проверка на зум(отдаление и приближение координат touch)
-    function checkZoom(e) {
+    /* function checkZoom(e) {
       let zoom;
       if (
         (touchedPoints[0].sideX == true && touchedPoints[1].sideX == false) ||
@@ -316,6 +348,6 @@ window.onload = function() {
         zoom = true;
       else zoom = false;
       return zoom;
-    }
+    } */
   }
 };
