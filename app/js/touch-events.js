@@ -11,7 +11,8 @@ window.onload = function() {
     let touchedPoints = [];
     let prevDiff = -1;
 
-    let checkZomm = false;
+    let checkZoom = false;
+    let checkScale = 0;
 
     if (window.PointerEvent) {
       cam.addEventListener("pointerdown", startController, false);
@@ -67,7 +68,7 @@ window.onload = function() {
         //if two active touches
         let oneTouchMove = checkВrightness(e); //check brightness status (one touch move & one stay)
 
-        if (oneTouchMove === true && !checkZomm) {
+        if (oneTouchMove === true && !checkZoom) {
           /* Rotate */
           touchAngle = parseInt(
             Math.atan2(e.clientX - imgCenterX, -(e.clientY - imgCenterY)) *
@@ -77,7 +78,7 @@ window.onload = function() {
           this.style.filter = "brightness(" + touchAngle + "%)";
         } else {
           /* Zoom */
-          checkZomm = true;
+          checkZoom = true;
           // Calculate the distance between the two pointers
           let curDiff = Math.abs(
             touchedPoints[0].clientX - touchedPoints[1].clientX
@@ -85,10 +86,24 @@ window.onload = function() {
 
           if (prevDiff > 0) {
             if (curDiff > prevDiff) {
-              this.style.transform = "scale(1.5)";
+              if (checkScale == 0) {
+                checkScale = 1;
+                this.style.transform = "scale(1.5)";
+              }
+              if (checkScale == -1) {
+                checkScale = 0;
+                this.style.transform = "scale(1)";
+              }
             }
             if (curDiff < prevDiff) {
-              this.style.transform = "scale(0.5)";
+              if (checkScale == 0) {
+                checkScale = -1;
+                this.style.transform = "scale(0.5)";
+              }
+              if (checkScale == 1) {
+                checkScale = 0;
+                this.style.transform = "scale(1)";
+              }
             }
           }
 
@@ -112,7 +127,7 @@ window.onload = function() {
 
     //удаление тача при up-е
     function stopController(e) {
-      checkZomm = false;
+      checkZoom = false;
       for (let i = 0; i < touchedPoints.length; i++) {
         if (touchedPoints[i].pointerId == e.pointerId) {
           touchedPoints.splice(i, 1);
