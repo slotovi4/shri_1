@@ -212,7 +212,7 @@ window.onload = function() {
       for (let i = 0; i < touchedPoints.length; i++) {
         if (
           touchedPoints[i].pointerId == e.pointerId &&
-          Math.abs(e.clientX - touchedPoints[i].clientX) > 30
+          Math.abs(e.clientX - touchedPoints[i].clientX) > 100
         ) {
           e.move = true;
           touchedPoints[i] = e;
