@@ -54,6 +54,7 @@ window.onload = function() {
     }
 
     function moveController(e) {
+      alert("move");
       // Find this event in the cache and update its record with this event
       for (let i = 0; i < touchedPoints.length; i++) {
         if (
