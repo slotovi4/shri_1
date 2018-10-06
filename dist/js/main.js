@@ -76,6 +76,7 @@ function templateEngine(jsonData) {
           blockButtIna = content.querySelector(
             ".event-buttons__button_inactive"
           ),
+          blockCamInfo = content.querySelector(".event-cam-info"),
           blockCamImage = content.querySelector(".event-cam__image"),
           blockInfo = content.querySelector(".event-info");
 
@@ -86,6 +87,7 @@ function templateEngine(jsonData) {
         blockMusic.classList.add("event-music_hide");
         blockButt.classList.add("event-buttons_hide");
         blockCamImage.classList.add("event-cam__image_hide");
+        blockCamInfo.classList.add("event-cam-info_hide");
 
         if (data) {
           let dType = data.type,
