@@ -1,5 +1,6 @@
 .event-cam {
   overflow: hidden;
+  margin-top: 16px;
 
   &__image {
     touch-action: none;
@@ -10,22 +11,5 @@
     &_hide {
       display: none !important;
     }
-  }
-
-  &__info {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 16px;
-
-    &_hide {
-      display: none;
-    }
-  }
-
-  &__zoom,
-  &__bright {
-    font-size: 1.125rem;
-    line-height: 1.3rem;
-    color: $primary-color;
   }
 }

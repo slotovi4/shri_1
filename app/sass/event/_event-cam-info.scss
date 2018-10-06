@@ -1,0 +1,16 @@
+.event-cam-info {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 16px;
+
+  &_hide {
+    display: none;
+  }
+
+  &__zoom,
+  &__bright {
+    font-size: 1.125rem;
+    line-height: 1.3rem;
+    color: $primary-color;
+  }
+}

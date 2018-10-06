@@ -171,12 +171,12 @@ function templateEngine(jsonData) {
 window.onload = function() {
   if ("ontouchstart" in document.documentElement) {
     let cam = document.querySelector("#cam");
-    let camParent = cam.parentElement;
-    let camInfo = camParent.querySelector(".event-cam__info");
-    let camZoom = camInfo.querySelector(".event-cam__zoom");
-    let camBright = camInfo.querySelector(".event-cam__bright");
+    let camParent = cam.parentElement.parentElement;
+    let camInfo = camParent.querySelector(".event-cam-info");
+    let camZoom = camInfo.querySelector(".event-cam-info__zoom");
+    let camBright = camInfo.querySelector(".event-cam-info__bright");
 
-    camInfo.classList.remove("event-cam__info_hide"); //if touch device show cam info block
+    camInfo.classList.remove("event-cam-info_hide"); //if touch device show cam info block
     camZoom.textContent = "Приближение: 0%";
     camBright.textContent = "Яркость: 0%";
 
@@ -252,8 +252,10 @@ window.onload = function() {
               (180 / Math.PI)
           );
 
-          this.style.filter = "brightness(" + touchAngle + "%)";
-          camBright.textContent = "Яркость: " + touchAngle + "%";
+          if (touchAngle > 0) {
+            this.style.filter = "brightness(" + touchAngle + "%)";
+            camBright.textContent = "Яркость: " + touchAngle + "%";
+          }
         } else {
           /* Zoom */
           checkZoom = true;
