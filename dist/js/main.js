@@ -180,6 +180,8 @@ window.onload = function() {
     let touchedPoints = [];
     let prevDiff = -1;
 
+    let checkZomm = false;
+
     if (window.PointerEvent) {
       cam.addEventListener("pointerdown", startController, false);
       cam.addEventListener("pointermove", moveController, false);
@@ -212,7 +214,7 @@ window.onload = function() {
       for (let i = 0; i < touchedPoints.length; i++) {
         if (
           touchedPoints[i].pointerId == e.pointerId &&
-          Math.abs(e.clientX - touchedPoints[i].clientX) > 100
+          Math.abs(e.clientX - touchedPoints[i].clientX) > 30
         ) {
           e.move = true;
           touchedPoints[i] = e;
@@ -234,7 +236,7 @@ window.onload = function() {
         //if two active touches
         let oneTouchMove = checkВrightness(e); //check brightness status (one touch move & one stay)
 
-        if (oneTouchMove === true) {
+        if (oneTouchMove === true && !checkZomm) {
           /* Rotate */
           touchAngle = parseInt(
             Math.atan2(e.clientX - imgCenterX, -(e.clientY - imgCenterY)) *
@@ -244,7 +246,7 @@ window.onload = function() {
           this.style.filter = "brightness(" + touchAngle + "%)";
         } else {
           /* Zoom */
-
+          checkZomm = true;
           // Calculate the distance between the two pointers
           let curDiff = Math.abs(
             touchedPoints[0].clientX - touchedPoints[1].clientX
@@ -279,6 +281,7 @@ window.onload = function() {
 
     //удаление тача при up-е
     function stopController(e) {
+      checkZomm = false;
       for (let i = 0; i < touchedPoints.length; i++) {
         if (touchedPoints[i].pointerId == e.pointerId) {
           touchedPoints.splice(i, 1);
