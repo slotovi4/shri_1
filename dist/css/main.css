@@ -351,9 +351,9 @@ a {
       margin-left: 18px; }
 
 .event-cam {
-  overflow: hidden;
-  margin-top: 16px; }
+  overflow: hidden; }
   .event-cam__image {
+    margin-top: 16px;
     touch-action: none;
     background-repeat: repeat-x;
     height: 430px;

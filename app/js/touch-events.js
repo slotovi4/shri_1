@@ -22,6 +22,7 @@ window.onload = function() {
     let checkZoom = false;
     let checkScale = 0;
 
+    /* Check Pointer Support */
     if (window.PointerEvent) {
       cam.addEventListener("pointerdown", startController, false);
       cam.addEventListener("pointermove", moveController, false);
@@ -54,7 +55,6 @@ window.onload = function() {
     }
 
     function moveController(e) {
-      alert("move");
       // Find this event in the cache and update its record with this event
       for (let i = 0; i < touchedPoints.length; i++) {
         if (
@@ -133,7 +133,7 @@ window.onload = function() {
       }
     }
 
-    //удаление тача при up-е
+    //detete touch on up
     function stopController(e) {
       checkZoom = false;
       for (let i = 0; i < touchedPoints.length; i++) {
@@ -144,11 +144,11 @@ window.onload = function() {
       }
     }
 
-    //проверка на то что если только один палец из двух двигается то вращаем
+    //rotate if one touch move & one stay
     function checkВrightness(e) {
       let status = false;
       touchedPoints.forEach(function(point) {
-        //если это второй палец и он не двигается то
+        //if current touch move & second touch not move
         if (point.pointerId != e.pointerId && point.move == false)
           status = true;
       });

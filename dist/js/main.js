@@ -76,7 +76,7 @@ function templateEngine(jsonData) {
           blockButtIna = content.querySelector(
             ".event-buttons__button_inactive"
           ),
-          blockCam = content.querySelector(".event-cam__image"),
+          blockCamImage = content.querySelector(".event-cam__image"),
           blockInfo = content.querySelector(".event-info");
 
         /* Custom Data */
@@ -85,7 +85,7 @@ function templateEngine(jsonData) {
         blockClimate.classList.add("event-climate_hide");
         blockMusic.classList.add("event-music_hide");
         blockButt.classList.add("event-buttons_hide");
-        blockCam.classList.add("event-cam__image_hide");
+        blockCamImage.classList.add("event-cam__image_hide");
 
         if (data) {
           let dType = data.type,
@@ -105,9 +105,9 @@ function templateEngine(jsonData) {
             blockImage.setAttribute("alt", "graph");
             blockImage.classList.remove("event__image_hide");
           } else if (dImage == "get_it_from_mocks_:3.jpg") {
-            blockCam.id = "cam"; //add cam
-            blockCam.style.backgroundImage = "url(img/image.jpg)";
-            blockCam.classList.remove("event-cam__image_hide");
+            blockCamImage.id = "cam"; //add cam
+            blockCamImage.style.backgroundImage = "url(img/image.jpg)";
+            blockCamImage.classList.remove("event-cam__image_hide");
           }
 
           //Climate
@@ -191,6 +191,7 @@ window.onload = function() {
     let checkZoom = false;
     let checkScale = 0;
 
+    /* Check Pointer Support */
     if (window.PointerEvent) {
       cam.addEventListener("pointerdown", startController, false);
       cam.addEventListener("pointermove", moveController, false);
@@ -223,7 +224,6 @@ window.onload = function() {
     }
 
     function moveController(e) {
-      alert("move");
       // Find this event in the cache and update its record with this event
       for (let i = 0; i < touchedPoints.length; i++) {
         if (
@@ -302,7 +302,7 @@ window.onload = function() {
       }
     }
 
-    //удаление тача при up-е
+    //detete touch on up
     function stopController(e) {
       checkZoom = false;
       for (let i = 0; i < touchedPoints.length; i++) {
@@ -313,11 +313,11 @@ window.onload = function() {
       }
     }
 
-    //проверка на то что если только один палец из двух двигается то вращаем
+    //rotate if one touch move & one stay
     function checkВrightness(e) {
       let status = false;
       touchedPoints.forEach(function(point) {
-        //если это второй палец и он не двигается то
+        //if current touch move & second touch not move
         if (point.pointerId != e.pointerId && point.move == false)
           status = true;
       });
