@@ -215,7 +215,7 @@ window.onload = function() {
       for (let i = 0; i < touchedPoints.length; i++) {
         if (
           touchedPoints[i].pointerId == e.pointerId &&
-          Math.abs(e.clientX - touchedPoints[i].clientX) > 30
+          Math.abs(e.clientX - touchedPoints[i].clientX) > 50
         ) {
           e.move = true;
           touchedPoints[i] = e;
@@ -267,7 +267,7 @@ window.onload = function() {
             if (curDiff < prevDiff) {
               if (checkScale == 0) {
                 checkScale = -1;
-                this.style.transform = "scale(0.5)";
+                this.style.transform = "scale(0.7)";
               }
               if (checkScale == 1) {
                 checkScale = 0;
