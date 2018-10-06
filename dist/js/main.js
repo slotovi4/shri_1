@@ -171,6 +171,14 @@ function templateEngine(jsonData) {
 window.onload = function() {
   if ("ontouchstart" in document.documentElement) {
     let cam = document.querySelector("#cam");
+    let camParent = cam.parentElement;
+    let camInfo = camParent.querySelector(".event-cam__info");
+    let camZoom = camInfo.querySelector(".event-cam__zoom");
+    let camBright = camInfo.querySelector(".event-cam__bright");
+
+    camInfo.classList.remove("event-cam__info_hide"); //if touch device show cam info block
+    camZoom.textContent = "Приближение: 0%";
+    camBright.textContent = "Яркость: 0%";
 
     let conXstart; //start X touch position
     let imgBackPosition; //img background X position
@@ -245,6 +253,7 @@ window.onload = function() {
           );
 
           this.style.filter = "brightness(" + touchAngle + "%)";
+          camBright.textContent = "Яркость: " + touchAngle + "%";
         } else {
           /* Zoom */
           checkZoom = true;
@@ -258,20 +267,24 @@ window.onload = function() {
               if (checkScale == 0) {
                 checkScale = 1;
                 this.style.transform = "scale(1.5)";
+                camZoom.textContent = "Приближение: 50%";
               }
               if (checkScale == -1) {
                 checkScale = 0;
                 this.style.transform = "scale(1)";
+                camZoom.textContent = "Приближение: 0%";
               }
             }
             if (curDiff < prevDiff) {
               if (checkScale == 0) {
                 checkScale = -1;
                 this.style.transform = "scale(0.7)";
+                camZoom.textContent = "Приближение: -30%";
               }
               if (checkScale == 1) {
                 checkScale = 0;
                 this.style.transform = "scale(1)";
+                camZoom.textContent = "Приближение: 0%";
               }
             }
           }

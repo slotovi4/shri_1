@@ -125,6 +125,18 @@
     }
   }
 
+  .event-cam {
+    &__image {
+      height: 280px;
+    }
+
+    &__zoom,
+    &__bright {
+      font-size: 1rem;
+      line-height: 1.15rem;
+    }
+  }
+
   .event-climate {
     display: flex;
     justify-content: space-between;

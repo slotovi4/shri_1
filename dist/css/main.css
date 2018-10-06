@@ -356,9 +356,19 @@ a {
     touch-action: none;
     background-repeat: repeat-x;
     height: 430px;
-    background-size: contain; }
+    background-size: cover; }
     .event-cam__image_hide {
       display: none !important; }
+  .event-cam__info {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 16px; }
+    .event-cam__info_hide {
+      display: none; }
+  .event-cam__zoom, .event-cam__bright {
+    font-size: 1.125rem;
+    line-height: 1.3rem;
+    color: #333333; }
 
 .footer {
   display: flex;
@@ -457,6 +467,11 @@ a {
     justify-content: space-between; }
     .event_size-s .event-system .event__source {
       margin: 0; }
+  .event-cam__image {
+    height: 280px; }
+  .event-cam__zoom, .event-cam__bright {
+    font-size: 1rem;
+    line-height: 1.15rem; }
   .event-climate {
     display: flex;
     justify-content: space-between; }
