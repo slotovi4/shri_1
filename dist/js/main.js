@@ -185,7 +185,7 @@ window.onload = function() {
     let imgLeft, imgRight, imgTop, imgBot; //img L/R/T/B position
     let imgCenterX, imgCenterY; //img X&Y center position
     let touchAngle; //touch rotate angle
-    let touchedPoints = [];
+    let touchedPoints = []; //active touches
     let prevDiff = -1;
 
     let checkZoom = false;
@@ -195,6 +195,10 @@ window.onload = function() {
       cam.addEventListener("pointerdown", startController, false);
       cam.addEventListener("pointermove", moveController, false);
       cam.addEventListener("pointerup", stopController, false);
+    } else {
+      cam.on("pointerdown", startController);
+      cam.on("pointermove", moveController);
+      cam.on("pointerup", stopController);
     }
 
     function startController(e) {
@@ -293,20 +297,8 @@ window.onload = function() {
 
           // Cache the distance for the next move event
           prevDiff = curDiff;
-
-          /* let p = cam.querySelector(".event-cam-debug");
-          p.textContent =
-            oneTouchMove +
-            " x = " +
-            touchedPoints[0].sideX +
-            " y= " +
-            touchedPoints[0].sideY +
-            " zoom = " +
-            checkedZoom; */
         }
-      } /* else {
-        touchedPoints = [];
-      } */
+      }
     }
 
     //удаление тача при up-е
