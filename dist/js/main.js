@@ -33,7 +33,7 @@ function toggleMenu() {
 
 function templateEngine(jsonData) {
   let request = new XMLHttpRequest();
-  request.open("GET", jsonData, true);
+  request.open("GET", jsonData, false);
 
   request.onload = function() {
     if (request.status >= 200 && request.status < 400) {
@@ -87,6 +87,7 @@ function templateEngine(jsonData) {
         blockMusic.classList.add("event-music_hide");
         blockButt.classList.add("event-buttons_hide");
         blockCamImage.classList.add("event-cam__image_hide");
+        blockCamImage.removeAttribute("id");
         blockCamInfo.classList.add("event-cam-info_hide");
 
         if (data) {
@@ -167,10 +168,16 @@ function templateEngine(jsonData) {
   };
 
   request.send();
+
+  if (request.status != 200) {
+    alert(request.status + ": " + request.statusText);
+  } else {
+    touchEvets();
+  }
 }
 
 /* Event Handling: Drag & Pinch & Rotate In #cam Image */
-window.onload = function() {
+function touchEvets() {
   if ("ontouchstart" in document.documentElement) {
     let cam = document.querySelector("#cam");
     let camParent = cam.parentElement.parentElement;
@@ -327,4 +334,4 @@ window.onload = function() {
       return status;
     }
   }
-};
+}
