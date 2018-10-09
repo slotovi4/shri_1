@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="robots" content="noindex">
     <link rel="stylesheet" href="css/main.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <title>Document</title>
 </head>
 
@@ -30,9 +31,41 @@
 
     <main class="container">
         <h1 class="container__title">Видеонаблюдение</h1>
+        <video id="video-1" class="container__video" poster="img/yandex.jpg" controls="controls" loop="loop" muted autoplay></video>
+        <video id="video-2" class="container__video" poster="img/yandex.jpg" controls="controls" loop="loop" muted autoplay></video>
+        <video id="video-3" class="container__video" poster="img/yandex.jpg" controls="controls" loop="loop" muted autoplay></video>
+        <video id="video-4" class="container__video" poster="img/yandex.jpg" controls="controls" loop="loop" muted autoplay></video>
     </main>
 
     <script src="js/main.js"></script>
+    <script>
+        window.onload = function () {
+
+            /* Init Video */
+            initVideo(
+                document.getElementById('video-1'),
+                'http://127.0.0.1:5500/dist/video/hall/360p.m3u8'
+            );
+            initVideo(
+                document.getElementById('video-2'),
+                'http://127.0.0.1:5500/dist/video/cat/360p.m3u8'
+            );
+            initVideo(
+                document.getElementById('video-3'),
+                'http://127.0.0.1:5500/dist/video/dog/360p.m3u8'
+            );
+            initVideo(
+                document.getElementById('video-4'),
+                'http://127.0.0.1:5500/dist/video/sosed/360p.m3u8'
+            );
+
+            /* Create Canvas Video */
+            canvasVideo('video-1');
+            canvasVideo('video-2');
+            canvasVideo('video-3');
+            canvasVideo('video-4');
+        }
+    </script>
 </body>
 
 </html>

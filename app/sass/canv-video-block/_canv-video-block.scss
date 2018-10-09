@@ -1,0 +1,15 @@
+.canv-video-block {
+  grid-column: span 3;
+  position: relative;
+
+  &__info {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  &__video {
+    width: 100%;
+    height: auto;
+  }
+}

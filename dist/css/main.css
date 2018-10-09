@@ -84,6 +84,10 @@ a {
     margin-top: 34px;
     margin-bottom: 12px;
     grid-column: span 6; }
+  .container__video {
+    grid-column: span 3;
+    width: 100%;
+    height: auto; }
 
 .event {
   border-radius: 20px;
@@ -371,6 +375,17 @@ a {
     font-size: 1.125rem;
     line-height: 1.3rem;
     color: #333333; }
+
+.canv-video-block {
+  grid-column: span 3;
+  position: relative; }
+  .canv-video-block__info {
+    position: absolute;
+    left: 0;
+    top: 0; }
+  .canv-video-block__video {
+    width: 100%;
+    height: auto; }
 
 .footer {
   display: flex;
