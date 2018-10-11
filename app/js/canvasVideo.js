@@ -8,6 +8,9 @@ function canvasVideo(videoId) {
   let lumRange = block.querySelector(".canv-video-block__luminance"); //luminance range
   let contrRange = block.querySelector(".canv-video-block__contrast"); //contrast range
 
+  let custCanvas = document.createElement("canvas");
+  let custCtx = custCanvas.getContext("2d", { alpha: false });
+
   let ctx = canvas.getContext("2d", { alpha: false });
   let fps = 30; //lock video fps
 
@@ -39,8 +42,10 @@ function canvasVideo(videoId) {
     false
   );
 
+  let oldRGB;
+
   /* Drawing */
-  function loop(video, canvas, ctx) {
+  function loop(video, canvas, ctx, custCtx) {
     let luminanceBlack = 0,
       luminanceWhite = 0;
 
@@ -71,6 +76,7 @@ function canvasVideo(videoId) {
           data[i] = (changeLum / 5) * r;
           data[i + 1] = (changeLum / 5) * g;
           data[i + 2] = (changeLum / 5) * b;
+
           r = data[i];
           g = data[i + 1];
           b = data[i + 2];
@@ -81,6 +87,7 @@ function canvasVideo(videoId) {
           data[i] = data[i] * contrast + intercept;
           data[i + 1] = data[i + 1] * contrast + intercept;
           data[i + 2] = data[i + 2] * contrast + intercept;
+
           r = data[i];
           g = data[i + 1];
           b = data[i + 2];
@@ -93,6 +100,49 @@ function canvasVideo(videoId) {
         if (r < 0) data[i] = 0;
         if (g < 0) data[i + 1] = 0;
         if (b < 0) data[i + 2] = 0;
+
+        if (i % 10 == 0) {
+          if (oldRGB) {
+            /* Color Euclidean Distance */
+            let disR = Math.pow(data[i] - oldRGB[i - fps], 2);
+            let disG = Math.pow(data[i + 1] - oldRGB[i - fps + 1], 2);
+            let disB = Math.pow(data[i + 2] - oldRGB[i - fps + 2], 2);
+            let distance = Math.sqrt(disR + disG + disB);
+
+            if (distance > 255) {
+              data[i] = 255;
+              data[i + 1] = 0;
+              data[i + 2] = 0;
+            }
+
+            /* if (rgbSum != custRgbSum && rgbSum != 255 && data[i] != 255) {
+              if (
+                rgbSum - sensitivity > custRgbSum ||
+                rgbSum + sensitivity < custRgbSum
+              ) {
+                data[i] = 255;
+                data[i + 1] = 0;
+                data[i + 2] = 0;
+              }
+            } */
+            /* 
+            let sensitivity = 100;
+            let rgbSum = data[i] + data[i + 1] + data[i + 2];
+            let custRgbSum =
+              oldRGB[i - fps] + oldRGB[i - fps + 1] + oldRGB[i - fps + 2];
+
+            if (
+              rgbSum + sensitivity < custRgbSum - sensitivity ||
+              rgbSum - sensitivity > custRgbSum + sensitivity
+            ) {
+              data[i] = 255;
+              data[i + 1] = 0;
+              data[i + 2] = 0;
+            } */
+          }
+        }
+
+        oldRGB = data;
 
         /* Get Luminance Info */
         let luminance = 0.299 * r + 0.587 * g + 0.114 * b;
@@ -119,10 +169,10 @@ function canvasVideo(videoId) {
     /* Redrawing */
     setTimeout(function() {
       requestAnimationFrame(function() {
-        loop(video, canvas, ctx);
+        loop(video, canvas, ctx, custCtx);
       });
     }, 1000 / fps);
   }
 
-  loop(video, canvas, ctx);
+  loop(video, canvas, ctx, custCtx);
 }
