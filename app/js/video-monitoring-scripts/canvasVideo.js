@@ -1,3 +1,4 @@
+/* Draw Canvas Video & Video Effects */
 function canvasVideo(videoId) {
   createCanvasVideoBlock(videoId);
 
@@ -101,13 +102,18 @@ function canvasVideo(videoId) {
         if (g < 0) data[i + 1] = 0;
         if (b < 0) data[i + 2] = 0;
 
-        if (i % 10 == 0) {
+        if (i % 12 == 0) {
           if (oldRGB) {
             /* Color Euclidean Distance */
             let disR = Math.pow(data[i] - oldRGB[i - fps], 2);
             let disG = Math.pow(data[i + 1] - oldRGB[i - fps + 1], 2);
             let disB = Math.pow(data[i + 2] - oldRGB[i - fps + 2], 2);
             let distance = Math.sqrt(disR + disG + disB);
+
+            //проверить на красный
+            //проверить на частоту изменений цвета по кадрам
+            //вычислять оттенок цвета(темный/светлый) и елси темный то перекрашиваю в черный иначе в белый,
+            //после сравниваю ч/б цвета и если цвет изменился то крашу в красный и делаю проверку на красный
 
             if (distance > 255) {
               data[i] = 255;
