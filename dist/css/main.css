@@ -389,7 +389,8 @@ a {
     cursor: pointer; }
   .canv-video-block__text {
     color: #333333;
-    font-weight: 600; }
+    font-weight: 600;
+    font-size: 1rem; }
   .canv-video-block__luminance, .canv-video-block__contrast {
     margin-left: 10px;
     margin-right: 10px; }
@@ -400,6 +401,7 @@ a {
       color: #333333;
       margin-right: 30px;
       font-weight: 600;
+      font-size: 1rem;
       padding: 5px;
       border: 1px solid gray;
       border-radius: 10px;
@@ -419,7 +421,7 @@ a {
     align-items: center;
     justify-content: center;
     flex-flow: row wrap;
-    padding: 10px 20px;
+    padding: 10px 0;
     position: relative;
     height: 50px; }
     .canv-video-block__controll-block_open {
@@ -475,7 +477,26 @@ a {
     font-size: 14px; }
   .event__icon {
     width: 35px;
-    height: 32px; } }
+    height: 32px; }
+  .canv-video-block__controll-block {
+    height: auto; }
+  .canv-video-block__text {
+    width: 70px;
+    margin-right: 10px;
+    line-height: 28px; }
+  .canv-video-block__luminance, .canv-video-block__contrast {
+    width: calc(100% - 80px);
+    margin: 0; } }
+
+@media screen and (min-width: 801px) and (max-height: 400px) {
+  .canv-video-block__controll-block_open {
+    position: absolute;
+    bottom: 0;
+    width: 100%; }
+    .canv-video-block__controll-block_open .canv-video-block__luminance,
+    .canv-video-block__controll-block_open .canv-video-block__contrast,
+    .canv-video-block__controll-block_open .canv-video-block__text {
+      display: none; } }
 
 @media screen and (max-width: 800px) {
   html {
@@ -509,6 +530,14 @@ a {
       color: white; }
       .header__link_active {
         color: #ffd93e; }
+  .canv-video-block__canvas-block_open {
+    z-index: 10000; }
+  .canv-video-block__controll-block_open {
+    margin-top: -15px; }
+    .canv-video-block__controll-block_open .canv-video-block__luminance,
+    .canv-video-block__controll-block_open .canv-video-block__contrast,
+    .canv-video-block__controll-block_open .canv-video-block__text {
+      display: none; }
   .header-mobile-btn {
     display: block;
     z-index: 100; }
@@ -572,4 +601,6 @@ a {
 @media screen and (max-width: 650px) {
   .container {
     display: flex;
-    flex-direction: column; } }
+    flex-direction: column; }
+  .canv-video-block {
+    width: 100%; } }

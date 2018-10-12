@@ -535,7 +535,7 @@ function canvasVideoSound(videoId) {
       source = ctx.createMediaElementSource(video), //get video element
       analyser = ctx.createAnalyser(), //analys sound
       processor = ctx.createScriptProcessor(2048, 1, 1), //check sound changes
-      data;
+      data; //frequency data from the analyzer
 
     let soundVolume; //current sound value
     let maxSoundVolume = 0; //max sound value

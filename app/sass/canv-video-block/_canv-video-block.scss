@@ -17,6 +17,7 @@
   &__text {
     color: $primary-color;
     font-weight: 600;
+    font-size: 1rem;
   }
 
   &__luminance,
@@ -33,6 +34,7 @@
       color: $primary-color;
       margin-right: 30px;
       font-weight: 600;
+      font-size: 1rem;
       padding: 5px;
       border: 1px solid gray;
       border-radius: 10px;
@@ -59,7 +61,7 @@
     align-items: center;
     justify-content: center;
     flex-flow: row wrap;
-    padding: 10px 20px;
+    padding: 10px 0;
     position: relative;
     height: 50px;
 
