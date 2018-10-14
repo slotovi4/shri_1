@@ -381,7 +381,10 @@ a {
   .canv-video-block__canvas-move {
     position: absolute;
     left: 0;
-    opacity: 0.2; }
+    opacity: 0.2;
+    pointer-events: none;
+    width: 100%;
+    height: auto; }
   .canv-video-block__info {
     position: absolute;
     left: 0;

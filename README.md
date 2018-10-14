@@ -1,7 +1,7 @@
 <b>«Мультимедиа»</b><br>
 Страница "Видеонаблюдение" содержится в файле video.html<br>
 Все скрипты для камер находятся в директории app/js/video-monitoring-scripts.<br>
-Все стили описаны в файле canv-video-block.scss, в директории app/sass/canv-video-block/
+Все стили описаны в файле canv-video-block.scss, в директории app/sass/canv-video-block/<br>
 <br>
 <b>initVideoHLS.js</b> -> Подключение HLS видеопотока.<br>
 <b>canvasVideo.js</b> -> Отвечает за отрисовку canvas видео. Реализованы контроллы яркости/контраста и индикатор освещенности.<br>

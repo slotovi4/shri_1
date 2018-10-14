@@ -338,30 +338,24 @@ function toggleMenu() {
 
 /* Draw Canvas Video & Video Effects */
 function canvasVideo(videoId) {
-  createCanvasVideoBlock(videoId);
-
   let video = document.querySelector("#" + videoId); //video
   let block = document.querySelector("#" + videoId + "-block"); //video block
   let videoInfo = block.querySelector(".canv-video-block__info"); //video info
   let canvas = block.querySelector(".canv-video-block__video"); //canvas video result
   let lumRange = block.querySelector(".canv-video-block__luminance"); //luminance range
   let contrRange = block.querySelector(".canv-video-block__contrast"); //contrast range
-
-  let canvasMove = block.querySelector(".canv-video-block__canvas-move");
-
-  //let custCanvas = document.createElement("canvas");
-  //let custCtx = custCanvas.getContext("2d", { alpha: false });
+  let canvasMove = block.querySelector(".canv-video-block__canvas-move"); //move info canvas
 
   let ctx = canvas.getContext("2d", { alpha: false });
   let custCtx = canvasMove.getContext("2d", { alpha: false });
 
-  let fps = 30; //lock video fps
+  let oldRGB; //old rgb video data
 
   /* Get Video Size*/
   let videoWidth = video.offsetWidth;
   let videoHeight = video.offsetHeight;
 
-  video.style.display = "none";
+  video.style.display = "none"; //hide video
 
   /* Change Range Luminance */
   let changeLum = lumRange.value;
@@ -369,7 +363,6 @@ function canvasVideo(videoId) {
     "input",
     function() {
       changeLum = lumRange.value;
-      //canvas.style.filter = "brightness(" + changeLum * 20 + "%)";
     },
     false
   );
@@ -380,17 +373,9 @@ function canvasVideo(videoId) {
     "input",
     function() {
       changeContr = contrRange.value;
-      //canvas.style.filter = "contrast(" + changeContr + ")";
     },
     false
   );
-
-  let oldRGB;
-  /*******/
-  let movedPixels = 0;
-  let moveBlock = [];
-  let checkLayer = 0;
-  /*******/
 
   /* Drawing */
   function loop(video, canvas, canvasMove, ctx, custCtx) {
@@ -400,7 +385,6 @@ function canvasVideo(videoId) {
     /* Set Canvas Size*/
     canvas.width = videoWidth;
     canvas.height = videoHeight;
-
     canvasMove.width = videoWidth;
     canvasMove.height = videoHeight;
 
@@ -409,27 +393,15 @@ function canvasVideo(videoId) {
       ctx.drawImage(video, 0, 0, videoWidth, videoHeight);
 
       /* Get RGB */
-      let videoData = ctx.getImageData(0, 0, videoWidth, videoHeight);
+      let videoData = ctx.getImageData(0, 0, videoWidth, videoHeight); //video canvas
       let data = videoData.data;
 
-      let moveI = custCtx.getImageData(0, 0, videoWidth, videoHeight);
+      let moveI = custCtx.getImageData(0, 0, videoWidth, videoHeight); //move canvas
       let moveData = moveI.data;
 
       /* Get Contrast */
       let contrast = changeContr / 5 + 1; // [0..2]
       let intercept = 128 * (1 - contrast);
-      /* 
-      for (let y = 0; y < videoHeight; y++) {
-        for (let x = 0; x < videoWidth; x++) {
-          let pixel = (y * videoWidth + x) * 4;
-
-          if (!(x % 36) || !(y % 36)) {
-            data[pixel] = 255;
-            data[pixel + 1] = 0;
-            data[pixel + 2] = 0;
-          }
-        }
-      } */
 
       /* Set RGB Style */
       for (let i = 0; i < data.length; i += 4) {
@@ -467,51 +439,6 @@ function canvasVideo(videoId) {
         if (g < 0) data[i + 1] = 0;
         if (b < 0) data[i + 2] = 0;
 
-        /* ** */
-
-        if (oldRGB) {
-          /* Color Euclidean Distance */
-          /* let disR = Math.pow(data[i] - oldRGB[i], 2);
-          let disG = Math.pow(data[i + 1] - oldRGB[i + 1], 2);
-          let disB = Math.pow(data[i + 2] - oldRGB[i + 2], 2);
-          let distance = Math.sqrt(disR + disG + disB); */
-
-          //проверить на красный
-          //проверить на частоту изменений цвета по кадрам
-          //вычислять оттенок цвета(темный/светлый) и елси темный то перекрашиваю в черный иначе в белый,
-          //после сравниваю ч/б цвета и если цвет изменился то крашу в красный и делаю проверку на красный
-
-          //проверка на сетку
-          /* let lineGrid = false;
-          if (data[i] == 255 && data[i + 1] == 0 && data[i + 2] == 0) {
-            lineGrid = true;
-          } */
-
-          let rgbSumm = data[i] + data[i + 1] + data[i + 2];
-          let rgboldSumm = oldRGB[i] + oldRGB[i + 1] + oldRGB[i + 2];
-
-          if (rgbSumm - 100 > rgboldSumm || rgbSumm + 100 < rgboldSumm) {
-            //movedPixels++;
-
-            moveData[i] = 255;
-            moveData[i + 1] = 0;
-            moveData[i + 2] = 0;
-          }
-
-          /* if (!i % 1296) {
-            //36x36px
-            if (movedPixels > 10000) {
-              //18x18px
-              //data = moveBlock;
-              //console.log(moveBlock);
-
-              moveBlock = [];
-              //alert("move!");
-            }
-            movedPixels = 0;
-          } */
-        }
-
         /* Get Luminance Info */
         let luminance = 0.299 * r + 0.587 * g + 0.114 * b;
         luminance < 50 ? luminanceBlack++ : luminanceWhite++;
@@ -522,9 +449,19 @@ function canvasVideo(videoId) {
             ? (videoInfo.style.color = "white")
             : (videoInfo.style.color = "black");
         }
-      }
 
-      oldRGB = data;
+        /* Move Detection */
+        if (oldRGB) {
+          let rgbSumm = data[i] + data[i + 1] + data[i + 2];
+          let rgboldSumm = oldRGB[i] + oldRGB[i + 1] + oldRGB[i + 2];
+
+          if (rgbSumm - 100 > rgboldSumm || rgbSumm + 100 < rgboldSumm) {
+            moveData[i] = 255;
+            moveData[i + 1] = 0;
+            moveData[i + 2] = 0;
+          }
+        }
+      }
 
       /* Check Luminance */
       luminanceBlack > luminanceWhite
@@ -532,11 +469,11 @@ function canvasVideo(videoId) {
         : (videoInfo.textContent = "light");
 
       /* Apply Style */
+      oldRGB = data;
       videoData.data = data;
       moveI.data = moveData;
       ctx.putImageData(videoData, 0, 0);
       custCtx.putImageData(moveI, 0, 0);
-      //ctx.clearRect(0, 0, videoWidth, videoHeight);
     }
 
     /* Redrawing */
@@ -544,7 +481,7 @@ function canvasVideo(videoId) {
       requestAnimationFrame(function() {
         loop(video, canvas, canvasMove, ctx, custCtx);
       });
-    }, 1000 / fps);
+    }, 100);
   }
 
   loop(video, canvas, canvasMove, ctx, custCtx);
