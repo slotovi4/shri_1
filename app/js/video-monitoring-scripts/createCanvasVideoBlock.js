@@ -12,9 +12,11 @@ function createCanvasVideoBlock(videoId) {
     luminance = document.createElement("input"),
     luminanceText = document.createElement("span"),
     contrast = document.createElement("input"),
+    canvMove = document.createElement("canvas"),
     contrastText = document.createElement("span");
 
   /* Set Values */
+  canvMove.classList.add("canv-video-block__canvas-move");
   block.classList.add("canv-video-block");
   block.id = videoId + "-block";
   canvasBlock.classList.add("canv-video-block__canvas-block");
@@ -51,6 +53,7 @@ function createCanvasVideoBlock(videoId) {
   canvasBlock.appendChild(info);
   canvasBlock.appendChild(soundVolume);
   canvasBlock.appendChild(canvas);
+  canvasBlock.appendChild(canvMove);
   canvasBlock.appendChild(controllsBlock);
   block.appendChild(canvasBlock);
 

@@ -1,6 +1,12 @@
 .canv-video-block {
   grid-column: span 3;
 
+  &__canvas-move {
+    position: absolute;
+    left: 0;
+    opacity: 0.2;
+  }
+
   &__info {
     position: absolute;
     left: 0;

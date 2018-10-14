@@ -303,6 +303,39 @@ function touchEvets() {
   }
 }
 
+/* Event handling "click" on the button ".header-mobile-btn": animate button & show/hide mobile menu */
+
+const menu = document.querySelector(".header__menu");
+const menuBtn = document.querySelector(".header-mobile-btn");
+const menuBtnLine = document.querySelectorAll(".header-mobile-btn__line");
+
+/* Set Initial State Of Menu */
+var showMenu = false;
+
+menuBtn.addEventListener("click", toggleMenu);
+
+function toggleMenu() {
+  if (!showMenu) {
+    menu.classList.add("header__menu_show");
+    menuBtn.classList.add("header-mobile-btn_close");
+    menuBtnLine.forEach(item =>
+      item.classList.add("header-mobile-btn__line_close")
+    );
+
+    /* Set Menu State */
+    showMenu = true;
+  } else {
+    menu.classList.remove("header__menu_show");
+    menuBtn.classList.remove("header-mobile-btn_close");
+    menuBtnLine.forEach(item =>
+      item.classList.remove("header-mobile-btn__line_close")
+    );
+
+    /* Set Menu State */
+    showMenu = false;
+  }
+}
+
 /* Draw Canvas Video & Video Effects */
 function canvasVideo(videoId) {
   createCanvasVideoBlock(videoId);
@@ -314,10 +347,14 @@ function canvasVideo(videoId) {
   let lumRange = block.querySelector(".canv-video-block__luminance"); //luminance range
   let contrRange = block.querySelector(".canv-video-block__contrast"); //contrast range
 
-  let custCanvas = document.createElement("canvas");
-  let custCtx = custCanvas.getContext("2d", { alpha: false });
+  let canvasMove = block.querySelector(".canv-video-block__canvas-move");
+
+  //let custCanvas = document.createElement("canvas");
+  //let custCtx = custCanvas.getContext("2d", { alpha: false });
 
   let ctx = canvas.getContext("2d", { alpha: false });
+  let custCtx = canvasMove.getContext("2d", { alpha: false });
+
   let fps = 30; //lock video fps
 
   /* Get Video Size*/
@@ -349,15 +386,23 @@ function canvasVideo(videoId) {
   );
 
   let oldRGB;
+  /*******/
+  let movedPixels = 0;
+  let moveBlock = [];
+  let checkLayer = 0;
+  /*******/
 
   /* Drawing */
-  function loop(video, canvas, ctx, custCtx) {
+  function loop(video, canvas, canvasMove, ctx, custCtx) {
     let luminanceBlack = 0,
       luminanceWhite = 0;
 
     /* Set Canvas Size*/
     canvas.width = videoWidth;
     canvas.height = videoHeight;
+
+    canvasMove.width = videoWidth;
+    canvasMove.height = videoHeight;
 
     /* Set Canvas Styles */
     if (!video.paused && !video.ended) {
@@ -367,9 +412,24 @@ function canvasVideo(videoId) {
       let videoData = ctx.getImageData(0, 0, videoWidth, videoHeight);
       let data = videoData.data;
 
+      let moveI = custCtx.getImageData(0, 0, videoWidth, videoHeight);
+      let moveData = moveI.data;
+
       /* Get Contrast */
       let contrast = changeContr / 5 + 1; // [0..2]
       let intercept = 128 * (1 - contrast);
+      /* 
+      for (let y = 0; y < videoHeight; y++) {
+        for (let x = 0; x < videoWidth; x++) {
+          let pixel = (y * videoWidth + x) * 4;
+
+          if (!(x % 36) || !(y % 36)) {
+            data[pixel] = 255;
+            data[pixel + 1] = 0;
+            data[pixel + 2] = 0;
+          }
+        }
+      } */
 
       /* Set RGB Style */
       for (let i = 0; i < data.length; i += 4) {
@@ -407,65 +467,64 @@ function canvasVideo(videoId) {
         if (g < 0) data[i + 1] = 0;
         if (b < 0) data[i + 2] = 0;
 
-        if (i % 12 == 0) {
-          if (oldRGB) {
-            /* Color Euclidean Distance */
-            let disR = Math.pow(data[i] - oldRGB[i - fps], 2);
-            let disG = Math.pow(data[i + 1] - oldRGB[i - fps + 1], 2);
-            let disB = Math.pow(data[i + 2] - oldRGB[i - fps + 2], 2);
-            let distance = Math.sqrt(disR + disG + disB);
+        /* ** */
 
-            //проверить на красный
-            //проверить на частоту изменений цвета по кадрам
-            //вычислять оттенок цвета(темный/светлый) и елси темный то перекрашиваю в черный иначе в белый,
-            //после сравниваю ч/б цвета и если цвет изменился то крашу в красный и делаю проверку на красный
+        if (oldRGB) {
+          /* Color Euclidean Distance */
+          /* let disR = Math.pow(data[i] - oldRGB[i], 2);
+          let disG = Math.pow(data[i + 1] - oldRGB[i + 1], 2);
+          let disB = Math.pow(data[i + 2] - oldRGB[i + 2], 2);
+          let distance = Math.sqrt(disR + disG + disB); */
 
-            if (distance > 255) {
-              data[i] = 255;
-              data[i + 1] = 0;
-              data[i + 2] = 0;
-            }
+          //проверить на красный
+          //проверить на частоту изменений цвета по кадрам
+          //вычислять оттенок цвета(темный/светлый) и елси темный то перекрашиваю в черный иначе в белый,
+          //после сравниваю ч/б цвета и если цвет изменился то крашу в красный и делаю проверку на красный
 
-            /* if (rgbSum != custRgbSum && rgbSum != 255 && data[i] != 255) {
-              if (
-                rgbSum - sensitivity > custRgbSum ||
-                rgbSum + sensitivity < custRgbSum
-              ) {
-                data[i] = 255;
-                data[i + 1] = 0;
-                data[i + 2] = 0;
-              }
-            } */
-            /* 
-            let sensitivity = 100;
-            let rgbSum = data[i] + data[i + 1] + data[i + 2];
-            let custRgbSum =
-              oldRGB[i - fps] + oldRGB[i - fps + 1] + oldRGB[i - fps + 2];
+          //проверка на сетку
+          /* let lineGrid = false;
+          if (data[i] == 255 && data[i + 1] == 0 && data[i + 2] == 0) {
+            lineGrid = true;
+          } */
 
-            if (
-              rgbSum + sensitivity < custRgbSum - sensitivity ||
-              rgbSum - sensitivity > custRgbSum + sensitivity
-            ) {
-              data[i] = 255;
-              data[i + 1] = 0;
-              data[i + 2] = 0;
-            } */
+          let rgbSumm = data[i] + data[i + 1] + data[i + 2];
+          let rgboldSumm = oldRGB[i] + oldRGB[i + 1] + oldRGB[i + 2];
+
+          if (rgbSumm - 100 > rgboldSumm || rgbSumm + 100 < rgboldSumm) {
+            //movedPixels++;
+
+            moveData[i] = 255;
+            moveData[i + 1] = 0;
+            moveData[i + 2] = 0;
           }
-        }
 
-        oldRGB = data;
+          /* if (!i % 1296) {
+            //36x36px
+            if (movedPixels > 10000) {
+              //18x18px
+              //data = moveBlock;
+              //console.log(moveBlock);
+
+              moveBlock = [];
+              //alert("move!");
+            }
+            movedPixels = 0;
+          } */
+        }
 
         /* Get Luminance Info */
         let luminance = 0.299 * r + 0.587 * g + 0.114 * b;
         luminance < 50 ? luminanceBlack++ : luminanceWhite++;
 
-        /* Change Info Text Color 50x50px */
-        if (i == 200) {
+        /* Change Info Text Color 25x25px */
+        if (i == 100) {
           luminanceBlack > luminanceWhite
             ? (videoInfo.style.color = "white")
             : (videoInfo.style.color = "black");
         }
       }
+
+      oldRGB = data;
 
       /* Check Luminance */
       luminanceBlack > luminanceWhite
@@ -474,18 +533,21 @@ function canvasVideo(videoId) {
 
       /* Apply Style */
       videoData.data = data;
+      moveI.data = moveData;
       ctx.putImageData(videoData, 0, 0);
+      custCtx.putImageData(moveI, 0, 0);
+      //ctx.clearRect(0, 0, videoWidth, videoHeight);
     }
 
     /* Redrawing */
     setTimeout(function() {
       requestAnimationFrame(function() {
-        loop(video, canvas, ctx, custCtx);
+        loop(video, canvas, canvasMove, ctx, custCtx);
       });
     }, 1000 / fps);
   }
 
-  loop(video, canvas, ctx, custCtx);
+  loop(video, canvas, canvasMove, ctx, custCtx);
 }
 
 /* Get Video Sound */
@@ -561,9 +623,11 @@ function createCanvasVideoBlock(videoId) {
     luminance = document.createElement("input"),
     luminanceText = document.createElement("span"),
     contrast = document.createElement("input"),
+    canvMove = document.createElement("canvas"),
     contrastText = document.createElement("span");
 
   /* Set Values */
+  canvMove.classList.add("canv-video-block__canvas-move");
   block.classList.add("canv-video-block");
   block.id = videoId + "-block";
   canvasBlock.classList.add("canv-video-block__canvas-block");
@@ -600,6 +664,7 @@ function createCanvasVideoBlock(videoId) {
   canvasBlock.appendChild(info);
   canvasBlock.appendChild(soundVolume);
   canvasBlock.appendChild(canvas);
+  canvasBlock.appendChild(canvMove);
   canvasBlock.appendChild(controllsBlock);
   block.appendChild(canvasBlock);
 
@@ -669,37 +734,4 @@ function soundMuteButton(button, video) {
       button.classList.remove("canv-video-block__sound-mute_active");
     }
   });
-}
-
-/* Event handling "click" on the button ".header-mobile-btn": animate button & show/hide mobile menu */
-
-const menu = document.querySelector(".header__menu");
-const menuBtn = document.querySelector(".header-mobile-btn");
-const menuBtnLine = document.querySelectorAll(".header-mobile-btn__line");
-
-/* Set Initial State Of Menu */
-var showMenu = false;
-
-menuBtn.addEventListener("click", toggleMenu);
-
-function toggleMenu() {
-  if (!showMenu) {
-    menu.classList.add("header__menu_show");
-    menuBtn.classList.add("header-mobile-btn_close");
-    menuBtnLine.forEach(item =>
-      item.classList.add("header-mobile-btn__line_close")
-    );
-
-    /* Set Menu State */
-    showMenu = true;
-  } else {
-    menu.classList.remove("header__menu_show");
-    menuBtn.classList.remove("header-mobile-btn_close");
-    menuBtnLine.forEach(item =>
-      item.classList.remove("header-mobile-btn__line_close")
-    );
-
-    /* Set Menu State */
-    showMenu = false;
-  }
 }
