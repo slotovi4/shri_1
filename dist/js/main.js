@@ -3,19 +3,19 @@ const menu = document.querySelector(".header__menu");
 const menuBtn = document.querySelector(".header-mobile-btn");
 const menuBtnLine = document.querySelectorAll(".header-mobile-btn__line");
 /* Set Initial State Of Menu */
-var showMenu = false;
-menuBtn.addEventListener("click", toggleMenu);
+let showMenu = false;
+menuBtn && menuBtn.addEventListener("click", toggleMenu);
 function toggleMenu() {
     if (!showMenu) {
-        menu.classList.add("header__menu_show");
-        menuBtn.classList.add("header-mobile-btn_close");
+        menu && menu.classList.add("header__menu_show");
+        menuBtn && menuBtn.classList.add("header-mobile-btn_close");
         menuBtnLine.forEach(item => item.classList.add("header-mobile-btn__line_close"));
         /* Set Menu State */
         showMenu = true;
     }
     else {
-        menu.classList.remove("header__menu_show");
-        menuBtn.classList.remove("header-mobile-btn_close");
+        menu && menu.classList.remove("header__menu_show");
+        menuBtn && menuBtn.classList.remove("header-mobile-btn_close");
         menuBtnLine.forEach(item => item.classList.remove("header-mobile-btn__line_close"));
         /* Set Menu State */
         showMenu = false;
@@ -141,11 +141,6 @@ function touchEvets() {
             cam.addEventListener("pointermove", moveController, false);
             cam.addEventListener("pointerup", stopController, false);
         }
-        else {
-            cam.on("pointerdown", startController);
-            cam.on("pointermove", moveController);
-            cam.on("pointerup", stopController);
-        }
         function startController(e) {
             /* Get Position Info */
             conXstart = e.clientX;
@@ -157,10 +152,8 @@ function touchEvets() {
             imgRight = this.getBoundingClientRect().right;
             imgTop = this.getBoundingClientRect().top;
             imgBot = this.getBoundingClientRect().bottom;
-            imgWight = parseInt(imgRight - imgLeft);
-            imgHeight = parseInt(imgBot - imgTop);
-            imgCenterX = parseInt((imgLeft + imgRight) / 2);
-            imgCenterY = parseInt((imgTop + imgBot) / 2);
+            imgCenterX = Math.round((imgLeft + imgRight) / 2);
+            imgCenterY = Math.round((imgTop + imgBot) / 2);
         }
         function moveController(e) {
             // Find this event in the cache and update its record with this event
@@ -176,7 +169,7 @@ function touchEvets() {
             if (touchedPoints.length < 2) {
                 /* Left & Right Move */
                 let xPos = e.clientX;
-                let moveValue = parseInt(xPos - conXstart);
+                let moveValue = Math.round(xPos - conXstart);
                 !imgBackPosition
                     ? (this.style.backgroundPositionX = moveValue + "px")
                     : (this.style.backgroundPositionX =
@@ -187,7 +180,7 @@ function touchEvets() {
                 let oneTouchMove = checkВrightness(e); //check brightness status (one touch move & one stay)
                 if (oneTouchMove === true && !checkZoom) {
                     /* Rotate */
-                    touchAngle = parseInt(Math.atan2(e.clientX - imgCenterX, -(e.clientY - imgCenterY)) *
+                    touchAngle = Math.round(Math.atan2(e.clientX - imgCenterX, -(e.clientY - imgCenterY)) *
                         (180 / Math.PI));
                     if (touchAngle > 0) {
                         this.style.filter = "brightness(" + touchAngle + "%)";

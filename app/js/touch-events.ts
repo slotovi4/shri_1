@@ -13,8 +13,8 @@ function touchEvets() {
 
     let conXstart; //start X touch position
     let imgBackPosition; //img background X position
-    let imgLeft, imgRight, imgTop, imgBot; //img L/R/T/B position
-    let imgCenterX, imgCenterY; //img X&Y center position
+    let imgLeft: number, imgRight: number, imgTop: number, imgBot: number; //img L/R/T/B position
+    let imgCenterX: number, imgCenterY: number; //img X&Y center position
     let touchAngle; //touch rotate angle
     let touchedPoints = []; //active touches
     let prevDiff = -1;
@@ -23,14 +23,10 @@ function touchEvets() {
     let checkScale = 0;
 
     /* Check Pointer Support */
-    if (window.PointerEvent) {
+    if ((<any>window).PointerEvent) {
       cam.addEventListener("pointerdown", startController, false);
       cam.addEventListener("pointermove", moveController, false);
       cam.addEventListener("pointerup", stopController, false);
-    } else {
-      cam.on("pointerdown", startController);
-      cam.on("pointermove", moveController);
-      cam.on("pointerup", stopController);
     }
 
     function startController(e) {
@@ -47,11 +43,8 @@ function touchEvets() {
       imgTop = this.getBoundingClientRect().top;
       imgBot = this.getBoundingClientRect().bottom;
 
-      imgWight = parseInt(imgRight - imgLeft);
-      imgHeight = parseInt(imgBot - imgTop);
-
-      imgCenterX = parseInt((imgLeft + imgRight) / 2);
-      imgCenterY = parseInt((imgTop + imgBot) / 2);
+      imgCenterX = Math.round((imgLeft + imgRight) / 2);
+      imgCenterY = Math.round((imgTop + imgBot) / 2);
     }
 
     function moveController(e) {
@@ -71,7 +64,7 @@ function touchEvets() {
       if (touchedPoints.length < 2) {
         /* Left & Right Move */
         let xPos = e.clientX;
-        let moveValue = parseInt(xPos - conXstart);
+        let moveValue = Math.round(xPos - conXstart);
 
         !imgBackPosition
           ? (this.style.backgroundPositionX = moveValue + "px")
@@ -83,7 +76,7 @@ function touchEvets() {
 
         if (oneTouchMove === true && !checkZoom) {
           /* Rotate */
-          touchAngle = parseInt(
+          touchAngle = Math.round(
             Math.atan2(e.clientX - imgCenterX, -(e.clientY - imgCenterY)) *
               (180 / Math.PI)
           );

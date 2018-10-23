@@ -46,14 +46,6 @@ gulp.task("mincss", ["scss"], function() {
     .pipe(gulp.dest(path.dev.css)); //Результат
 });
 
-//Сборка js
-/* gulp.task("js", function() {
-  return gulp
-    .src(path.src.js)
-    .pipe(concat("main.js")) //Конкатанация
-    .pipe(gulp.dest(path.dev.js)); //Результат
-}); */
-
 //Сборка ts
 gulp.task("ts", function() {
   return gulp
