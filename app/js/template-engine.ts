@@ -101,6 +101,7 @@ function templateEngine(jsonData: string) {
         blockMusic.classList.add("event-music_hide");
         blockButt.classList.add("event-buttons_hide");
         blockCamImage.classList.add("event-cam__image_hide");
+        blockInfo.removeAttribute("id");
         blockCamImage.removeAttribute("id");
         blockCamInfo.classList.add("event-cam-info_hide");
 
@@ -124,6 +125,7 @@ function templateEngine(jsonData: string) {
             blockImage.setAttribute("alt", "graph");
             blockImage.classList.remove("event__image_hide");
           } else if (dImage == "get_it_from_mocks_:3.jpg") {
+            blockInfo.id = "camParent";
             blockCamImage.id = "cam"; //add cam
             blockCamImage.style.backgroundImage = "url(img/image.jpg)";
             blockCamImage.classList.remove("event-cam__image_hide");
