@@ -2,13 +2,15 @@ const gulp = require("gulp"), //gulp
   sass = require("gulp-sass"), //sass
   concat = require("gulp-concat"), //конкатанация
   cssnano = require("gulp-cssnano"), //сжатие css
-  rename = require("gulp-rename"); //ренейм
+  rename = require("gulp-rename"), //ренейм
+  ts = require("gulp-typescript"); //TypeScript
 
 const source = "./app/",
   dist = "./dist/",
   path = {
     src: {
       js: source + "js/**/*.js",
+      ts: source + "js/**/*.ts",
       scss: source + "sass/**/*.scss",
       mainscss: source + "sass/main.scss"
     },
@@ -45,14 +47,29 @@ gulp.task("mincss", ["scss"], function() {
 });
 
 //Сборка js
-gulp.task("js", function() {
+/* gulp.task("js", function() {
   return gulp
     .src(path.src.js)
     .pipe(concat("main.js")) //Конкатанация
     .pipe(gulp.dest(path.dev.js)); //Результат
+}); */
+
+//Сборка ts
+gulp.task("ts", function() {
+  return gulp
+    .src(path.src.ts)
+    .pipe(
+      ts({
+        noImplicitAny: true,
+        target: "es6",
+        module: "amd",
+        outFile: "main.js"
+      })
+    )
+    .pipe(gulp.dest(path.dev.js));
 });
 
-gulp.task("watch", ["mincss", "js"], function() {
+gulp.task("watch", ["mincss", "ts"], function() {
   gulp.watch([path.src.scss], ["mincss"]);
-  gulp.watch([path.src.js], ["js"]);
+  gulp.watch([path.src.ts], ["ts"]);
 });
