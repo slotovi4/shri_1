@@ -27,12 +27,15 @@ function templateEngine(jsonData) {
     request.onload = function () {
         if (request.status >= 200 && request.status < 400) {
             let data = JSON.parse(request.responseText);
-            let events = data.events;
+            let ev = data;
+            let events = ev.events;
             events.forEach(function (el) {
+                let elts = el;
                 /* Get Data */
-                let type = el.type, title = el.title, source = el.source, time = el.time, description = el.description, icon = el.icon, size = el.size, data = el.data;
+                let type = elts.type, title = elts.title, source = elts.source, time = elts.time, description = elts.description, icon = elts.icon, size = elts.size, data = elts.data;
                 /* Template */
-                let content = document.querySelector("template").content, block = content.querySelector("#event"), blockIcon = content.querySelector(".event__icon"), blockTitle = content.querySelector(".event__title"), blockSource = content.querySelector(".event__source"), blockTime = content.querySelector(".event__time"), blockDesc = content.querySelector(".event__desc"), blockClose = content.querySelector(".event__close"), blockImage = content.querySelector(".event__image"), blockTemp = content.querySelector(".event__temperature"), blockHumi = content.querySelector(".event__humidity"), blockClimate = content.querySelector(".event-climate"), blockMusic = content.querySelector(".event-music"), blockMusImg = content.querySelector(".event-music__image"), blockMusName = content.querySelector(".event-music__name"), blockMusTime = content.querySelector(".event-music__time"), blockMusVolume = content.querySelector(".event-music-controlls__volume-value"), blockButt = content.querySelector(".event-buttons"), blockButtAct = content.querySelector(".event-buttons__button_active"), blockButtIna = content.querySelector(".event-buttons__button_inactive"), blockCamInfo = content.querySelector(".event-cam-info"), blockCamImage = content.querySelector(".event-cam__image"), blockInfo = content.querySelector(".event-info");
+                let template = document.querySelector("template");
+                let content = template.content, block = content.querySelector("#event"), blockIcon = content.querySelector(".event__icon"), blockTitle = content.querySelector(".event__title"), blockSource = content.querySelector(".event__source"), blockTime = content.querySelector(".event__time"), blockDesc = content.querySelector(".event__desc"), blockClose = content.querySelector(".event__close"), blockImage = content.querySelector(".event__image"), blockTemp = content.querySelector(".event__temperature"), blockHumi = content.querySelector(".event__humidity"), blockClimate = content.querySelector(".event-climate"), blockMusic = content.querySelector(".event-music"), blockMusImg = (content.querySelector(".event-music__image")), blockMusName = (content.querySelector(".event-music__name")), blockMusTime = (content.querySelector(".event-music__time")), blockMusVolume = (content.querySelector(".event-music-controlls__volume-value")), blockButt = content.querySelector(".event-buttons"), blockButtAct = (content.querySelector(".event-buttons__button_active")), blockButtIna = (content.querySelector(".event-buttons__button_inactive")), blockCamInfo = content.querySelector(".event-cam-info"), blockCamImage = (content.querySelector(".event-cam__image")), blockInfo = content.querySelector(".event-info");
                 /* Custom Data */
                 //hide blocks
                 blockImage.classList.add("event__image_hide");
@@ -43,7 +46,8 @@ function templateEngine(jsonData) {
                 blockCamImage.removeAttribute("id");
                 blockCamInfo.classList.add("event-cam-info_hide");
                 if (data) {
-                    let dType = data.type, dTemp = data.temperature, dHumi = data.humidity, dAlbum = data.albumcover, dArtist = data.artist, dTrack = data.track, dVolume = data.volume, dButton = data.buttons, dImage = data.image;
+                    let evDate = data;
+                    let dType = evDate.type, dTemp = evDate.temperature, dHumi = evDate.humidity, dAlbum = evDate.albumcover, dArtist = evDate.artist, dTrack = evDate.track, dVolume = evDate.volume, dButton = evDate.buttons, dImage = evDate.image;
                     /* Temporary Solution */
                     //Image
                     if (dType == "graph") {
@@ -65,7 +69,8 @@ function templateEngine(jsonData) {
                         blockClimate.classList.remove("event-climate_hide"); //show event climate block
                     //Music
                     if (dTrack) {
-                        let dLength = data.track.length, dName = data.track.name;
+                        let trackDate = dTrack;
+                        let dLength = trackDate.length, dName = trackDate.name;
                         if (dAlbum)
                             blockMusImg.style.backgroundImage = "url(" + dAlbum + ")";
                         if (dName)
@@ -98,9 +103,8 @@ function templateEngine(jsonData) {
                 !description
                     ? blockInfo.classList.add("event-info_hide")
                     : blockInfo.classList.remove("event-info_hide");
-                document
-                    .querySelector(".container")
-                    .appendChild(content.cloneNode(true));
+                let container = document.querySelector(".container");
+                container.appendChild(content.cloneNode(true));
             });
         }
         else {
