@@ -1,5 +1,5 @@
 /* Click Event To Mute Button */
-function soundMuteButton(button, video) {
+function soundMuteButton(button: HTMLElement, video: HTMLVideoElement) {
   button.addEventListener("click", function() {
     /* If Sound Muted */
     if (!button.classList.contains("canv-video-block__sound-mute_active")) {
