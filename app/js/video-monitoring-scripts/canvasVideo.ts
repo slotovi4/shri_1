@@ -1,5 +1,5 @@
 /* Draw Canvas Video & Video Effects */
-function canvasVideo(videoId) {
+function canvasVideo(videoId: string) {
   let video = document.querySelector("#" + videoId); //video
   let block = document.querySelector("#" + videoId + "-block"); //video block
   let videoInfo = block.querySelector(".canv-video-block__info"); //video info
