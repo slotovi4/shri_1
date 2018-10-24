@@ -1,5 +1,5 @@
 /* Create Canvas Video Block, Canvas, Info, Luminance */
-function createCanvasVideoBlock(videoId) {
+function createCanvasVideoBlock(videoId: string) {
   /* Create Video Elements */
   let block = document.createElement("div"),
     canvasBlock = document.createElement("div"),
@@ -57,5 +57,6 @@ function createCanvasVideoBlock(videoId) {
   canvasBlock.appendChild(controllsBlock);
   block.appendChild(canvasBlock);
 
-  document.querySelector(".container").appendChild(block);
+  let container = <HTMLElement>document.querySelector(".container");
+  container.appendChild(block);
 }
