@@ -2,11 +2,11 @@
 function canvasVideo(videoId) {
     let video = document.querySelector("#" + videoId); //video
     let block = document.querySelector("#" + videoId + "-block"); //video block
-    let videoInfo = block.querySelector(".canv-video-block__info"); //video info
-    let canvas = block.querySelector(".canv-video-block__video"); //canvas video result
-    let lumRange = block.querySelector(".canv-video-block__luminance"); //luminance range
-    let contrRange = block.querySelector(".canv-video-block__contrast"); //contrast range
-    let canvasMove = block.querySelector(".canv-video-block__canvas-move"); //move info canvas
+    let videoInfo = (block.querySelector(".canv-video-block__info")); //video info
+    let canvas = (block.querySelector(".canv-video-block__video")); //canvas video result
+    let lumRange = (block.querySelector(".canv-video-block__luminance")); //luminance range
+    let contrRange = (block.querySelector(".canv-video-block__contrast")); //contrast range
+    let canvasMove = (block.querySelector(".canv-video-block__canvas-move")); //move info canvas
     let ctx = canvas.getContext("2d", { alpha: false });
     let custCtx = canvasMove.getContext("2d", { alpha: false });
     let oldRGB; //old rgb video data
@@ -18,11 +18,23 @@ function canvasVideo(videoId) {
     let changeLum = lumRange.value;
     lumRange.addEventListener("input", function () {
         changeLum = lumRange.value;
+        canvas.style.filter =
+            "brightness(" +
+                parseInt(changeLum) * 20 +
+                "%) contrast(" +
+                changeContr +
+                ")";
     }, false);
     /* Change Range Contrast */
     let changeContr = contrRange.value;
     contrRange.addEventListener("input", function () {
         changeContr = contrRange.value;
+        canvas.style.filter =
+            "brightness(" +
+                parseInt(changeLum) * 20 +
+                "%) contrast(" +
+                changeContr +
+                ")";
     }, false);
     /* Drawing */
     function loop(video, canvas, canvasMove, ctx, custCtx) {
@@ -41,7 +53,7 @@ function canvasVideo(videoId) {
             let moveI = custCtx.getImageData(0, 0, videoWidth, videoHeight); //move canvas
             let moveData = moveI.data;
             /* Get Contrast */
-            let contrast = changeContr / 5 + 1; // [0..2]
+            let contrast = parseInt(changeContr) / 5 + 1; // [0..2]
             let intercept = 128 * (1 - contrast);
             /* Set RGB Style */
             for (let i = 0; i < data.length; i += 4) {
@@ -49,23 +61,25 @@ function canvasVideo(videoId) {
                 let g = data[i + 1];
                 let b = data[i + 2];
                 /* Change Luminance */
-                if (changeLum) {
-                    data[i] = (changeLum / 5) * r;
-                    data[i + 1] = (changeLum / 5) * g;
-                    data[i + 2] = (changeLum / 5) * b;
-                    r = data[i];
-                    g = data[i + 1];
-                    b = data[i + 2];
-                }
+                /* if (changeLum) {
+                  data[i] = (parseInt(changeLum) / 5) * r;
+                  data[i + 1] = (parseInt(changeLum) / 5) * g;
+                  data[i + 2] = (parseInt(changeLum) / 5) * b;
+        
+                  r = data[i];
+                  g = data[i + 1];
+                  b = data[i + 2];
+                } */
                 /* Change Contrast */
-                if (changeContr) {
-                    data[i] = data[i] * contrast + intercept;
-                    data[i + 1] = data[i + 1] * contrast + intercept;
-                    data[i + 2] = data[i + 2] * contrast + intercept;
-                    r = data[i];
-                    g = data[i + 1];
-                    b = data[i + 2];
-                }
+                /* if (changeContr) {
+                  data[i] = data[i] * contrast + intercept;
+                  data[i + 1] = data[i + 1] * contrast + intercept;
+                  data[i + 2] = data[i + 2] * contrast + intercept;
+        
+                  r = data[i];
+                  g = data[i + 1];
+                  b = data[i + 2];
+                } */
                 /* Check RGB Values */
                 if (r > 255)
                     data[i] = 255;
@@ -105,8 +119,8 @@ function canvasVideo(videoId) {
                 : (videoInfo.textContent = "light");
             /* Apply Style */
             oldRGB = data;
-            videoData.data = data;
-            moveI.data = moveData;
+            videoData.data.set(data);
+            moveI.data.set(moveData);
             ctx.putImageData(videoData, 0, 0);
             custCtx.putImageData(moveI, 0, 0);
         }
@@ -117,7 +131,8 @@ function canvasVideo(videoId) {
             });
         }, 100);
     }
-    loop(video, canvas, canvasMove, ctx, custCtx);
+    if (ctx && custCtx)
+        loop(video, canvas, canvasMove, ctx, custCtx);
 }
 /* Get Video Sound */
 function canvasVideoSound(videoId) {
@@ -125,13 +140,12 @@ function canvasVideoSound(videoId) {
     if (AudioContext) {
         let video = document.querySelector("#" + videoId), //video
         block = document.querySelector("#" + videoId + "-block"), //video block
-        muteButton = block.querySelector(".canv-video-block__sound-mute"), canvas = block.querySelector(".canv-video-block__video"), //canvas
-        soundIndicator = block.querySelector(".canv-video-block__sound-volume"), //sound indicator
+        muteButton = (block.querySelector(".canv-video-block__sound-mute")), canvas = (block.querySelector(".canv-video-block__video")), //canvas
+        soundIndicator = (block.querySelector(".canv-video-block__sound-volume")), //sound indicator
         ctx = new AudioContext(), //audio
         source = ctx.createMediaElementSource(video), //get video element
         analyser = ctx.createAnalyser(), //analys sound
-        processor = ctx.createScriptProcessor(2048, 1, 1), //check sound changes
-        data; //frequency data from the analyzer
+        processor = ctx.createScriptProcessor(2048, 1, 1); //check sound changes
         let soundVolume; //current sound value
         let maxSoundVolume = 0; //max sound value
         /* Set Mute Event */
@@ -142,7 +156,7 @@ function canvasVideoSound(videoId) {
         analyser.connect(ctx.destination);
         processor.connect(ctx.destination);
         /* Check Sound Volume(Frequency) */
-        data = new Uint8Array(analyser.frequencyBinCount);
+        let data = new Uint8Array(analyser.frequencyBinCount);
         processor.onaudioprocess = function () {
             analyser.getByteFrequencyData(data);
             soundVolume = getSoundVolumeValue(data);
@@ -196,8 +210,8 @@ function createCanvasVideoBlock(videoId) {
     luminanceText.textContent = "Яркость";
     contrast.classList.add("canv-video-block__contrast");
     contrast.setAttribute("type", "range");
-    contrast.setAttribute("value", "0");
-    contrast.setAttribute("min", "-5");
+    contrast.setAttribute("value", "1");
+    contrast.setAttribute("min", "1");
     contrast.setAttribute("max", "5");
     contrastText.classList.add("canv-video-block__text");
     contrastText.textContent = "Контраст";
@@ -214,7 +228,8 @@ function createCanvasVideoBlock(videoId) {
     canvasBlock.appendChild(canvMove);
     canvasBlock.appendChild(controllsBlock);
     block.appendChild(canvasBlock);
-    document.querySelector(".container").appendChild(block);
+    let container = document.querySelector(".container");
+    container.appendChild(block);
 }
 /* HLS */
 function initVideo(video, url) {

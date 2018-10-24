@@ -4,7 +4,7 @@ function canvasVideoSound(videoId: string) {
     (<any>window).AudioContext || (<any>window).webkitAudioContext;
 
   if (AudioContext) {
-    let video = <HTMLElement>document.querySelector("#" + videoId), //video
+    let video = <HTMLVideoElement>document.querySelector("#" + videoId), //video
       block = <HTMLElement>document.querySelector("#" + videoId + "-block"), //video block
       muteButton = <HTMLElement>(
         block.querySelector(".canv-video-block__sound-mute")

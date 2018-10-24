@@ -63,5 +63,5 @@ gulp.task("ts", function() {
 
 gulp.task("watch", ["mincss", "ts"], function() {
   gulp.watch([path.src.scss], ["mincss"]);
-  gulp.watch([path.src.js], ["ts"]);
+  gulp.watch([path.src.ts], ["ts"]);
 });

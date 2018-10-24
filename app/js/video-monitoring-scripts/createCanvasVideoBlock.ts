@@ -37,8 +37,8 @@ function createCanvasVideoBlock(videoId: string) {
   luminanceText.textContent = "Яркость";
   contrast.classList.add("canv-video-block__contrast");
   contrast.setAttribute("type", "range");
-  contrast.setAttribute("value", "0");
-  contrast.setAttribute("min", "-5");
+  contrast.setAttribute("value", "1");
+  contrast.setAttribute("min", "1");
   contrast.setAttribute("max", "5");
   contrastText.classList.add("canv-video-block__text");
   contrastText.textContent = "Контраст";
