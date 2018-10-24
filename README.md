@@ -4,4 +4,4 @@
 Версия ноды - v8.11.3<br>
 Запуск:<br>
 <b>npm i</b><br>
-<b>node express/express.js</b><br>
+<b>node express/express.ts</b><br>
