@@ -52,7 +52,6 @@ gulp.task("ts", function() {
     .src(path.src.ts)
     .pipe(
       ts({
-        noImplicitAny: true,
         target: "es6",
         module: "amd",
         outFile: "main.js"
