@@ -1,18 +1,24 @@
 /* Get Video Sound */
-function canvasVideoSound(videoId) {
-  let AudioContext = window.AudioContext || window.webkitAudioContext;
+function canvasVideoSound(videoId: string) {
+  let AudioContext =
+    (<any>window).AudioContext || (<any>window).webkitAudioContext;
 
   if (AudioContext) {
-    let video = document.querySelector("#" + videoId), //video
-      block = document.querySelector("#" + videoId + "-block"), //video block
-      muteButton = block.querySelector(".canv-video-block__sound-mute"),
-      canvas = block.querySelector(".canv-video-block__video"), //canvas
-      soundIndicator = block.querySelector(".canv-video-block__sound-volume"), //sound indicator
+    let video = <HTMLVideoElement>document.querySelector("#" + videoId), //video
+      block = <HTMLElement>document.querySelector("#" + videoId + "-block"), //video block
+      muteButton = <HTMLElement>(
+        block.querySelector(".canv-video-block__sound-mute")
+      ),
+      canvas = <HTMLCanvasElement>(
+        block.querySelector(".canv-video-block__video")
+      ), //canvas
+      soundIndicator = <HTMLElement>(
+        block.querySelector(".canv-video-block__sound-volume")
+      ), //sound indicator
       ctx = new AudioContext(), //audio
       source = ctx.createMediaElementSource(video), //get video element
       analyser = ctx.createAnalyser(), //analys sound
-      processor = ctx.createScriptProcessor(2048, 1, 1), //check sound changes
-      data; //frequency data from the analyzer
+      processor = ctx.createScriptProcessor(2048, 1, 1); //check sound changes
 
     let soundVolume; //current sound value
     let maxSoundVolume = 0; //max sound value
@@ -27,7 +33,7 @@ function canvasVideoSound(videoId) {
     processor.connect(ctx.destination);
 
     /* Check Sound Volume(Frequency) */
-    data = new Uint8Array(analyser.frequencyBinCount);
+    let data = new Uint8Array(analyser.frequencyBinCount);
     processor.onaudioprocess = function() {
       analyser.getByteFrequencyData(data);
       soundVolume = getSoundVolumeValue(data);
@@ -40,7 +46,7 @@ function canvasVideoSound(videoId) {
 }
 
 /* Get Sound Value(Frequency) */
-function getSoundVolumeValue(data) {
+function getSoundVolumeValue(data: Uint8Array) {
   let result = 0;
   data.forEach(val => {
     result += val;
@@ -49,7 +55,12 @@ function getSoundVolumeValue(data) {
 }
 
 /* Draw Volume */
-function drawSoundVolume(volume, maxVolume, canvas, soundIndicator) {
+function drawSoundVolume(
+  volume: number,
+  maxVolume: number,
+  canvas: HTMLCanvasElement,
+  soundIndicator: HTMLElement
+) {
   let canvasHeight = canvas.offsetHeight; //canvas height
   let oneHeightVal = canvasHeight / maxVolume;
   let volumeValue = volume * oneHeightVal;

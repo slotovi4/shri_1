@@ -1,5 +1,5 @@
 /* Create Canvas Video Block, Canvas, Info, Luminance */
-function createCanvasVideoBlock(videoId) {
+function createCanvasVideoBlock(videoId: string) {
   /* Create Video Elements */
   let block = document.createElement("div"),
     canvasBlock = document.createElement("div"),
@@ -37,8 +37,8 @@ function createCanvasVideoBlock(videoId) {
   luminanceText.textContent = "Яркость";
   contrast.classList.add("canv-video-block__contrast");
   contrast.setAttribute("type", "range");
-  contrast.setAttribute("value", "0");
-  contrast.setAttribute("min", "-5");
+  contrast.setAttribute("value", "1");
+  contrast.setAttribute("min", "1");
   contrast.setAttribute("max", "5");
   contrastText.classList.add("canv-video-block__text");
   contrastText.textContent = "Контраст";
@@ -57,5 +57,6 @@ function createCanvasVideoBlock(videoId) {
   canvasBlock.appendChild(controllsBlock);
   block.appendChild(canvasBlock);
 
-  document.querySelector(".container").appendChild(block);
+  let container = <HTMLElement>document.querySelector(".container");
+  container.appendChild(block);
 }
