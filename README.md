@@ -1,4 +1,1 @@
-<b>Типизация: ДЗ «Адаптивная вёрстка» & ДЗ «Работа с сенсорным пользовательским вводом»</b><br>
-<b>Запуск:</b><br>
-npm i<br>
-gulp watch<br>
+merge ts-multimedia & ts-adaptive
