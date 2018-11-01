@@ -1,5 +1,5 @@
 /* Zoom(Click) Event To Video */
-function openVideo() {
+function openVideo(): void {
   let canvasVid = document.querySelectorAll(".canv-video-block__video");
 
   canvasVid.forEach(function(canvas) {

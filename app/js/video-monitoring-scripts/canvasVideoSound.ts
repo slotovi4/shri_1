@@ -1,5 +1,5 @@
 /* Get Video Sound */
-function canvasVideoSound(videoId: string) {
+function canvasVideoSound(videoId: string): void {
   let AudioContext =
     (<any>window).AudioContext || (<any>window).webkitAudioContext;
 
@@ -60,7 +60,7 @@ function drawSoundVolume(
   maxVolume: number,
   canvas: HTMLCanvasElement,
   soundIndicator: HTMLElement
-) {
+): void {
   let canvasHeight = canvas.offsetHeight; //canvas height
   let oneHeightVal = canvasHeight / maxVolume;
   let volumeValue = volume * oneHeightVal;

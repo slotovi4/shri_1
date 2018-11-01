@@ -1,4 +1,4 @@
-function templateEngine(jsonData: string) {
+function templateEngine(jsonData: string): void {
   let request = new XMLHttpRequest();
   request.open("GET", jsonData, false);
 

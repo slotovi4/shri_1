@@ -1,22 +1,18 @@
 /* Draw Canvas Video & Video Effects */
-function canvasVideo(videoId: string) {
-  let video = <HTMLVideoElement>document.querySelector("#" + videoId); //video
-  let block = <HTMLDivElement>document.querySelector("#" + videoId + "-block"); //video block
-  let videoInfo = <HTMLSpanElement>(
-    block.querySelector(".canv-video-block__info")
-  ); //video info
-  let canvas = <HTMLCanvasElement>(
-    block.querySelector(".canv-video-block__video")
-  ); //canvas video result
-  let lumRange = <HTMLInputElement>(
-    block.querySelector(".canv-video-block__luminance")
-  ); //luminance range
-  let contrRange = <HTMLInputElement>(
-    block.querySelector(".canv-video-block__contrast")
-  ); //contrast range
-  let canvasMove = <HTMLCanvasElement>(
-    block.querySelector(".canv-video-block__canvas-move")
-  ); //move info canvas
+function canvasVideo(videoId: string): void {
+  const video = <HTMLVideoElement>document.querySelector("#" + videoId), //video
+    block = <HTMLDivElement>document.querySelector("#" + videoId + "-block"), //video block
+    videoInfo = <HTMLSpanElement>block.querySelector(".canv-video-block__info"), //video info
+    canvas = <HTMLCanvasElement>block.querySelector(".canv-video-block__video"), //canvas video result
+    lumRange = <HTMLInputElement>(
+      block.querySelector(".canv-video-block__luminance")
+    ), //luminance range
+    contrRange = <HTMLInputElement>(
+      block.querySelector(".canv-video-block__contrast")
+    ), //contrast range
+    canvasMove = <HTMLCanvasElement>(
+      block.querySelector(".canv-video-block__canvas-move")
+    ); //move info canvas
 
   let ctx = canvas.getContext("2d", { alpha: false });
   let custCtx = canvasMove.getContext("2d", { alpha: false });
@@ -68,7 +64,7 @@ function canvasVideo(videoId: string) {
     canvasMove: HTMLCanvasElement,
     ctx: CanvasRenderingContext2D,
     custCtx: CanvasRenderingContext2D
-  ) {
+  ): void {
     let luminanceBlack = 0,
       luminanceWhite = 0;
 
@@ -89,37 +85,11 @@ function canvasVideo(videoId: string) {
       let moveI = custCtx.getImageData(0, 0, videoWidth, videoHeight); //move canvas
       let moveData = moveI.data;
 
-      /* Get Contrast */
-      let contrast = parseInt(changeContr) / 5 + 1; // [0..2]
-      let intercept = 128 * (1 - contrast);
-
       /* Set RGB Style */
       for (let i = 0; i < data.length; i += 4) {
         let r = data[i];
         let g = data[i + 1];
         let b = data[i + 2];
-
-        /* Change Luminance */
-        /* if (changeLum) {
-          data[i] = (parseInt(changeLum) / 5) * r;
-          data[i + 1] = (parseInt(changeLum) / 5) * g;
-          data[i + 2] = (parseInt(changeLum) / 5) * b;
-
-          r = data[i];
-          g = data[i + 1];
-          b = data[i + 2];
-        } */
-
-        /* Change Contrast */
-        /* if (changeContr) {
-          data[i] = data[i] * contrast + intercept;
-          data[i + 1] = data[i + 1] * contrast + intercept;
-          data[i + 2] = data[i + 2] * contrast + intercept;
-
-          r = data[i];
-          g = data[i + 1];
-          b = data[i + 2];
-        } */
 
         /* Check RGB Values */
         if (r > 255) data[i] = 255;

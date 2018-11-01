@@ -1,5 +1,5 @@
 /* Event Handling: Drag & Pinch & Rotate In #cam Image */
-function touchEvets() {
+function touchEvets(): void {
   let cam = <HTMLDivElement>document.querySelector("#cam");
   let camParent = <HTMLDivElement>document.querySelector("#camParent");
   let camInfo = <HTMLDivElement>camParent.querySelector(".event-cam-info");
@@ -39,7 +39,7 @@ function touchEvets() {
     }
   }
 
-  function startController(e: object) {
+  function startController(e: object): void {
     /* Get Position Info */
     let eEv = e as PointEvent;
     conXstart = eEv.clientX;
@@ -58,7 +58,7 @@ function touchEvets() {
     imgCenterY = Math.round((imgTop + imgBot) / 2);
   }
 
-  function moveController(e: object) {
+  function moveController(e: object): void {
     // Find this event in the cache and update its record with this event
     let eEv = e as PointEvent;
 
@@ -154,7 +154,7 @@ function touchEvets() {
   }
 
   //detete touch on up
-  function stopController(e: object) {
+  function stopController(e: object): void {
     checkZoom = false;
     for (let i = 0; i < touchedPoints.length; i++) {
       let eEv = e as PointEvent;

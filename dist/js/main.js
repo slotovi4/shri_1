@@ -236,15 +236,38 @@ function touchEvets() {
         }
     }
 }
+/* Event handling "click" on the button ".header-mobile-btn": animate button & show/hide mobile menu */
+const menu = document.querySelector(".header__menu");
+const menuBtn = document.querySelector(".header-mobile-btn");
+const menuBtnLine = document.querySelectorAll(".header-mobile-btn__line");
+/* Set Initial State Of Menu */
+let showMenu = false;
+menuBtn.addEventListener("click", toggleMenu);
+function toggleMenu() {
+    if (!showMenu) {
+        menu.classList.add("header__menu_show");
+        menuBtn.classList.add("header-mobile-btn_close");
+        menuBtnLine.forEach(item => item.classList.add("header-mobile-btn__line_close"));
+        /* Set Menu State */
+        showMenu = true;
+    }
+    else {
+        menu.classList.remove("header__menu_show");
+        menuBtn.classList.remove("header-mobile-btn_close");
+        menuBtnLine.forEach(item => item.classList.remove("header-mobile-btn__line_close"));
+        /* Set Menu State */
+        showMenu = false;
+    }
+}
 /* Draw Canvas Video & Video Effects */
 function canvasVideo(videoId) {
-    let video = document.querySelector("#" + videoId); //video
-    let block = document.querySelector("#" + videoId + "-block"); //video block
-    let videoInfo = (block.querySelector(".canv-video-block__info")); //video info
-    let canvas = (block.querySelector(".canv-video-block__video")); //canvas video result
-    let lumRange = (block.querySelector(".canv-video-block__luminance")); //luminance range
-    let contrRange = (block.querySelector(".canv-video-block__contrast")); //contrast range
-    let canvasMove = (block.querySelector(".canv-video-block__canvas-move")); //move info canvas
+    const video = document.querySelector("#" + videoId), //video
+    block = document.querySelector("#" + videoId + "-block"), //video block
+    videoInfo = block.querySelector(".canv-video-block__info"), //video info
+    canvas = block.querySelector(".canv-video-block__video"), //canvas video result
+    lumRange = (block.querySelector(".canv-video-block__luminance")), //luminance range
+    contrRange = (block.querySelector(".canv-video-block__contrast")), //contrast range
+    canvasMove = (block.querySelector(".canv-video-block__canvas-move")); //move info canvas
     let ctx = canvas.getContext("2d", { alpha: false });
     let custCtx = canvasMove.getContext("2d", { alpha: false });
     let oldRGB; //old rgb video data
@@ -290,34 +313,11 @@ function canvasVideo(videoId) {
             let data = videoData.data;
             let moveI = custCtx.getImageData(0, 0, videoWidth, videoHeight); //move canvas
             let moveData = moveI.data;
-            /* Get Contrast */
-            let contrast = parseInt(changeContr) / 5 + 1; // [0..2]
-            let intercept = 128 * (1 - contrast);
             /* Set RGB Style */
             for (let i = 0; i < data.length; i += 4) {
                 let r = data[i];
                 let g = data[i + 1];
                 let b = data[i + 2];
-                /* Change Luminance */
-                /* if (changeLum) {
-                  data[i] = (parseInt(changeLum) / 5) * r;
-                  data[i + 1] = (parseInt(changeLum) / 5) * g;
-                  data[i + 2] = (parseInt(changeLum) / 5) * b;
-        
-                  r = data[i];
-                  g = data[i + 1];
-                  b = data[i + 2];
-                } */
-                /* Change Contrast */
-                /* if (changeContr) {
-                  data[i] = data[i] * contrast + intercept;
-                  data[i + 1] = data[i + 1] * contrast + intercept;
-                  data[i + 2] = data[i + 2] * contrast + intercept;
-        
-                  r = data[i];
-                  g = data[i + 1];
-                  b = data[i + 2];
-                } */
                 /* Check RGB Values */
                 if (r > 255)
                     data[i] = 255;
@@ -520,27 +520,4 @@ function soundMuteButton(button, video) {
             button.classList.remove("canv-video-block__sound-mute_active");
         }
     });
-}
-/* Event handling "click" on the button ".header-mobile-btn": animate button & show/hide mobile menu */
-const menu = document.querySelector(".header__menu");
-const menuBtn = document.querySelector(".header-mobile-btn");
-const menuBtnLine = document.querySelectorAll(".header-mobile-btn__line");
-/* Set Initial State Of Menu */
-let showMenu = false;
-menuBtn.addEventListener("click", toggleMenu);
-function toggleMenu() {
-    if (!showMenu) {
-        menu.classList.add("header__menu_show");
-        menuBtn.classList.add("header-mobile-btn_close");
-        menuBtnLine.forEach(item => item.classList.add("header-mobile-btn__line_close"));
-        /* Set Menu State */
-        showMenu = true;
-    }
-    else {
-        menu.classList.remove("header__menu_show");
-        menuBtn.classList.remove("header-mobile-btn_close");
-        menuBtnLine.forEach(item => item.classList.remove("header-mobile-btn__line_close"));
-        /* Set Menu State */
-        showMenu = false;
-    }
 }
