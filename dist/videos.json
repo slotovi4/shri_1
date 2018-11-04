@@ -1,0 +1,21 @@
+{
+  "page": "videomonitoring",
+  "videos": [
+    {
+      "id": "video-1",
+      "url": "https://slotovi4.github.io/shri_1/dist/video/hall/master.m3u8"
+    },
+    {
+      "id": "video-2",
+      "url": "https://slotovi4.github.io/shri_1/dist/video/cat/master.m3u8"
+    },
+    {
+      "id": "video-3",
+      "url": "https://slotovi4.github.io/shri_1/dist/video/dog/master.m3u8"
+    },
+    {
+      "id": "video-4",
+      "url": "https://slotovi4.github.io/shri_1/dist/video/sosed/master.m3u8"
+    }
+  ]
+}

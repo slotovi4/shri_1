@@ -9,6 +9,7 @@
     <meta name="robots" content="noindex">
     <meta name="robots" content="noindex">
     <link rel="stylesheet" href="css/main.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
 
 <body>
@@ -30,7 +31,7 @@
     </header>
 
     <main class="container">
-        <h1 class="container__title">Лента событий</h1>
+        <h1 class="container__title"></h1>
     </main>
 
     <footer class="footer">
@@ -46,8 +47,8 @@
         </div>
     </footer>
 
-    <template>
-        <div id="event" class="event">
+    <template class="event-template">
+        <div class="event">
             <div class="event__close"></div>
             <div class="event-header">
                 <img class="event__icon" src="" alt="">
@@ -99,10 +100,30 @@
         </div>
     </template>
 
+    <template class="video-template">
+        <video class="container__video" poster="img/yandex.jpg" controls="controls" loop="loop" muted autoplay></video>
+        <div class="canv-video-block">
+            <div class="canv-video-block__canvas-block">
+                <span class="canv-video-block__info"></span>
+                <div class="canv-video-block__sound-volume"></div>
+                <canvas class="canv-video-block__video"></canvas>
+                <canvas class="canv-video-block__canvas-move"></canvas>
+                <div class="canv-video-block__controll-block">
+                    <span class="canv-video-block__text">Яркость</span>
+                    <input class="canv-video-block__luminance" type="range" value="5" min="0" max="10">
+                    <span class="canv-video-block__text">Контраст</span>
+                    <input class="canv-video-block__contrast" type="range" value="1" min="1" max="5">
+                    <span class="canv-video-block__button">Все камеры</span>
+                    <div class="canv-video-block__sound-mute">♪</div>
+                </div>
+            </div>
+        </div>
+    </template>
+
     <script src="js/main.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            templateEngine("events.json");
+            templateEngine("videos.json");
         });
     </script>
 </body>
