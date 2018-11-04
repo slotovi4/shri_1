@@ -196,6 +196,8 @@ function templateEngine(jsonData: string): void {
           let container = <HTMLElement>document.querySelector(".container");
           container.appendChild(content.cloneNode(true));
         });
+
+        touchEvets();
       }
 
       if (page == "videomonitoring") {
@@ -238,7 +240,5 @@ function templateEngine(jsonData: string): void {
 
   if (request.status != 200) {
     alert(request.status + ": " + request.statusText);
-  } else {
-    touchEvets();
   }
 }
