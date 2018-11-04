@@ -8,8 +8,8 @@ function templateEngine(jsonData) {
             let page = ev.page;
             let title = document.querySelector(".container__title");
             if (page == "events") {
-                title.textContent = "Лента событий";
                 let events = ev.events;
+                title.textContent = "Лента событий";
                 events.forEach(function (el) {
                     let elts = el;
                     /* Get Data */
@@ -89,6 +89,7 @@ function templateEngine(jsonData) {
                     let container = document.querySelector(".container");
                     container.appendChild(content.cloneNode(true));
                 });
+                touchEvets();
             }
             if (page == "videomonitoring") {
                 let videos = ev.videos;
@@ -117,9 +118,6 @@ function templateEngine(jsonData) {
     request.send();
     if (request.status != 200) {
         alert(request.status + ": " + request.statusText);
-    }
-    else {
-        touchEvets();
     }
 }
 /* Event Handling: Drag & Pinch & Rotate In #cam Image */
