@@ -204,30 +204,28 @@ function templateEngine(jsonData: string): void {
       }
 
       if (page == "videomonitoring") {
-        let videos = ev.videos;
         title.textContent = "Видеонаблюдение";
-        videos.forEach(function(el) {
-          let elts = el as Video;
 
-          /* Get Data */
-          let id = elts.id,
+        let videos = ev.videos;
+        videos.forEach(function(el) {
+          let elts = el as Video,
+            id = elts.id,
             url = elts.url;
 
           let template = <HTMLTemplateElement>(
-            document.querySelector(".video-template")
-          );
-
-          let content = template.content,
+              document.querySelector(".video-template")
+            ),
+            content = template.content,
             video = <HTMLElement>content.querySelector(".container__video"),
             canvBlock = <HTMLElement>content.querySelector(".canv-video-block");
 
           video.id = id;
           canvBlock.id = id + "-block";
-          initVideo(<HTMLVideoElement>document.getElementById(id), url);
 
           let container = <HTMLElement>document.querySelector(".container");
           container.appendChild(content.cloneNode(true));
 
+          initVideo(<HTMLVideoElement>document.getElementById(id), url);
           canvasVideo(id);
           canvasVideoSound(id);
         });

@@ -92,19 +92,16 @@ function templateEngine(jsonData) {
                 touchEvets();
             }
             if (page == "videomonitoring") {
-                let videos = ev.videos;
                 title.textContent = "Видеонаблюдение";
+                let videos = ev.videos;
                 videos.forEach(function (el) {
-                    let elts = el;
-                    /* Get Data */
-                    let id = elts.id, url = elts.url;
-                    let template = (document.querySelector(".video-template"));
-                    let content = template.content, video = content.querySelector(".container__video"), canvBlock = content.querySelector(".canv-video-block");
+                    let elts = el, id = elts.id, url = elts.url;
+                    let template = (document.querySelector(".video-template")), content = template.content, video = content.querySelector(".container__video"), canvBlock = content.querySelector(".canv-video-block");
                     video.id = id;
                     canvBlock.id = id + "-block";
-                    initVideo(document.getElementById(id), url);
                     let container = document.querySelector(".container");
                     container.appendChild(content.cloneNode(true));
+                    initVideo(document.getElementById(id), url);
                     canvasVideo(id);
                     canvasVideoSound(id);
                 });
