@@ -47,11 +47,14 @@ function templateEngine(jsonData: string): void {
 
       let ev = data as Template;
       let page = ev.page;
-      let title = document.querySelector(".container__title");
+
+      let title = <HTMLElement>document.querySelector(".container__title");
 
       if (page == "events") {
-        title.textContent = "Лента событий";
         let events = ev.events;
+
+        title.textContent = "Лента событий";
+
         events.forEach(function(el) {
           let elts = el as Event;
 
