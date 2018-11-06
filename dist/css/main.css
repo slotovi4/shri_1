@@ -384,7 +384,8 @@ a {
     opacity: 0.2;
     pointer-events: none;
     width: 100%;
-    height: auto; }
+    height: auto;
+    top: 0; }
   .canv-video-block__info {
     position: absolute;
     left: 0;
@@ -433,7 +434,7 @@ a {
     position: relative;
     height: 50px; }
     .canv-video-block__controll-block_open {
-      margin-top: -54px;
+      margin-top: -53px;
       background: white; }
   .canv-video-block__sound-volume {
     display: none;

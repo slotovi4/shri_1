@@ -1,11 +1,11 @@
 /* Event handling "click" on the button ".header-mobile-btn": animate button & show/hide mobile menu */
 
-const menu = document.querySelector(".header__menu");
-const menuBtn = document.querySelector(".header-mobile-btn");
+const menu = <HTMLElement>document.querySelector(".header__menu");
+const menuBtn = <HTMLElement>document.querySelector(".header-mobile-btn");
 const menuBtnLine = document.querySelectorAll(".header-mobile-btn__line");
 
 /* Set Initial State Of Menu */
-var showMenu = false;
+let showMenu = false;
 
 menuBtn.addEventListener("click", toggleMenu);
 

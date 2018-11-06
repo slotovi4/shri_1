@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
+    <title>Яндекс Дом</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="robots" content="noindex">
     <link rel="stylesheet" href="css/main.min.css">
-    <script src="js/jquery.min.js"></script>
-    <script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
-    <title>Document</title>
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="framework/frame.min.js"></script>
 </head>
 
 <body>
@@ -17,11 +18,11 @@
     <header class="header">
         <div class="header__logo"></div>
         <div class="header__menu">
-            <a class="header__link header__link_active" href="#">События</a>
-            <a class="header__link" href="index.html">Сводка</a>
+            <a class="header__link header__link_active" data-page-title="Лента событий" data-page="events.json" href="#">События</a>
+            <a class="header__link" href="#">Сводка</a>
             <a class="header__link" href="#">Устройства</a>
             <a class="header__link" href="#">Сценарии</a>
-            <a class="header__link" href="video.html">Видеонаблюдение</a>
+            <a class="header__link" data-page-title="Видеонаблюдение" data-page="videos.json" href="#">Видеонаблюдение</a>
         </div>
         <div class="header-mobile-btn">
             <div class="header-mobile-btn__line"></div>
@@ -31,7 +32,7 @@
     </header>
 
     <main class="container">
-        <h1 class="container__title">Лента событий</h1>
+        <h1 class="container__title"></h1>
     </main>
 
     <footer class="footer">
@@ -47,8 +48,8 @@
         </div>
     </footer>
 
-    <template>
-        <div id="event" class="event">
+    <template class="event-template">
+        <section class="event">
             <div class="event__close"></div>
             <div class="event-header">
                 <img class="event__icon" src="" alt="">
@@ -97,13 +98,95 @@
             </div>
 
             <div class="event__continue"></div>
-        </div>
+        </section>
+    </template>
+
+    <template class="video-template">
+        <section class="canv-video-block">
+            <video class="container__video" poster="img/yandex.jpg" controls="controls" loop="loop" muted autoplay></video>
+            <div class="canv-video-block__canvas-block">
+                <span class="canv-video-block__info"></span>
+                <div class="canv-video-block__sound-volume"></div>
+                <canvas class="canv-video-block__video"></canvas>
+                <canvas class="canv-video-block__canvas-move"></canvas>
+                <div class="canv-video-block__controll-block">
+                    <span class="canv-video-block__text">Яркость</span>
+                    <input class="canv-video-block__luminance" type="range" value="5" min="0" max="10">
+                    <span class="canv-video-block__text">Контраст</span>
+                    <input class="canv-video-block__contrast" type="range" value="1" min="1" max="5">
+                    <span class="canv-video-block__button">Все камеры</span>
+                    <div class="canv-video-block__sound-mute">♪</div>
+                </div>
+            </div>
+        </section>
     </template>
 
     <script src="js/main.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            templateEngine("events.json");
+            //let dataDispatcher = new Dispatcher();
+            //Init page
+            dataDispatcher.dispatch([{
+                actionType: "setDefaultPage",
+                data: {
+                    pageName: "События",
+                    dataName: "events.json",
+                    dataPath: "/dist/data/",
+                    dataFunc: templateEngine
+                }
+            }, {
+                actionType: "setPageTitle",
+                data: {
+                    el: ".container__title",
+                    title: "Лента событий"
+                }
+            }
+            ]);
+
+            //New page
+            const menuLinks = document.querySelectorAll('.header__link');
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function () {
+                    clearActiveLink(menuLinks);
+                    link.classList.add('header__link_active');
+
+                    let pageData = link.getAttribute('data-page');
+                    let pageTitle = link.getAttribute('data-page-title');
+                    let currentPage = dataDispatcher.getCurrentPage();
+
+                    if (pageData) {
+                        dataDispatcher.dispatch([{
+                            actionType: "setNewPage",
+                            data: {
+                                pageName: link.textContent,
+                                dataName: pageData,
+                                dataPath: "/dist/data/",
+                                dataFunc: templateEngine
+                            }
+                        }]);
+                    }
+
+                    if (pageTitle) {
+                        dataDispatcher.dispatch([{
+                            actionType: "setPageTitle",
+                            data: {
+                                el: ".container__title",
+                                title: pageTitle
+                            }
+                        }]);
+                    }
+                });
+            });
+
+            console.log(dataDispatcher.store);
+
+            function clearActiveLink(links) {
+                links.forEach(item => {
+                    if (item.classList.contains('header__link_active'))
+                        item.classList.remove('header__link_active');
+                });
+            }
+
         });
     </script>
 </body>

@@ -1,5 +1,5 @@
 /* HLS */
-function initVideo(video: HTMLVideoElement, url: string) {
+function initVideo(video: HTMLVideoElement, url: string): void {
   if (Hls.isSupported()) {
     let hls = new Hls();
     hls.loadSource(url);

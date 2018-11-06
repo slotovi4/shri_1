@@ -1,5 +1,5 @@
 /* Create Canvas Video Block, Canvas, Info, Luminance */
-function createCanvasVideoBlock(videoId: string) {
+function createCanvasVideoBlock(videoId: string): void {
   /* Create Video Elements */
   let block = document.createElement("div"),
     canvasBlock = document.createElement("div"),

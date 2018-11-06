@@ -10,7 +10,7 @@ const source = "./app/",
   path = {
     src: {
       js: source + "js/**/*.js",
-      ts: source + "js/video-monitoring-scripts/*.ts",
+      ts: source + "js/**/*.ts",
       scss: source + "sass/**/*.scss",
       mainscss: source + "sass/main.scss"
     },
@@ -52,6 +52,7 @@ gulp.task("ts", function() {
     .src(path.src.ts)
     .pipe(
       ts({
+        noImplicitAny: true,
         target: "es6",
         module: "amd",
         outFile: "main.js"
