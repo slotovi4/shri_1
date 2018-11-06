@@ -124,14 +124,13 @@
     <script src="js/main.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            //let dataDispatcher = new Dispatcher();
             //Init page
             dataDispatcher.dispatch([{
                 actionType: "setDefaultPage",
                 data: {
                     pageName: "События",
                     dataName: "events.json",
-                    dataPath: "/dist/data/",
+                    dataPath: "https://slotovi4.github.io/shri_1/dist/data/",
                     dataFunc: templateEngine
                 }
             }, {
@@ -160,7 +159,7 @@
                             data: {
                                 pageName: link.textContent,
                                 dataName: pageData,
-                                dataPath: "/dist/data/",
+                                dataPath: "https://slotovi4.github.io/shri_1/dist/data/",
                                 dataFunc: templateEngine
                             }
                         }]);
@@ -178,16 +177,12 @@
                 });
             });
 
-            console.log(dataDispatcher.store);
-            console.log(12312312331221323);
-
             function clearActiveLink(links) {
                 links.forEach(item => {
                     if (item.classList.contains('header__link_active'))
                         item.classList.remove('header__link_active');
                 });
             }
-
         });
     </script>
 </body>
