@@ -9,8 +9,8 @@
     <meta name="robots" content="noindex">
     <link rel="stylesheet" href="css/main.min.css">
     <link rel="shortcut icon" href="favicon.png" type="image/png">
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="framework/frame.min.js"></script>
 </head>
 
 <body>
@@ -18,11 +18,11 @@
     <header class="header">
         <div class="header__logo"></div>
         <div class="header__menu">
-            <a class="header__link header__link_active" href="#">События</a>
+            <a class="header__link header__link_active" data-page-title="Лента событий" data-page="events.json" href="#">События</a>
             <a class="header__link" href="#">Сводка</a>
             <a class="header__link" href="#">Устройства</a>
             <a class="header__link" href="#">Сценарии</a>
-            <a class="header__link" href="#">Видеонаблюдение</a>
+            <a class="header__link" data-page-title="Видеонаблюдение" data-page="videos.json" href="#">Видеонаблюдение</a>
         </div>
         <div class="header-mobile-btn">
             <div class="header-mobile-btn__line"></div>
@@ -124,7 +124,69 @@
     <script src="js/main.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            templateEngine("events.json");
+            //let dataDispatcher = new Dispatcher();
+            //Init page
+            dataDispatcher.dispatch([{
+                actionType: "setDefaultPage",
+                data: {
+                    pageName: "События",
+                    dataName: "events.json",
+                    dataPath: "/dist/data/",
+                    dataFunc: templateEngine
+                }
+            }, {
+                actionType: "setPageTitle",
+                data: {
+                    el: ".container__title",
+                    title: "Лента событий"
+                }
+            }
+            ]);
+
+            //New page
+            const menuLinks = document.querySelectorAll('.header__link');
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function () {
+                    clearActiveLink(menuLinks);
+                    link.classList.add('header__link_active');
+
+                    let pageData = link.getAttribute('data-page');
+                    let pageTitle = link.getAttribute('data-page-title');
+                    let currentPage = dataDispatcher.getCurrentPage();
+
+                    if (pageData) {
+                        dataDispatcher.dispatch([{
+                            actionType: "setNewPage",
+                            data: {
+                                pageName: link.textContent,
+                                dataName: pageData,
+                                dataPath: "/dist/data/",
+                                dataFunc: templateEngine
+                            }
+                        }]);
+                    }
+
+                    if (pageTitle) {
+                        dataDispatcher.dispatch([{
+                            actionType: "setPageTitle",
+                            data: {
+                                el: ".container__title",
+                                title: pageTitle
+                            }
+                        }]);
+                    }
+                });
+            });
+
+            console.log(dataDispatcher.store);
+
+            function clearActiveLink(links) {
+                links.forEach(item => {
+                    if (item.classList.contains('header__link_active'))
+                        item.classList.remove('header__link_active');
+                });
+            }
+
         });
     </script>
 </body>

@@ -1,120 +1,107 @@
 function templateEngine(jsonData) {
-    let request = new XMLHttpRequest();
-    request.open("GET", jsonData, false);
-    request.onload = function () {
-        if (request.status >= 200 && request.status < 400) {
-            let data = JSON.parse(request.responseText);
-            let ev = data;
-            let page = ev.page;
-            let title = document.querySelector(".container__title");
-            if (page == "events") {
-                let events = ev.events;
-                title.textContent = "Лента событий";
-                events.forEach(function (el) {
-                    let elts = el;
-                    /* Get Data */
-                    let type = elts.type, title = elts.title, source = elts.source, time = elts.time, description = elts.description, icon = elts.icon, size = elts.size, data = elts.data;
-                    /* Template */
-                    let template = (document.querySelector(".event-template"));
-                    let content = template.content, block = content.querySelector(".event"), blockIcon = content.querySelector(".event__icon"), blockTitle = content.querySelector(".event__title"), blockSource = content.querySelector(".event__source"), blockTime = content.querySelector(".event__time"), blockDesc = content.querySelector(".event__desc"), blockClose = content.querySelector(".event__close"), blockImage = content.querySelector(".event__image"), blockTemp = (content.querySelector(".event__temperature")), blockHumi = content.querySelector(".event__humidity"), blockClimate = content.querySelector(".event-climate"), blockMusic = content.querySelector(".event-music"), blockMusImg = (content.querySelector(".event-music__image")), blockMusName = (content.querySelector(".event-music__name")), blockMusTime = (content.querySelector(".event-music__time")), blockMusVolume = (content.querySelector(".event-music-controlls__volume-value")), blockButt = content.querySelector(".event-buttons"), blockButtAct = (content.querySelector(".event-buttons__button_active")), blockButtIna = (content.querySelector(".event-buttons__button_inactive")), blockCamInfo = (content.querySelector(".event-cam-info")), blockCamImage = (content.querySelector(".event-cam__image")), blockInfo = content.querySelector(".event-info");
-                    /* Custom Data */
-                    //hide blocks
-                    blockImage.classList.add("event__image_hide");
-                    blockClimate.classList.add("event-climate_hide");
-                    blockMusic.classList.add("event-music_hide");
-                    blockButt.classList.add("event-buttons_hide");
-                    blockCamImage.classList.add("event-cam__image_hide");
-                    blockInfo.removeAttribute("id");
-                    blockCamImage.removeAttribute("id");
-                    blockCamInfo.classList.add("event-cam-info_hide");
-                    if (data) {
-                        let evDate = data;
-                        let dType = evDate.type, dTemp = evDate.temperature, dHumi = evDate.humidity, dAlbum = evDate.albumcover, dArtist = evDate.artist, dTrack = evDate.track, dVolume = evDate.volume, dButton = evDate.buttons, dImage = evDate.image;
-                        /* Temporary Solution */
-                        //Image
-                        if (dType == "graph") {
-                            blockImage.setAttribute("src", "img/graph.png");
-                            blockImage.setAttribute("alt", "graph");
-                            blockImage.classList.remove("event__image_hide");
-                        }
-                        else if (dImage == "get_it_from_mocks_:3.jpg") {
-                            blockInfo.id = "camParent";
-                            blockCamImage.id = "cam"; //add cam
-                            blockCamImage.style.backgroundImage = "url(img/image.jpg)";
-                            blockCamImage.classList.remove("event-cam__image_hide");
-                        }
-                        //Climate
-                        if (dTemp)
-                            blockTemp.innerHTML = "Температура: <b>" + dTemp + " C</b>";
-                        if (dHumi)
-                            blockHumi.innerHTML = "Влажность: <b>" + dHumi + "%</b>";
-                        if (dTemp || dHumi)
-                            blockClimate.classList.remove("event-climate_hide"); //show event climate block
-                        //Music
-                        if (dTrack) {
-                            let trackDate = dTrack;
-                            let dLength = trackDate.length, dName = trackDate.name;
-                            if (dAlbum)
-                                blockMusImg.style.backgroundImage = "url(" + dAlbum + ")";
-                            if (dName)
-                                blockMusName.textContent = dArtist + " - " + dName;
-                            if (dLength)
-                                blockMusTime.textContent = dLength;
-                            if (dVolume)
-                                blockMusVolume.textContent = dVolume + "%";
-                            blockMusic.classList.remove("event-music_hide"); //show event music block
-                        }
-                        //Buttons
-                        if (dButton) {
-                            if (dButton[0])
-                                blockButtAct.textContent = dButton[0];
-                            if (dButton[1])
-                                blockButtIna.textContent = dButton[1];
-                            blockButt.classList.remove("event-buttons_hide"); //show event buttons block
-                        }
-                    }
-                    /* Fill Template */
-                    block.className = "event event_size-" + size + " event_type-" + type;
-                    blockIcon.setAttribute("src", "img/" + icon + ".svg");
-                    blockIcon.setAttribute("alt", icon);
-                    blockClose.className = "event__close event__close_type-" + type;
-                    blockTitle.textContent = title;
-                    blockSource.textContent = source;
-                    blockTime.textContent = time;
-                    blockDesc.textContent = description;
-                    //hide event info block if empry data
-                    !description
-                        ? blockInfo.classList.add("event-info_hide")
-                        : blockInfo.classList.remove("event-info_hide");
-                    let container = document.querySelector(".container");
-                    container.appendChild(content.cloneNode(true));
-                });
-                touchEvets();
+    let data = jsonData;
+    let ev = data;
+    let page = ev.page;
+    const container = document.querySelector(".container");
+    let sections = container.querySelectorAll("section");
+    sections.forEach(item => {
+        container.removeChild(item);
+    });
+    if (page == "events") {
+        let events = ev.events;
+        events.forEach(function (el) {
+            let elts = el;
+            /* Get Data */
+            let type = elts.type, title = elts.title, source = elts.source, time = elts.time, description = elts.description, icon = elts.icon, size = elts.size, data = elts.data;
+            /* Template */
+            let template = (document.querySelector(".event-template"));
+            let content = template.content, block = content.querySelector(".event"), blockIcon = content.querySelector(".event__icon"), blockTitle = content.querySelector(".event__title"), blockSource = content.querySelector(".event__source"), blockTime = content.querySelector(".event__time"), blockDesc = content.querySelector(".event__desc"), blockClose = content.querySelector(".event__close"), blockImage = content.querySelector(".event__image"), blockTemp = content.querySelector(".event__temperature"), blockHumi = content.querySelector(".event__humidity"), blockClimate = content.querySelector(".event-climate"), blockMusic = content.querySelector(".event-music"), blockMusImg = content.querySelector(".event-music__image"), blockMusName = content.querySelector(".event-music__name"), blockMusTime = content.querySelector(".event-music__time"), blockMusVolume = (content.querySelector(".event-music-controlls__volume-value")), blockButt = content.querySelector(".event-buttons"), blockButtAct = (content.querySelector(".event-buttons__button_active")), blockButtIna = (content.querySelector(".event-buttons__button_inactive")), blockCamInfo = content.querySelector(".event-cam-info"), blockCamImage = content.querySelector(".event-cam__image"), blockInfo = content.querySelector(".event-info");
+            /* Custom Data */
+            //hide blocks
+            blockImage.classList.add("event__image_hide");
+            blockClimate.classList.add("event-climate_hide");
+            blockMusic.classList.add("event-music_hide");
+            blockButt.classList.add("event-buttons_hide");
+            blockCamImage.classList.add("event-cam__image_hide");
+            blockInfo.removeAttribute("id");
+            blockCamImage.removeAttribute("id");
+            blockCamInfo.classList.add("event-cam-info_hide");
+            if (data) {
+                let evDate = data;
+                let dType = evDate.type, dTemp = evDate.temperature, dHumi = evDate.humidity, dAlbum = evDate.albumcover, dArtist = evDate.artist, dTrack = evDate.track, dVolume = evDate.volume, dButton = evDate.buttons, dImage = evDate.image;
+                /* Temporary Solution */
+                //Image
+                if (dType == "graph") {
+                    blockImage.setAttribute("src", "img/graph.png");
+                    blockImage.setAttribute("alt", "graph");
+                    blockImage.classList.remove("event__image_hide");
+                }
+                else if (dImage == "get_it_from_mocks_:3.jpg") {
+                    blockInfo.id = "camParent";
+                    blockCamImage.id = "cam"; //add cam
+                    blockCamImage.style.backgroundImage = "url(img/image.jpg)";
+                    blockCamImage.classList.remove("event-cam__image_hide");
+                }
+                //Climate
+                if (dTemp)
+                    blockTemp.innerHTML = "Температура: <b>" + dTemp + " C</b>";
+                if (dHumi)
+                    blockHumi.innerHTML = "Влажность: <b>" + dHumi + "%</b>";
+                if (dTemp || dHumi)
+                    blockClimate.classList.remove("event-climate_hide"); //show event climate block
+                //Music
+                if (dTrack) {
+                    let trackDate = dTrack;
+                    let dLength = trackDate.length, dName = trackDate.name;
+                    if (dAlbum)
+                        blockMusImg.style.backgroundImage = "url(" + dAlbum + ")";
+                    if (dName)
+                        blockMusName.textContent = dArtist + " - " + dName;
+                    if (dLength)
+                        blockMusTime.textContent = dLength;
+                    if (dVolume)
+                        blockMusVolume.textContent = dVolume + "%";
+                    blockMusic.classList.remove("event-music_hide"); //show event music block
+                }
+                //Buttons
+                if (dButton) {
+                    if (dButton[0])
+                        blockButtAct.textContent = dButton[0];
+                    if (dButton[1])
+                        blockButtIna.textContent = dButton[1];
+                    blockButt.classList.remove("event-buttons_hide"); //show event buttons block
+                }
             }
-            if (page == "videomonitoring") {
-                title.textContent = "Видеонаблюдение";
-                let videos = ev.videos;
-                videos.forEach(function (el) {
-                    let elts = el, id = elts.id, url = elts.url;
-                    let template = (document.querySelector(".video-template")), content = template.content, video = content.querySelector(".container__video"), canvBlock = content.querySelector(".canv-video-block");
-                    video.id = id;
-                    canvBlock.id = id + "-block";
-                    let container = document.querySelector(".container");
-                    container.appendChild(content.cloneNode(true));
-                    initVideo(document.getElementById(id), url);
-                    canvasVideo(id);
-                    canvasVideoSound(id);
-                });
-                openVideo();
-            }
-        }
-        else {
-            throw "Error: data not received";
-        }
-    };
-    request.send();
-    if (request.status != 200) {
-        alert(request.status + ": " + request.statusText);
+            /* Fill Template */
+            block.className = "event event_size-" + size + " event_type-" + type;
+            blockIcon.setAttribute("src", "img/" + icon + ".svg");
+            blockIcon.setAttribute("alt", icon);
+            blockClose.className = "event__close event__close_type-" + type;
+            blockTitle.textContent = title;
+            blockSource.textContent = source;
+            blockTime.textContent = time;
+            blockDesc.textContent = description;
+            //hide event info block if empry data
+            !description
+                ? blockInfo.classList.add("event-info_hide")
+                : blockInfo.classList.remove("event-info_hide");
+            container.appendChild(content.cloneNode(true));
+        });
+        touchEvets();
+    }
+    if (page == "videomonitoring") {
+        let videos = ev.videos;
+        videos.forEach(function (el) {
+            let elts = el, id = elts.id, url = elts.url;
+            let template = (document.querySelector(".video-template")), content = template.content, video = content.querySelector(".container__video"), canvBlock = content.querySelector(".canv-video-block");
+            video.id = id;
+            canvBlock.id = id + "-block";
+            container.appendChild(content.cloneNode(true));
+            initVideo(document.getElementById(id), url);
+            canvasVideo(id);
+            canvasVideoSound(id);
+        });
+        openVideo();
     }
 }
 /* Event Handling: Drag & Pinch & Rotate In #cam Image */
@@ -253,29 +240,6 @@ function touchEvets() {
                 break;
             }
         }
-    }
-}
-/* Event handling "click" on the button ".header-mobile-btn": animate button & show/hide mobile menu */
-const menu = document.querySelector(".header__menu");
-const menuBtn = document.querySelector(".header-mobile-btn");
-const menuBtnLine = document.querySelectorAll(".header-mobile-btn__line");
-/* Set Initial State Of Menu */
-let showMenu = false;
-menuBtn.addEventListener("click", toggleMenu);
-function toggleMenu() {
-    if (!showMenu) {
-        menu.classList.add("header__menu_show");
-        menuBtn.classList.add("header-mobile-btn_close");
-        menuBtnLine.forEach(item => item.classList.add("header-mobile-btn__line_close"));
-        /* Set Menu State */
-        showMenu = true;
-    }
-    else {
-        menu.classList.remove("header__menu_show");
-        menuBtn.classList.remove("header-mobile-btn_close");
-        menuBtnLine.forEach(item => item.classList.remove("header-mobile-btn__line_close"));
-        /* Set Menu State */
-        showMenu = false;
     }
 }
 /* Draw Canvas Video & Video Effects */
@@ -502,12 +466,14 @@ function initVideo(video, url) {
 /* Zoom(Click) Event To Video */
 function openVideo() {
     let canvasVid = document.querySelectorAll(".canv-video-block__video");
+    let videoBlock = document.querySelectorAll(".canv-video-block__canvas-block");
     canvasVid.forEach(function (canvas) {
         canvas.addEventListener("click", function () {
             let parentBlock = this.parentNode;
             let controllBlock = parentBlock.querySelector(".canv-video-block__controll-block");
             let button = parentBlock.querySelector(".canv-video-block__button");
             let soundIndicator = parentBlock.querySelector(".canv-video-block__sound-volume");
+            let openVideo = dataDispatcher.getActiveItems();
             /* Close Button */
             button.addEventListener("click", function () {
                 parentBlock.classList.remove("canv-video-block__canvas-block_open");
@@ -515,16 +481,30 @@ function openVideo() {
                 button.classList.remove("canv-video-block__button_open");
                 controllBlock.classList.remove("canv-video-block__controll-block_open");
                 soundIndicator.classList.remove("canv-video-block__sound-volume_active");
+                getActiveVideo(videoBlock, "canv-video-block__canvas-block_open");
             });
             /* Open Video */
-            if (!parentBlock.classList.contains("canv-video-block__canvas-block_open")) {
+            if (!parentBlock.classList.contains("canv-video-block__canvas-block_open") &&
+                !openVideo) {
                 parentBlock.classList.add("canv-video-block__canvas-block_open");
                 button.classList.add("canv-video-block__button_open");
                 controllBlock.classList.add("canv-video-block__controll-block_open");
                 soundIndicator.classList.add("canv-video-block__sound-volume_active");
+                getActiveVideo(videoBlock, "canv-video-block__canvas-block_open");
             }
         });
     });
+}
+function getActiveVideo(item, className) {
+    dataDispatcher.dispatch([
+        {
+            actionType: "itemStatus",
+            data: {
+                dataActive: item,
+                activeClass: className
+            }
+        }
+    ]);
 }
 /* Click Event To Mute Button */
 function soundMuteButton(button, video) {
@@ -539,4 +519,27 @@ function soundMuteButton(button, video) {
             button.classList.remove("canv-video-block__sound-mute_active");
         }
     });
+}
+/* Event handling "click" on the button ".header-mobile-btn": animate button & show/hide mobile menu */
+const menu = document.querySelector(".header__menu");
+const menuBtn = document.querySelector(".header-mobile-btn");
+const menuBtnLine = document.querySelectorAll(".header-mobile-btn__line");
+/* Set Initial State Of Menu */
+let showMenu = false;
+menuBtn.addEventListener("click", toggleMenu);
+function toggleMenu() {
+    if (!showMenu) {
+        menu.classList.add("header__menu_show");
+        menuBtn.classList.add("header-mobile-btn_close");
+        menuBtnLine.forEach(item => item.classList.add("header-mobile-btn__line_close"));
+        /* Set Menu State */
+        showMenu = true;
+    }
+    else {
+        menu.classList.remove("header__menu_show");
+        menuBtn.classList.remove("header-mobile-btn_close");
+        menuBtnLine.forEach(item => item.classList.remove("header-mobile-btn__line_close"));
+        /* Set Menu State */
+        showMenu = false;
+    }
 }
