@@ -1,0 +1,7 @@
+.EventMusic-Time {
+  right: -46px;
+}
+
+.EventMusic-Track {
+  width: calc(100% - 46px);
+}

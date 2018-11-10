@@ -12,27 +12,50 @@ const source = "./app/",
       js: source + "js/**/*.js",
       ts: source + "js/**/*.ts",
       scss: source + "sass/**/*.scss",
-      mainscss: source + "sass/main.scss"
+      mainscss: source + "sass/main.scss",
+      descbemcss: source + "bem/desktop/**/*.css",
+      touchbemcss: source + "bem/touch/**/*.css",
+      commonbemcss: source + "bem/common/**/*.css",
+      bem: source + "bem/",
+      globalcss: source + "bem/global.css",
+      mediacss: source + "bem/media.css",
     },
     dev: {
       js: dist + "js",
       css: dist + "css/",
-      maincss: dist + "css/main.css"
+      maincss: dist + "css/main.css",
     }
   };
 
-//Препроцессинг scss
-gulp.task("scss", function () {
+//Сборка common.css
+gulp.task("commonCss", function () {
   return gulp
-    .src([path.src.mainscss])
-    .pipe(sass().on("error", sass.logError)) //Преобразование scss в css
-    .pipe(gulp.dest(path.dev.css)); //Результат
+    .src([path.src.commonbemcss])
+    .pipe(concat('common.css'))
+    .pipe(gulp.dest(path.src.bem));
 });
 
-//Препроцессинг css
-gulp.task("mincss", ["scss"], function () {
+//Сборка desktop.css
+gulp.task("desktopCss", function () {
   return gulp
-    .src([path.dev.maincss])
+    .src([path.src.descbemcss])
+    .pipe(concat('desktop.css'))
+    .pipe(gulp.dest(path.src.bem));
+});
+
+//Сборка touch.css
+gulp.task("touchCss", function () {
+  return gulp
+    .src([path.src.touchbemcss])
+    .pipe(concat('touch.css'))
+    .pipe(gulp.dest(path.src.bem));
+});
+
+//Сборка всех компонентов css(global.css + common.css + media.css)
+gulp.task("mainCss", ['commonCss', "desktopCss", "touchCss"], function () {
+  return gulp
+    .src(["app/bem/global.css", 'app/bem/common.css', 'app/bem/media.css'])
+    .pipe(concat('newmain.css'))
     .pipe(
       cssnano({
         //Добавление вендорных префиксов
@@ -45,6 +68,7 @@ gulp.task("mincss", ["scss"], function () {
     .pipe(rename({ suffix: ".min" })) //Ренейм
     .pipe(gulp.dest(path.dev.css)); //Результат
 });
+
 
 //Сборка ts
 gulp.task("ts", function () {
@@ -61,7 +85,7 @@ gulp.task("ts", function () {
     .pipe(gulp.dest(path.dev.js));
 });
 
-gulp.task("watch", ["mincss", "ts"], function () {
-  gulp.watch([path.src.scss], ["mincss"]);
+gulp.task("watch", ["mainCss", "ts"], function () {
+  //gulp.watch([path.src.scss], ["mincss"]);
   gulp.watch([path.src.ts], ["ts"]);
 });

@@ -1,0 +1,626 @@
+.CanvVideoBlock {
+  grid-column: span 3;
+}
+
+.Container {
+  max-width: 1075px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-flow: dense;
+  justify-content: center;
+  grid-gap: 20px;
+  align-items: flex-start;
+  padding: 0 20px 80px;
+}
+
+.EventButtons {
+  display: inline-block;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.Event {
+  border-radius: 20px;
+  transition: all .3s ease-out;
+  cursor: pointer;
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.Event:hover {
+  box-shadow: 0 2px 6px 0 rgba(197, 186, 186, 0.5);
+}
+
+.Event:hover .Event-Close,
+.Event:hover .Event-Continue {
+  transition: all .7s ease-out;
+  opacity: 1;
+}
+
+.EventCam {
+  overflow: hidden;
+}
+
+.EventCamInfo {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 16px;
+}
+
+.EventClimate {
+  display: block;
+  margin-top: 20px;
+}
+
+.EventHeader {
+  display: flex;
+  align-items: center;
+  padding: 20px 20px 0;
+  margin-bottom: 16px;
+  flex: 1 0 auto;
+}
+
+.EventInfo {
+  transition: all .3s ease-out;
+  padding: 20px;
+  border-radius: 18px;
+  background: #fafafa;
+  flex: 0 0 auto;
+  width: 100%;
+}
+
+.EventMusic {
+  position: relative;
+  margin-top: 20px;
+  display: inline-block;
+  width: 100%;
+}
+
+.EventMusicControlls {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+  padding-right: 28px;
+}
+
+.EventMusicTracker {
+  height: 52px;
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 70px;
+}
+
+.EventSystem {
+  padding: 0 20px 20px;
+  flex: 1 0 auto;
+}
+
+.Footer {
+  display: flex;
+  width: 100%;
+  height: 64px;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  padding: 22px 35px 28px 40px;
+}
+
+.Header {
+  padding: 33px 40px;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.CanvVideoBlock-Button {
+  display: none;
+}
+
+.CanvVideoBlock-CanvasBlock {
+  position: relative;
+}
+
+.CanvVideoBlock-Contrast {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.CanvVideoBlock-CanvasMove {
+  position: absolute;
+  left: 0;
+  opacity: .2;
+  pointer-events: none;
+  width: 100%;
+  height: auto;
+  top: 0;
+}
+
+.CanvVideoBlock-ControllBlock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: row wrap;
+  padding: 10px 0;
+  position: relative;
+  height: 50px;
+}
+
+.CanvVideoBlock-Info {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: 600;
+  z-index: 10;
+}
+
+.CanvVideoBlock-Luminance {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.CanvVideoBlock-SoundMute {
+  line-height: 18px;
+  cursor: pointer;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  font-size: 18px;
+  color: red;
+  border: 1px solid #333333;
+  border-radius: 50%;
+}
+
+.CanvVideoBlock-SoundVolume {
+  display: none;
+  position: absolute;
+  width: 5px;
+  background-color: blue;
+  min-height: 10px;
+  right: 0;
+  z-index: 100;
+}
+
+.CanvVideoBlock-Text {
+  color: #333333;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.CanvVideoBlock-Video {
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+}
+
+.Container-Title {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  display: inline-block;
+  width: 100%;
+  margin-top: 34px;
+  margin-bottom: 12px;
+  grid-column: span 6;
+}
+
+.Container-Video {
+  grid-column: span 3;
+  width: 100%;
+  height: auto;
+}
+
+.EventButtons-Button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 132px;
+  width: 100%;
+  height: 54px;
+  border-radius: 8px;
+  color: black;
+  font-weight: 600;
+  font-size: 1.25rem;
+  float: left;
+  line-height: 1.4rem;
+}
+
+.EventButtons_hide {
+  display: none !important;
+}
+
+.Event-Close {
+  width: 14px;
+  height: 14px;
+  opacity: 0;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+
+.Event-Continue {
+  background-image: url("../img/continue.png");
+  width: 10px;
+  height: 16px;
+  opacity: 0;
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+}
+
+.Event-Desc {
+  color: black;
+  font-size: 1.25rem;
+  line-height: 1.4rem;
+  display: inline-block;
+  width: 100%;
+  padding-right: 40px;
+}
+
+.Event-Humidity {
+  color: black;
+  font-size: 1.125rem;
+  line-height: 1.31rem;
+  padding-left: 50px;
+}
+
+.Event-Icon {
+  width: 52px;
+  height: 52px;
+  display: inline-block;
+}
+
+.Event-Image {
+  display: inline-block;
+  margin-top: 30px;
+  width: 100%;
+}
+
+.Event-Source {
+  font-size: 1.125rem;
+  line-height: 1.31rem;
+}
+
+.Event-Temperature {
+  color: black;
+  font-size: 1.125rem;
+  line-height: 1.31rem;
+}
+
+.Event-Time {
+  font-size: 1.125rem;
+  line-height: 1.31rem;
+}
+
+.Event-Title {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 1.5rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.Event_size_l {
+  grid-column: span 4;
+  grid-row-end: span 3;
+}
+
+.Event_size_l .EventSystem {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Event_size_l .Event-Desc {
+  font-size: 1.5rem;
+  line-height: 1.75rem;
+  color: #333333;
+}
+
+.Event_size_m {
+  grid-column: span 3;
+}
+
+.Event_size_m .EventSystem {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Event_size_s {
+  grid-column: span 2;
+}
+
+.Event_size_s .Event-Source,
+.Event_size_s .Event-Source {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.Event_size_s .Event-Source:last-child,
+.Event_size_s .Event-Source:last-child {
+  margin: 0;
+}
+
+.Event_type_critical {
+  background-color: #db5341;
+}
+
+.Event_type_critical .EventHeader,
+.Event_type_critical .EventSystem {
+  color: white;
+}
+
+.Event_type_info {
+  background-color: #fafafa;
+}
+
+.Event_type_info .EventInfo {
+  padding-top: 0;
+}
+
+.Event_type_info:hover,
+.Event_type_info:hover .EventInfo {
+  background: #f3f3f3;
+}
+
+.EventCam-Image {
+  margin-top: 16px;
+  touch-action: none;
+  background-repeat: repeat-x;
+  height: 430px;
+  background-size: cover;
+}
+
+.EventCamInfo-Bright {
+  font-size: 1.125rem;
+  line-height: 1.3rem;
+  color: #333333;
+}
+
+.EventCamInfo-Zoom {
+  font-size: 1.125rem;
+  line-height: 1.3rem;
+  color: #333333;
+}
+
+.EventCamInfo_hide {
+  display: none;
+}
+
+.EventClimate_hide {
+  display: none !important;
+}
+
+.EventInfo_hide {
+  display: none;
+}
+
+.EventMusic-Image {
+  width: 53px;
+  height: 52px;
+  display: inline-block;
+  background-position: center;
+  background-size: contain;
+  border-radius: 10px;
+  left: 0;
+  position: absolute;
+}
+
+.EventMusic-Name {
+  font-size: 1.25rem;
+  line-height: 1.4rem;
+  color: black;
+  display: inline-block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
+  padding-bottom: 20px;
+}
+
+.EventMusic-Time {
+  position: absolute;
+  color: rgba(#a1a1a1, 0.84);
+  font-size: .875rem;
+  right: -30px;
+}
+
+.EventMusic-Track {
+  display: flex;
+  background-color: #979797;
+  height: 1px;
+  max-width: 350px;
+  width: calc(100% - 30px);
+  position: relative;
+  align-items: center;
+}
+
+.EventMusic-Track::after {
+  content: "";
+  position: absolute;
+  background-color: #d8d8d8;
+  border-radius: 5px;
+  width: 12px;
+  height: 20px;
+  left: 0;
+  top: 0;
+  margin-top: -10px;
+  margin-left: 24px;
+}
+
+.EventMusic_hide {
+  display: none;
+}
+
+.EventMusicControlls-Next {
+  width: 53px;
+  height: 52px;
+  background: url("../img/Prev.svg");
+  display: inline-block;
+  border-radius: 50%;
+  transition: all .3s ease-out;
+  flex: none;
+  transform: rotate(180deg);
+  margin-left: 27px;
+}
+
+.EventMusicControlls-Next:hover {
+  background-color: rgba(black, 0.1);
+}
+
+.EventMusicControlls-Prev {
+  width: 53px;
+  height: 52px;
+  background: url("../img/Prev.svg");
+  display: inline-block;
+  border-radius: 50%;
+  transition: all .3s ease-out;
+  flex: none;
+}
+
+.EventMusicControlls-Prev:hover {
+  background-color: rgba(black, 0.1);
+}
+
+.EventMusicControlls-Volume {
+  display: inline-block;
+  background-color: rgba(#d8d8d8, 0.3);
+  border-radius: 2px;
+  max-width: 280px;
+  width: 100%;
+  height: 4px;
+  margin-left: 6px;
+  position: relative;
+}
+
+.EventMusicControlls-Volume::after {
+  content: "";
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #605757;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: -6px;
+  margin-left: calc(80% - 16px);
+}
+
+.EventMusicControlls-VolumeValue {
+  position: absolute;
+  right: 0;
+  color: rgba(#a1a1a1, 0.84);
+  font-size: .875rem;
+}
+
+.Footer-Text {
+  color: #858585;
+  font-size: .75rem;
+  line-height: .875rem;
+  padding-right: 10px;
+}
+
+.Footer-Text:last-child {
+  padding: 0;
+}
+
+.Header-Link {
+  line-height: 1.25rem;
+  color: rgba(#333333, 0.6);
+  padding-right: 22px;
+  font-weight: 600;
+  transition: all .3s ease-out;
+}
+
+.Header-Link:hover {
+  color: red;
+}
+
+.Header-Logo {
+  width: 108px;
+  height: 27px;
+  background-image: url("../img/logo.png");
+  margin-right: 21px;
+}
+
+.Header-Menu {
+    
+}
+
+.CanvVideoBlock-Button_open {
+  display: inline-block;
+  color: #333333;
+  margin-right: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 5px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.CanvVideoBlock-CanvasBlock_open {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  background: white;
+  left: 0;
+  height: 100vh;
+  top: 0;
+}
+
+.CanvVideoBlock-ControllBlock_open {
+  margin-top: -53px;
+  background: rgba(255, 255, 255, 1);
+}
+
+.CanvVideoBlock-SoundMute_active {
+  color: green;
+}
+
+.CanvVideoBlock-SoundVolume_active {
+  display: inline-block;
+}
+
+.EventButtons-Button_active {
+  background-color: #ffd93e;
+}
+
+.EventButtons-Button_inactive {
+  background-color: #e5e5e5;
+  margin-left: 18px;
+}
+
+.Event-Close_type_critical {
+  background-image: url("../img/close-white.png");
+}
+
+.Event-Close_type_info {
+  background-image: url("../img/close.png");
+}
+
+.Event-Image_hide {
+  display: none;
+}
+
+.EventCam-Image_hide {
+  display: none !important;
+}
+
+.Header-Link_active {
+  color: #333333;
+}
+
+.Header-Menu_show {
+  visibility: visible !important;
+  transform: translateZ(0) !important;
+}
