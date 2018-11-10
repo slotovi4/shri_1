@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="robots" content="noindex">
-    <link rel="stylesheet" href="css/main.min.css">
+    <link rel="stylesheet" href="css/newmain.min.css">
     <link rel="shortcut icon" href="favicon.png" type="image/png">
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script src="framework/frame.min.js"></script>
@@ -15,107 +15,107 @@
 
 <body>
 
-    <header class="header">
-        <div class="header__logo"></div>
-        <div class="header__menu">
-            <a class="header__link header__link_active" data-page-title="Лента событий" data-page="events.json" href="#">События</a>
-            <a class="header__link" href="#">Сводка</a>
-            <a class="header__link" href="#">Устройства</a>
-            <a class="header__link" href="#">Сценарии</a>
-            <a class="header__link" data-page-title="Видеонаблюдение" data-page="videos.json" href="#">Видеонаблюдение</a>
+    <header class="Header">
+        <div class="Header-Logo"></div>
+        <div class="Header-Menu">
+            <a class="Header-Link Header-Link_active" data-page-title="Лента событий" data-page="events.json" href="#">События</a>
+            <a class="Header-Link" href="#">Сводка</a>
+            <a class="Header-Link" href="#">Устройства</a>
+            <a class="Header-Link" href="#">Сценарии</a>
+            <a class="Header-Link" data-page-title="Видеонаблюдение" data-page="videos.json" href="#">Видеонаблюдение</a>
         </div>
-        <div class="header-mobile-btn">
-            <div class="header-mobile-btn__line"></div>
-            <div class="header-mobile-btn__line"></div>
-            <div class="header-mobile-btn__line"></div>
+        <div class="HeaderMobileBtn">
+            <div class="HeaderMobileBtn__line"></div>
+            <div class="HeaderMobileBtn__line"></div>
+            <div class="HeaderMobileBtn__line"></div>
         </div>
     </header>
 
-    <main class="container">
-        <h1 class="container__title"></h1>
+    <main class="Container">
+        <h1 class="Container-Title"></h1>
     </main>
 
-    <footer class="footer">
-        <div class="footer__left-section">
-            <a href="#" class="footer__text">Помощь</a>
-            <a href="#" class="footer__text">Обратная связь</a>
-            <a href="#" class="footer__text">Разработчикам</a>
-            <a href="#" class="footer__text">Условия использования</a>
-            <a href="license.pdf" class="footer__text">Авторские права</a>
+    <footer class="Footer">
+        <div class="Footer-LeftSection">
+            <a href="#" class="Footer-Text">Помощь</a>
+            <a href="#" class="Footer-Text">Обратная связь</a>
+            <a href="#" class="Footer-Text">Разработчикам</a>
+            <a href="#" class="Footer-Text">Условия использования</a>
+            <a href="license.pdf" class="Footer-Text">Авторские права</a>
         </div>
         <div class="footer__right-section">
-            <span class="footer__text">© 2001–2017 ООО «Яндекс»</span>
+            <span class="Footer-Text">© 2001–2017 ООО «Яндекс»</span>
         </div>
     </footer>
 
-    <template class="event-template">
-        <section class="event">
-            <div class="event__close"></div>
-            <div class="event-header">
-                <img class="event__icon" src="" alt="">
-                <h3 class="event__title"></h3>
+    <template class="EventTemplate">
+        <section class="Event">
+            <div class="Event-Close"></div>
+            <div class="EventHeader">
+                <img class="Event-Icon" src="" alt="">
+                <h3 class="Event-Title"></h3>
             </div>
 
-            <div class="event-system">
-                <span class="event__source"></span>
-                <span class="event__time"></span>
+            <div class="EventSystem">
+                <span class="Event-Source"></span>
+                <span class="Event-Time"></span>
             </div>
 
-            <div class="event-info">
-                <span class="event__desc"></span>
-                <div class="event-climate">
-                    <span class="event__temperature"></span>
-                    <span class="event__humidity"></span>
+            <div class="EventTnfo">
+                <span class="Event-Desc"></span>
+                <div class="EventClimate">
+                    <span class="Event-Temperature"></span>
+                    <span class="Cvent-Humidity"></span>
                 </div>
-                <div class="event-music">
-                    <div class="event-music-tracker">
-                        <div class="event-music__image"></div>
-                        <span class="event-music__name"></span>
-                        <div class="event-music__track">
-                            <span class="event-music__time"></span>
+                <div class="EventMusic">
+                    <div class="EventMusicTracker">
+                        <div class="EventMusic-Image"></div>
+                        <span class="EventMusic-Name"></span>
+                        <div class="EventMusic-Track">
+                            <span class="EventMusic-Time"></span>
                         </div>
                     </div>
 
-                    <div class="event-music-controlls">
-                        <div class="event-music-controlls__prev"></div>
-                        <div class="event-music-controlls__next"></div>
-                        <div class="event-music-controlls__volume"></div>
-                        <div class="event-music-controlls__volume-value"></div>
+                    <div class="EventMusicControlls">
+                        <div class="EventMusicControlls-Prev"></div>
+                        <div class="EventMusicControlls-Next"></div>
+                        <div class="EventMusicControlls-Volume"></div>
+                        <div class="EventMusicControlls-VolumeValue"></div>
                     </div>
                 </div>
-                <div class="event-buttons">
-                    <span class="event-buttons__button event-buttons__button_active"></span>
-                    <span class="event-buttons__button event-buttons__button_inactive"></span>
+                <div class="EventButtons">
+                    <span class="EventButtons-Button EventButtons-Button_active"></span>
+                    <span class="EventButtons-Button EventButtons-Button_inactive"></span>
                 </div>
-                <img class="event__image" src="" alt="">
-                <div class="event-cam">
-                    <div class="event-cam__image"></div>
+                <img class="Event-Image" src="" alt="">
+                <div class="EventCam">
+                    <div class="EventCam-Image"></div>
                 </div>
-                <div class="event-cam-info">
-                    <span class="event-cam-info__zoom"></span>
-                    <span class="event-cam-info__bright"></span>
+                <div class="EventCamInfo">
+                    <span class="EventCamInfo-Zoom"></span>
+                    <span class="EventCamInfo-Bright"></span>
                 </div>
             </div>
 
-            <div class="event__continue"></div>
+            <div class="Event-Continue"></div>
         </section>
     </template>
 
-    <template class="video-template">
-        <section class="canv-video-block">
-            <video class="container__video" poster="img/yandex.jpg" controls="controls" loop="loop" muted autoplay></video>
-            <div class="canv-video-block__canvas-block">
-                <span class="canv-video-block__info"></span>
-                <div class="canv-video-block__sound-volume"></div>
-                <canvas class="canv-video-block__video"></canvas>
-                <canvas class="canv-video-block__canvas-move"></canvas>
-                <div class="canv-video-block__controll-block">
-                    <span class="canv-video-block__text">Яркость</span>
-                    <input class="canv-video-block__luminance" type="range" value="5" min="0" max="10">
-                    <span class="canv-video-block__text">Контраст</span>
-                    <input class="canv-video-block__contrast" type="range" value="1" min="1" max="5">
-                    <span class="canv-video-block__button">Все камеры</span>
-                    <div class="canv-video-block__sound-mute">♪</div>
+    <template class="VideoTemplate">
+        <section class="CanvVideoBlock">
+            <video class="Container-Video" poster="img/yandex.jpg" controls="controls" loop="loop" muted autoplay></video>
+            <div class="CanvVideoBlock-CanvasBlock">
+                <span class="CanvVideoBlock-Info"></span>
+                <div class="CanvVideoBlock-SoundVolume"></div>
+                <canvas class="CanvVideoBlock-Video"></canvas>
+                <canvas class="CanvVideoBlock-CanvasMove"></canvas>
+                <div class="CanvVideoBlock-ControllBlock">
+                    <span class="CanvVideoBlock-Text">Яркость</span>
+                    <input class="CanvVideoBlock-Luminance" type="range" value="5" min="0" max="10">
+                    <span class="CanvVideoBlock-Text">Контраст</span>
+                    <input class="CanvVideoBlock-Contrast" type="range" value="1" min="1" max="5">
+                    <span class="CanvVideoBlock-Button">Все камеры</span>
+                    <div class="CanvVideoBlock-SoundMute">♪</div>
                 </div>
             </div>
         </section>
@@ -136,18 +136,18 @@
             }, {
                 actionType: "setPageTitle",
                 data: {
-                    el: ".container__title",
+                    el: ".Container-Title",
                     title: "Лента событий"
                 }
             }
             ]);
 
             //New page
-            const menuLinks = document.querySelectorAll('.header__link');
+            const menuLinks = document.querySelectorAll('.Header-Link');
             menuLinks.forEach(link => {
                 link.addEventListener('click', function () {
                     clearActiveLink(menuLinks);
-                    link.classList.add('header__link_active');
+                    link.classList.add('Header-Link_active');
 
                     let pageData = link.getAttribute('data-page');
                     let pageTitle = link.getAttribute('data-page-title');
@@ -169,7 +169,7 @@
                         dataDispatcher.dispatch([{
                             actionType: "setPageTitle",
                             data: {
-                                el: ".container__title",
+                                el: ".Container-Title",
                                 title: pageTitle
                             }
                         }]);
@@ -179,8 +179,8 @@
 
             function clearActiveLink(links) {
                 links.forEach(item => {
-                    if (item.classList.contains('header__link_active'))
-                        item.classList.remove('header__link_active');
+                    if (item.classList.contains('Header-Link_active'))
+                        item.classList.remove('Header-Link_active');
                 });
             }
 
