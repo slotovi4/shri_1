@@ -1,1 +1,1 @@
-merge ts-multimedia & ts-adaptive
+merge bem & i-framework
