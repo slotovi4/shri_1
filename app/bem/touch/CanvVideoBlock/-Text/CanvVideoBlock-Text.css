@@ -1,0 +1,7 @@
+@media screen and (max-width: 900px) {
+  .CanvVideoBlock-Text {
+    width: 70px;
+    margin-right: 10px;
+    line-height: 28px;
+  }
+}

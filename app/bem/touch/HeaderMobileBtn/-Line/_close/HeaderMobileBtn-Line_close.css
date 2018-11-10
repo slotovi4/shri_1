@@ -17,3 +17,8 @@
 .HeaderMobileBtn-Line_close {
   transform: rotate(180deg);
 }
+@media screen and (max-width: 800px) {
+  .HeaderMobileBtn-Line_close {
+    background-color: white;
+  }
+}

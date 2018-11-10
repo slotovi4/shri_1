@@ -110,6 +110,9 @@ create(common + 'CanvVideoBlock-SoundMute_active.css');
 
 /* Desktop */
 
+//EventMusic-Track
+create(desktop + 'EventMusic-Track.css');
+create(desktop + 'EventMusic-Time.css');
 
 /* Touch */
 
@@ -117,3 +120,42 @@ create(common + 'CanvVideoBlock-SoundMute_active.css');
 create(touch + 'HeaderMobileBtn.css');
 create(touch + 'HeaderMobileBtn-Line.css');
 create(touch + 'HeaderMobileBtn-Line_close.css');
+//Event-Icon
+create(touch + 'Event-Icon.css');
+//CanvVideoBlock
+create(touch + 'CanvVideoBlock.css');
+create(touch + 'CanvVideoBlock-ControllBlock.css');
+create(touch + 'CanvVideoBlock-CanvasBlock_open.css');
+create(touch + 'CanvVideoBlock-ControllBlock_open.css');
+create(touch + 'CanvVideoBlock-Text.css');
+create(touch + 'CanvVideoBlock-Luminance.css');
+create(touch + 'CanvVideoBlock-Contrast.css');
+//Header
+create(touch + 'Header.css');
+create(touch + 'Header-Menu.css');
+create(touch + 'Header-Link.css');
+create(touch + 'Header-Link_active.css');
+//Container
+create(touch + 'Container.css');
+create(touch + 'Container-Title.css');
+//Event
+create(touch + 'Event.css');
+create(touch + 'Event_size_l.css');
+create(touch + 'Event_size_s.css');
+create(touch + 'Event-Title.css');
+create(touch + 'Event-Desc.css');
+create(touch + 'Event-Humidity.css');
+create(touch + 'Event-Close.css');
+create(touch + 'Event-Continue.css');
+create(touch + 'Event-Source.css');
+create(touch + 'Event-Time.css');
+create(touch + 'EventCam-Image.css');
+create(touch + 'EventCamInfo-Zoom.css');
+create(touch + 'EventCamInfo-Bright.css');
+create(touch + 'EventClimate.css');
+create(touch + 'EventHeader.css');
+create(touch + 'EventSystem.css');
+create(touch + 'EventInfo.css');
+create(touch + 'EventButtons.css');
+create(touch + 'Footer.css');
+create(touch + 'Footer-RightSection.css');

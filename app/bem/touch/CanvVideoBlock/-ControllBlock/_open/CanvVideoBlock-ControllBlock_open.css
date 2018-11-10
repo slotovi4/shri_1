@@ -1,0 +1,24 @@
+@media screen and (min-width: 801px) and (max-height: 400px) {
+  .CanvVideoBlock-ControllBlock_open {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+
+  .CanvVideoBlock-ControllBlock_open .CanvVideoBlock-Contrast,
+  .CanvVideoBlock-ControllBlock_open .CanvVideoBlock-Luminance,
+  .CanvVideoBlock-ControllBlock_open .CanvVideoBlock-Text {
+    display: none;
+  }
+}
+@media screen and (max-width: 800px) {
+  .CanvVideoBlock-ControllBlock_open {
+    margin-top: -4px;
+  }
+
+  .CanvVideoBlock-ControllBlock_open .CanvVideoBlock-Contrast,
+  .CanvVideoBlock-ControllBlock_open .CanvVideoBlock-Luminance,
+  .CanvVideoBlock-ControllBlock_open .CanvVideoBlock-Text {
+    display: none;
+  }
+}
