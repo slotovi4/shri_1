@@ -2,16 +2,16 @@
 function canvasVideo(videoId: string): void {
   const video = <HTMLVideoElement>document.querySelector("#" + videoId), //video
     block = <HTMLDivElement>document.querySelector("#" + videoId + "-block"), //video block
-    videoInfo = <HTMLSpanElement>block.querySelector(".canv-video-block__info"), //video info
-    canvas = <HTMLCanvasElement>block.querySelector(".canv-video-block__video"), //canvas video result
+    videoInfo = <HTMLSpanElement>block.querySelector(".CanvVideoBlock-Info"), //video info
+    canvas = <HTMLCanvasElement>block.querySelector(".CanvVideoBlock-Video"), //canvas video result
     lumRange = <HTMLInputElement>(
-      block.querySelector(".canv-video-block__luminance")
+      block.querySelector(".CanvVideoBlock-Luminance")
     ), //luminance range
     contrRange = <HTMLInputElement>(
-      block.querySelector(".canv-video-block__contrast")
+      block.querySelector(".CanvVideoBlock-Contrast")
     ), //contrast range
     canvasMove = <HTMLCanvasElement>(
-      block.querySelector(".canv-video-block__canvas-move")
+      block.querySelector(".CanvVideoBlock-CanvasMove")
     ); //move info canvas
 
   let ctx = canvas.getContext("2d", { alpha: false });
@@ -29,7 +29,7 @@ function canvasVideo(videoId: string): void {
   let changeLum = lumRange.value;
   lumRange.addEventListener(
     "input",
-    function() {
+    function () {
       changeLum = lumRange.value;
       canvas.style.filter =
         "brightness(" +
@@ -45,7 +45,7 @@ function canvasVideo(videoId: string): void {
   let changeContr = contrRange.value;
   contrRange.addEventListener(
     "input",
-    function() {
+    function () {
       changeContr = contrRange.value;
       canvas.style.filter =
         "brightness(" +
@@ -137,8 +137,8 @@ function canvasVideo(videoId: string): void {
     }
 
     /* Redrawing */
-    setTimeout(function() {
-      requestAnimationFrame(function() {
+    setTimeout(function () {
+      requestAnimationFrame(function () {
         loop(video, canvas, canvasMove, ctx, custCtx);
       });
     }, 100);
