@@ -22,7 +22,7 @@ const source = "./app/",
   };
 
 //Препроцессинг scss
-gulp.task("scss", function() {
+gulp.task("scss", function () {
   return gulp
     .src([path.src.mainscss])
     .pipe(sass().on("error", sass.logError)) //Преобразование scss в css
@@ -30,7 +30,7 @@ gulp.task("scss", function() {
 });
 
 //Препроцессинг css
-gulp.task("mincss", ["scss"], function() {
+gulp.task("mincss", ["scss"], function () {
   return gulp
     .src([path.dev.maincss])
     .pipe(
@@ -47,7 +47,7 @@ gulp.task("mincss", ["scss"], function() {
 });
 
 //Сборка ts
-gulp.task("ts", function() {
+gulp.task("ts", function () {
   return gulp
     .src(path.src.ts)
     .pipe(
@@ -61,7 +61,7 @@ gulp.task("ts", function() {
     .pipe(gulp.dest(path.dev.js));
 });
 
-gulp.task("watch", ["mincss", "ts"], function() {
+gulp.task("watch", ["mincss", "ts"], function () {
   gulp.watch([path.src.scss], ["mincss"]);
   gulp.watch([path.src.ts], ["ts"]);
 });
