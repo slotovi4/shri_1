@@ -1,0 +1,14 @@
+.Event_size_s {
+  grid-column: span 2;
+}
+
+.Event_size_s .Event-Source,
+.Event_size_s .Event-Source {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.Event_size_s .Event-Source:last-child,
+.Event_size_s .Event-Source:last-child {
+  margin: 0;
+}

@@ -1,0 +1,14 @@
+.EventButtons-Button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 132px;
+  width: 100%;
+  height: 54px;
+  border-radius: 8px;
+  color: black;
+  font-weight: 600;
+  font-size: 1.25rem;
+  float: left;
+  line-height: 1.4rem;
+}
