@@ -1,6 +1,6 @@
 .EventMusicControlls-VolumeValue {
   position: absolute;
   right: 0;
-  color: rgba(#a1a1a1, 0.84);
+  color: hsla(0,0%,63%,.84);
   font-size: .875rem;
 }

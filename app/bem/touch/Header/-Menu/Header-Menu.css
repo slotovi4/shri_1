@@ -2,7 +2,7 @@
   .Header-Menu {
     visibility: hidden;
     position: fixed;
-    background-color: rgba(#333333, 0.8);
+    background-color: rgba(51,51,51,.8);
     top: 0;
     left: 0;
     width: 100%;

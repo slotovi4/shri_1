@@ -66,7 +66,7 @@ function templateEngine(jsonData: object): void {
 
       /* Template */
       let template = <HTMLTemplateElement>(
-        document.querySelector(".event-template")
+        document.querySelector(".EventTemplate")
       );
       let content = template.content,
         block = <HTMLElement>content.querySelector(".Event"),

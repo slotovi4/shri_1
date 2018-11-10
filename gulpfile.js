@@ -16,9 +16,10 @@ const source = "./app/",
       descbemcss: source + "bem/desktop/**/*.css",
       touchbemcss: source + "bem/touch/**/*.css",
       commonbemcss: source + "bem/common/**/*.css",
+      desccss: source + "bem/desktop.css",
+      touchcss: source + "bem/touch.css",
       bem: source + "bem/",
       globalcss: source + "bem/global.css",
-      mediacss: source + "bem/media.css",
     },
     dev: {
       js: dist + "js",
@@ -51,11 +52,45 @@ gulp.task("touchCss", function () {
     .pipe(gulp.dest(path.src.bem));
 });
 
-//Сборка всех компонентов css(global.css + common.css + media.css)
-gulp.task("mainCss", ['commonCss', "desktopCss", "touchCss"], function () {
+//Сборка desktop.min.css
+gulp.task("desktopMinCss", ['desktopCss'], function () {
   return gulp
-    .src(["app/bem/global.css", 'app/bem/common.css', 'app/bem/media.css'])
-    .pipe(concat('newmain.css'))
+    .src(path.src.desccss)
+    .pipe(
+      cssnano({
+        //Добавление вендорных префиксов
+        autoprefixer: {
+          browsers: ["last 50 versions"],
+          add: true
+        }
+      })
+    ) //Сжатие css
+    .pipe(rename({ suffix: ".min" })) //Ренейм
+    .pipe(gulp.dest(path.dev.css)); //Результат
+});
+
+//Сборка touch.min.css
+gulp.task("touchMinCss", ['touchCss'], function () {
+  return gulp
+    .src(path.src.touchcss)
+    .pipe(
+      cssnano({
+        //Добавление вендорных префиксов
+        autoprefixer: {
+          browsers: ["last 50 versions"],
+          add: true
+        }
+      })
+    ) //Сжатие css
+    .pipe(rename({ suffix: ".min" })) //Ренейм
+    .pipe(gulp.dest(path.dev.css)); //Результат
+});
+
+//Сборка common компонентов css(global.css + common.css)
+gulp.task("mainCss", ['commonCss', "desktopMinCss", "touchMinCss"], function () {
+  return gulp
+    .src(["app/bem/global.css", 'app/bem/common.css'])
+    .pipe(concat('common.css'))
     .pipe(
       cssnano({
         //Добавление вендорных префиксов
@@ -86,6 +121,5 @@ gulp.task("ts", function () {
 });
 
 gulp.task("watch", ["mainCss", "ts"], function () {
-  //gulp.watch([path.src.scss], ["mincss"]);
   gulp.watch([path.src.ts], ["ts"]);
 });

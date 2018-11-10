@@ -2,7 +2,7 @@ function templateEngine(jsonData) {
     let data = jsonData;
     let ev = data;
     let page = ev.page;
-    const container = document.querySelector(".container");
+    const container = document.querySelector(".Container");
     let sections = container.querySelectorAll("section");
     sections.forEach(item => {
         container.removeChild(item);
@@ -14,18 +14,18 @@ function templateEngine(jsonData) {
             /* Get Data */
             let type = elts.type, title = elts.title, source = elts.source, time = elts.time, description = elts.description, icon = elts.icon, size = elts.size, data = elts.data;
             /* Template */
-            let template = (document.querySelector(".event-template"));
-            let content = template.content, block = content.querySelector(".event"), blockIcon = content.querySelector(".event__icon"), blockTitle = content.querySelector(".event__title"), blockSource = content.querySelector(".event__source"), blockTime = content.querySelector(".event__time"), blockDesc = content.querySelector(".event__desc"), blockClose = content.querySelector(".event__close"), blockImage = content.querySelector(".event__image"), blockTemp = content.querySelector(".event__temperature"), blockHumi = content.querySelector(".event__humidity"), blockClimate = content.querySelector(".event-climate"), blockMusic = content.querySelector(".event-music"), blockMusImg = content.querySelector(".event-music__image"), blockMusName = content.querySelector(".event-music__name"), blockMusTime = content.querySelector(".event-music__time"), blockMusVolume = (content.querySelector(".event-music-controlls__volume-value")), blockButt = content.querySelector(".event-buttons"), blockButtAct = (content.querySelector(".event-buttons__button_active")), blockButtIna = (content.querySelector(".event-buttons__button_inactive")), blockCamInfo = content.querySelector(".event-cam-info"), blockCamImage = content.querySelector(".event-cam__image"), blockInfo = content.querySelector(".event-info");
+            let template = (document.querySelector(".EventTemplate"));
+            let content = template.content, block = content.querySelector(".Event"), blockIcon = content.querySelector(".Event-Icon"), blockTitle = content.querySelector(".Event-Title"), blockSource = content.querySelector(".Event-Source"), blockTime = content.querySelector(".Event-Time"), blockDesc = content.querySelector(".Event-Desc"), blockClose = content.querySelector(".Event-Close"), blockImage = content.querySelector(".Event-Image"), blockTemp = content.querySelector(".Event-Temperature"), blockHumi = content.querySelector(".Event-Humidity"), blockClimate = content.querySelector(".EventClimate"), blockMusic = content.querySelector(".EventMusic"), blockMusImg = content.querySelector(".EventMusic-Image"), blockMusName = content.querySelector(".EventMusic-Name"), blockMusTime = content.querySelector(".EventMusic-Time"), blockMusVolume = (content.querySelector(".EventMusicControlls-VolumeValue")), blockButt = content.querySelector(".EventButtons"), blockButtAct = (content.querySelector(".EventButtons-Button_active")), blockButtIna = (content.querySelector(".EventButtons-Button_inactive")), blockCamInfo = content.querySelector(".EventCamInfo"), blockCamImage = content.querySelector(".EventCam-Image"), blockInfo = content.querySelector(".EventInfo");
             /* Custom Data */
             //hide blocks
-            blockImage.classList.add("event__image_hide");
-            blockClimate.classList.add("event-climate_hide");
-            blockMusic.classList.add("event-music_hide");
-            blockButt.classList.add("event-buttons_hide");
-            blockCamImage.classList.add("event-cam__image_hide");
+            blockImage.classList.add("Event-Image_hide");
+            blockClimate.classList.add("EventClimate_hide");
+            blockMusic.classList.add("EventMusic_hide");
+            blockButt.classList.add("EventButtons_hide");
+            blockCamImage.classList.add("EventCam-Image_hide");
             blockInfo.removeAttribute("id");
             blockCamImage.removeAttribute("id");
-            blockCamInfo.classList.add("event-cam-info_hide");
+            blockCamInfo.classList.add("EventCamInfo_hide");
             if (data) {
                 let evDate = data;
                 let dType = evDate.type, dTemp = evDate.temperature, dHumi = evDate.humidity, dAlbum = evDate.albumcover, dArtist = evDate.artist, dTrack = evDate.track, dVolume = evDate.volume, dButton = evDate.buttons, dImage = evDate.image;
@@ -34,13 +34,13 @@ function templateEngine(jsonData) {
                 if (dType == "graph") {
                     blockImage.setAttribute("src", "img/graph.png");
                     blockImage.setAttribute("alt", "graph");
-                    blockImage.classList.remove("event__image_hide");
+                    blockImage.classList.remove("Event-Image_hide");
                 }
                 else if (dImage == "get_it_from_mocks_:3.jpg") {
                     blockInfo.id = "camParent";
                     blockCamImage.id = "cam"; //add cam
                     blockCamImage.style.backgroundImage = "url(img/image.jpg)";
-                    blockCamImage.classList.remove("event-cam__image_hide");
+                    blockCamImage.classList.remove("EventCam-Image_hide");
                 }
                 //Climate
                 if (dTemp)
@@ -48,7 +48,7 @@ function templateEngine(jsonData) {
                 if (dHumi)
                     blockHumi.innerHTML = "Влажность: <b>" + dHumi + "%</b>";
                 if (dTemp || dHumi)
-                    blockClimate.classList.remove("event-climate_hide"); //show event climate block
+                    blockClimate.classList.remove("EventClimate_hide"); //show event climate block
                 //Music
                 if (dTrack) {
                     let trackDate = dTrack;
@@ -61,7 +61,7 @@ function templateEngine(jsonData) {
                         blockMusTime.textContent = dLength;
                     if (dVolume)
                         blockMusVolume.textContent = dVolume + "%";
-                    blockMusic.classList.remove("event-music_hide"); //show event music block
+                    blockMusic.classList.remove("EventMusic_hide"); //show event music block
                 }
                 //Buttons
                 if (dButton) {
@@ -69,22 +69,22 @@ function templateEngine(jsonData) {
                         blockButtAct.textContent = dButton[0];
                     if (dButton[1])
                         blockButtIna.textContent = dButton[1];
-                    blockButt.classList.remove("event-buttons_hide"); //show event buttons block
+                    blockButt.classList.remove("EventButtons_hide"); //show event buttons block
                 }
             }
             /* Fill Template */
-            block.className = "event event_size-" + size + " event_type-" + type;
+            block.className = "Event Event_size_" + size + " Event_type_" + type;
             blockIcon.setAttribute("src", "img/" + icon + ".svg");
             blockIcon.setAttribute("alt", icon);
-            blockClose.className = "event__close event__close_type-" + type;
+            blockClose.className = "Event-Close Event-Close_type_" + type;
             blockTitle.textContent = title;
             blockSource.textContent = source;
             blockTime.textContent = time;
             blockDesc.textContent = description;
             //hide event info block if empry data
             !description
-                ? blockInfo.classList.add("event-info_hide")
-                : blockInfo.classList.remove("event-info_hide");
+                ? blockInfo.classList.add("EventInfo_hide")
+                : blockInfo.classList.remove("EventInfo_hide");
             container.appendChild(content.cloneNode(true));
         });
         touchEvets();
@@ -93,7 +93,7 @@ function templateEngine(jsonData) {
         let videos = ev.videos;
         videos.forEach(function (el) {
             let elts = el, id = elts.id, url = elts.url;
-            let template = (document.querySelector(".video-template")), content = template.content, video = content.querySelector(".container__video"), canvBlock = content.querySelector(".canv-video-block");
+            let template = (document.querySelector(".VideoTemplate")), content = template.content, video = content.querySelector(".Container-Video"), canvBlock = content.querySelector(".CanvVideoBlock");
             video.id = id;
             canvBlock.id = id + "-block";
             container.appendChild(content.cloneNode(true));
@@ -108,9 +108,9 @@ function templateEngine(jsonData) {
 function touchEvets() {
     let cam = document.querySelector("#cam");
     let camParent = document.querySelector("#camParent");
-    let camInfo = camParent.querySelector(".event-cam-info");
-    let camZoom = camInfo.querySelector(".event-cam-info__zoom");
-    let camBright = (camInfo.querySelector(".event-cam-info__bright"));
+    let camInfo = camParent.querySelector(".EventCamInfo");
+    let camZoom = camInfo.querySelector(".EventCamInfo-Zoom");
+    let camBright = (camInfo.querySelector(".EventCamInfo-Bright"));
     let conXstart; //start X touch position
     let imgBackPosition; //img background X position
     let imgLeft, imgRight, imgTop, imgBot; //img L/R/T/B position
@@ -121,7 +121,7 @@ function touchEvets() {
     let checkZoom = false;
     let checkScale = 0;
     if ("ontouchstart" in document.documentElement) {
-        camInfo.classList.remove("event-cam-info_hide"); //if touch device show cam info block
+        camInfo.classList.remove("EventCamInfo_hide"); //if touch device show cam info block
         camZoom.textContent = "Приближение: 0%";
         camBright.textContent = "Яркость: 0%";
         /* Check Pointer Support */
@@ -243,24 +243,24 @@ function touchEvets() {
     }
 }
 /* Event handling "click" on the button ".header-mobile-btn": animate button & show/hide mobile menu */
-const menu = document.querySelector(".header__menu");
-const menuBtn = document.querySelector(".header-mobile-btn");
-const menuBtnLine = document.querySelectorAll(".header-mobile-btn__line");
+const menu = document.querySelector(".Header-Menu");
+const menuBtn = document.querySelector(".HeaderMobileBtn");
+const menuBtnLine = document.querySelectorAll(".HeaderMobileBtn-Line");
 /* Set Initial State Of Menu */
 let showMenu = false;
 menuBtn.addEventListener("click", toggleMenu);
 function toggleMenu() {
     if (!showMenu) {
-        menu.classList.add("header__menu_show");
-        menuBtn.classList.add("header-mobile-btn_close");
-        menuBtnLine.forEach(item => item.classList.add("header-mobile-btn__line_close"));
+        menu.classList.add("Header-Menu_show");
+        menuBtn.classList.add("HeaderMobileBtn_close");
+        menuBtnLine.forEach(item => item.classList.add("HeaderMobileBtn-Line_close"));
         /* Set Menu State */
         showMenu = true;
     }
     else {
-        menu.classList.remove("header__menu_show");
-        menuBtn.classList.remove("header-mobile-btn_close");
-        menuBtnLine.forEach(item => item.classList.remove("header-mobile-btn__line_close"));
+        menu.classList.remove("Header-Menu_show");
+        menuBtn.classList.remove("HeaderMobileBtn_close");
+        menuBtnLine.forEach(item => item.classList.remove("HeaderMobileBtn-Line_close"));
         /* Set Menu State */
         showMenu = false;
     }
@@ -269,11 +269,11 @@ function toggleMenu() {
 function canvasVideo(videoId) {
     const video = document.querySelector("#" + videoId), //video
     block = document.querySelector("#" + videoId + "-block"), //video block
-    videoInfo = block.querySelector(".canv-video-block__info"), //video info
-    canvas = block.querySelector(".canv-video-block__video"), //canvas video result
-    lumRange = (block.querySelector(".canv-video-block__luminance")), //luminance range
-    contrRange = (block.querySelector(".canv-video-block__contrast")), //contrast range
-    canvasMove = (block.querySelector(".canv-video-block__canvas-move")); //move info canvas
+    videoInfo = block.querySelector(".CanvVideoBlock-Info"), //video info
+    canvas = block.querySelector(".CanvVideoBlock-Video"), //canvas video result
+    lumRange = (block.querySelector(".CanvVideoBlock-Luminance")), //luminance range
+    contrRange = (block.querySelector(".CanvVideoBlock-Contrast")), //contrast range
+    canvasMove = (block.querySelector(".CanvVideoBlock-CanvasMove")); //move info canvas
     let ctx = canvas.getContext("2d", { alpha: false });
     let custCtx = canvasMove.getContext("2d", { alpha: false });
     let oldRGB; //old rgb video data
@@ -384,8 +384,8 @@ function canvasVideoSound(videoId) {
     if (AudioContext) {
         let video = document.querySelector("#" + videoId), //video
         block = document.querySelector("#" + videoId + "-block"), //video block
-        muteButton = (block.querySelector(".canv-video-block__sound-mute")), canvas = (block.querySelector(".canv-video-block__video")), //canvas
-        soundIndicator = (block.querySelector(".canv-video-block__sound-volume")), //sound indicator
+        muteButton = (block.querySelector(".CanvVideoBlock-SoundMute")), canvas = (block.querySelector(".CanvVideoBlock-Video")), //canvas
+        soundIndicator = (block.querySelector(".CanvVideoBlock-SoundVolume")), //sound indicator
         ctx = new AudioContext(), //audio
         source = ctx.createMediaElementSource(video), //get video element
         analyser = ctx.createAnalyser(), //analys sound
@@ -433,31 +433,31 @@ function createCanvasVideoBlock(videoId) {
     /* Create Video Elements */
     let block = document.createElement("div"), canvasBlock = document.createElement("div"), controllsBlock = document.createElement("div"), soundVolume = document.createElement("div"), soundMute = document.createElement("div"), prevButton = document.createElement("span"), canvas = document.createElement("canvas"), info = document.createElement("span"), luminance = document.createElement("input"), luminanceText = document.createElement("span"), contrast = document.createElement("input"), canvMove = document.createElement("canvas"), contrastText = document.createElement("span");
     /* Set Values */
-    canvMove.classList.add("canv-video-block__canvas-move");
-    block.classList.add("canv-video-block");
+    canvMove.classList.add("CanvVideoBlock-CanvasMove");
+    block.classList.add("CanvVideoBlock");
     block.id = videoId + "-block";
-    canvasBlock.classList.add("canv-video-block__canvas-block");
-    controllsBlock.classList.add("canv-video-block__controll-block");
-    prevButton.classList.add("canv-video-block__button");
+    canvasBlock.classList.add("CanvVideoBlock-CanvasBlock");
+    controllsBlock.classList.add("CanvVideoBlock-ControllBlock");
+    prevButton.classList.add("CanvVideoBlock-Button");
     prevButton.textContent = "Все камеры";
-    canvas.classList.add("canv-video-block__video");
-    soundVolume.classList.add("canv-video-block__sound-volume");
-    soundMute.classList.add("canv-video-block__sound-mute");
+    canvas.classList.add("CanvVideoBlock-Cideo");
+    soundVolume.classList.add("CanvVideoBlock-SoundVolume");
+    soundMute.classList.add("CanvVideoBlock-SoundMute");
     soundMute.textContent = "♪";
-    info.classList.add("canv-video-block__info");
-    luminance.classList.add("canv-video-block__luminance");
+    info.classList.add("CanvVideoBlock-Info");
+    luminance.classList.add("CanvVideoBlock-Luminance");
     luminance.setAttribute("type", "range");
     luminance.setAttribute("value", "5");
     luminance.setAttribute("min", "0");
     luminance.setAttribute("max", "10");
-    luminanceText.classList.add("canv-video-block__text");
+    luminanceText.classList.add("CanvVideoBlock-Text");
     luminanceText.textContent = "Яркость";
-    contrast.classList.add("canv-video-block__contrast");
+    contrast.classList.add("CanvVideoBlock-Contrast");
     contrast.setAttribute("type", "range");
     contrast.setAttribute("value", "1");
     contrast.setAttribute("min", "1");
     contrast.setAttribute("max", "5");
-    contrastText.classList.add("canv-video-block__text");
+    contrastText.classList.add("CanvVideoBlock-Text");
     contrastText.textContent = "Контраст";
     /* Add Elements To Block */
     controllsBlock.appendChild(luminanceText);
@@ -472,7 +472,7 @@ function createCanvasVideoBlock(videoId) {
     canvasBlock.appendChild(canvMove);
     canvasBlock.appendChild(controllsBlock);
     block.appendChild(canvasBlock);
-    let container = document.querySelector(".container");
+    let container = document.querySelector(".Container");
     container.appendChild(block);
 }
 /* HLS */
@@ -488,32 +488,32 @@ function initVideo(video, url) {
 }
 /* Zoom(Click) Event To Video */
 function openVideo() {
-    let canvasVid = document.querySelectorAll(".canv-video-block__video");
-    let videoBlock = document.querySelectorAll(".canv-video-block__canvas-block");
+    let canvasVid = document.querySelectorAll(".CanvVideoBlock-Video");
+    let videoBlock = document.querySelectorAll(".CanvVideoBlock-CanvasBlock");
     canvasVid.forEach(function (canvas) {
         canvas.addEventListener("click", function () {
             let parentBlock = this.parentNode;
-            let controllBlock = parentBlock.querySelector(".canv-video-block__controll-block");
-            let button = parentBlock.querySelector(".canv-video-block__button");
-            let soundIndicator = parentBlock.querySelector(".canv-video-block__sound-volume");
+            let controllBlock = parentBlock.querySelector(".CanvVideoBlock-ControllBlock");
+            let button = parentBlock.querySelector(".CanvVideoBlock-Button");
+            let soundIndicator = parentBlock.querySelector(".CanvVideoBlock-SoundVolume");
             let openVideo = dataDispatcher.getActiveItems();
             /* Close Button */
             button.addEventListener("click", function () {
-                parentBlock.classList.remove("canv-video-block__canvas-block_open");
-                button.classList.remove("canv-video-block__button_open");
-                button.classList.remove("canv-video-block__button_open");
-                controllBlock.classList.remove("canv-video-block__controll-block_open");
-                soundIndicator.classList.remove("canv-video-block__sound-volume_active");
-                getActiveVideo(videoBlock, "canv-video-block__canvas-block_open");
+                parentBlock.classList.remove("CanvVideoBlock-CanvasBlock_open");
+                button.classList.remove("CanvVideoBlock-Button_open");
+                button.classList.remove("CanvVideoBlock-Button_open");
+                controllBlock.classList.remove("CanvVideoBlock-ControllBlock_open");
+                soundIndicator.classList.remove("CanvVideoBlock-SoundVolume_active");
+                getActiveVideo(videoBlock, "CanvVideoBlock-CanvasBlock_open");
             });
             /* Open Video */
-            if (!parentBlock.classList.contains("canv-video-block__canvas-block_open") &&
+            if (!parentBlock.classList.contains("CanvVideoBlock-CanvasBlock_open") &&
                 !openVideo) {
-                parentBlock.classList.add("canv-video-block__canvas-block_open");
-                button.classList.add("canv-video-block__button_open");
-                controllBlock.classList.add("canv-video-block__controll-block_open");
-                soundIndicator.classList.add("canv-video-block__sound-volume_active");
-                getActiveVideo(videoBlock, "canv-video-block__canvas-block_open");
+                parentBlock.classList.add("CanvVideoBlock-CanvasBlock_open");
+                button.classList.add("CanvVideoBlock-Button_open");
+                controllBlock.classList.add("CanvVideoBlock-ControllBlock_open");
+                soundIndicator.classList.add("CanvVideoBlock-SoundVolume_active");
+                getActiveVideo(videoBlock, "CanvVideoBlock-CanvasBlock_open");
             }
         });
     });
@@ -533,13 +533,13 @@ function getActiveVideo(item, className) {
 function soundMuteButton(button, video) {
     button.addEventListener("click", function () {
         /* If Sound Muted */
-        if (!button.classList.contains("canv-video-block__sound-mute_active")) {
+        if (!button.classList.contains("CanvVideoBlock-SoundMute_active")) {
             video.muted = false;
-            button.classList.add("canv-video-block__sound-mute_active");
+            button.classList.add("CanvVideoBlock-SoundMute_active");
         }
         else {
             video.muted = true;
-            button.classList.remove("canv-video-block__sound-mute_active");
+            button.classList.remove("CanvVideoBlock-SoundMute_active");
         }
     });
 }

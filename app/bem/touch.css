@@ -1,16 +1,3 @@
-@media screen and (max-width: 650px) {
-  .CanvVideoBlock {
-    width: 100%;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .Event {
-    margin-bottom: 16px;
-    width: 100%;
-  }
-}
-
 @media screen and (max-width: 800px) {
   .Container {
     padding-bottom: 20px;
@@ -21,6 +8,19 @@
   .Container {
     display: flex;
     flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .CanvVideoBlock {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .Event {
+    margin-bottom: 16px;
+    width: 100%;
   }
 }
 
@@ -99,6 +99,13 @@
 @media screen and (max-width: 800px) {
   .Html {
     font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .Container-Title {
+    font-size: 2rem;
+    margin-top: 0;
   }
 }
 
@@ -208,13 +215,6 @@
 }
 
 @media screen and (max-width: 800px) {
-  .Container-Title {
-    font-size: 2rem;
-    margin-top: 0;
-  }
-}
-
-@media screen and (max-width: 800px) {
   .EventCam-Image {
     height: 280px;
   }
@@ -252,7 +252,7 @@
   .Header-Menu {
     visibility: hidden;
     position: fixed;
-    background-color: rgba(#333333, 0.8);
+    background-color: rgba(51,51,51,.8);
     top: 0;
     left: 0;
     width: 100%;
