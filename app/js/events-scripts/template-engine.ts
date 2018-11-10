@@ -42,7 +42,7 @@ function templateEngine(jsonData: object): void {
   let ev = data as Template;
   let page = ev.page;
 
-  const container = <HTMLElement>document.querySelector(".container");
+  const container = <HTMLElement>document.querySelector(".Container");
   let sections = container.querySelectorAll("section");
   sections.forEach(item => {
     container.removeChild(item);
@@ -51,7 +51,7 @@ function templateEngine(jsonData: object): void {
   if (page == "events") {
     let events = ev.events;
 
-    events.forEach(function(el) {
+    events.forEach(function (el) {
       let elts = el as Event;
 
       /* Get Data */
@@ -69,44 +69,44 @@ function templateEngine(jsonData: object): void {
         document.querySelector(".event-template")
       );
       let content = template.content,
-        block = <HTMLElement>content.querySelector(".event"),
-        blockIcon = <HTMLElement>content.querySelector(".event__icon"),
-        blockTitle = <HTMLElement>content.querySelector(".event__title"),
-        blockSource = <HTMLElement>content.querySelector(".event__source"),
-        blockTime = <HTMLElement>content.querySelector(".event__time"),
-        blockDesc = <HTMLElement>content.querySelector(".event__desc"),
-        blockClose = <HTMLElement>content.querySelector(".event__close"),
-        blockImage = <HTMLElement>content.querySelector(".event__image"),
-        blockTemp = <HTMLElement>content.querySelector(".event__temperature"),
-        blockHumi = <HTMLElement>content.querySelector(".event__humidity"),
-        blockClimate = <HTMLElement>content.querySelector(".event-climate"),
-        blockMusic = <HTMLElement>content.querySelector(".event-music"),
-        blockMusImg = <HTMLElement>content.querySelector(".event-music__image"),
-        blockMusName = <HTMLElement>content.querySelector(".event-music__name"),
-        blockMusTime = <HTMLElement>content.querySelector(".event-music__time"),
+        block = <HTMLElement>content.querySelector(".Event"),
+        blockIcon = <HTMLElement>content.querySelector(".Event-Icon"),
+        blockTitle = <HTMLElement>content.querySelector(".Event-Title"),
+        blockSource = <HTMLElement>content.querySelector(".Event-Source"),
+        blockTime = <HTMLElement>content.querySelector(".Event-Time"),
+        blockDesc = <HTMLElement>content.querySelector(".Event-Desc"),
+        blockClose = <HTMLElement>content.querySelector(".Event-Close"),
+        blockImage = <HTMLElement>content.querySelector(".Event-Image"),
+        blockTemp = <HTMLElement>content.querySelector(".Event-Temperature"),
+        blockHumi = <HTMLElement>content.querySelector(".Event-Humidity"),
+        blockClimate = <HTMLElement>content.querySelector(".EventClimate"),
+        blockMusic = <HTMLElement>content.querySelector(".EventMusic"),
+        blockMusImg = <HTMLElement>content.querySelector(".EventMusic-Image"),
+        blockMusName = <HTMLElement>content.querySelector(".EventMusic-Name"),
+        blockMusTime = <HTMLElement>content.querySelector(".EventMusic-Time"),
         blockMusVolume = <HTMLElement>(
-          content.querySelector(".event-music-controlls__volume-value")
+          content.querySelector(".EventMusicControlls-VolumeValue")
         ),
-        blockButt = <HTMLElement>content.querySelector(".event-buttons"),
+        blockButt = <HTMLElement>content.querySelector(".EventButtons"),
         blockButtAct = <HTMLElement>(
-          content.querySelector(".event-buttons__button_active")
+          content.querySelector(".EventButtons-Button_active")
         ),
         blockButtIna = <HTMLElement>(
-          content.querySelector(".event-buttons__button_inactive")
+          content.querySelector(".EventButtons-Button_inactive")
         ),
-        blockCamInfo = <HTMLElement>content.querySelector(".event-cam-info"),
-        blockCamImage = <HTMLElement>content.querySelector(".event-cam__image"),
-        blockInfo = <HTMLElement>content.querySelector(".event-info");
+        blockCamInfo = <HTMLElement>content.querySelector(".EventCamInfo"),
+        blockCamImage = <HTMLElement>content.querySelector(".EventCam-Image"),
+        blockInfo = <HTMLElement>content.querySelector(".EventInfo");
       /* Custom Data */
       //hide blocks
-      blockImage.classList.add("event__image_hide");
-      blockClimate.classList.add("event-climate_hide");
-      blockMusic.classList.add("event-music_hide");
-      blockButt.classList.add("event-buttons_hide");
-      blockCamImage.classList.add("event-cam__image_hide");
+      blockImage.classList.add("Event-Image_hide");
+      blockClimate.classList.add("EventClimate_hide");
+      blockMusic.classList.add("EventMusic_hide");
+      blockButt.classList.add("EventButtons_hide");
+      blockCamImage.classList.add("EventCam-Image_hide");
       blockInfo.removeAttribute("id");
       blockCamImage.removeAttribute("id");
-      blockCamInfo.classList.add("event-cam-info_hide");
+      blockCamInfo.classList.add("EventCamInfo_hide");
 
       if (data) {
         let evDate = data as EventDate;
@@ -126,18 +126,18 @@ function templateEngine(jsonData: object): void {
         if (dType == "graph") {
           blockImage.setAttribute("src", "img/graph.png");
           blockImage.setAttribute("alt", "graph");
-          blockImage.classList.remove("event__image_hide");
+          blockImage.classList.remove("Event-Image_hide");
         } else if (dImage == "get_it_from_mocks_:3.jpg") {
           blockInfo.id = "camParent";
           blockCamImage.id = "cam"; //add cam
           blockCamImage.style.backgroundImage = "url(img/image.jpg)";
-          blockCamImage.classList.remove("event-cam__image_hide");
+          blockCamImage.classList.remove("EventCam-Image_hide");
         }
 
         //Climate
         if (dTemp) blockTemp.innerHTML = "Температура: <b>" + dTemp + " C</b>";
         if (dHumi) blockHumi.innerHTML = "Влажность: <b>" + dHumi + "%</b>";
-        if (dTemp || dHumi) blockClimate.classList.remove("event-climate_hide"); //show event climate block
+        if (dTemp || dHumi) blockClimate.classList.remove("EventClimate_hide"); //show event climate block
 
         //Music
         if (dTrack) {
@@ -150,7 +150,7 @@ function templateEngine(jsonData: object): void {
           if (dLength) blockMusTime.textContent = dLength;
           if (dVolume) blockMusVolume.textContent = dVolume + "%";
 
-          blockMusic.classList.remove("event-music_hide"); //show event music block
+          blockMusic.classList.remove("EventMusic_hide"); //show event music block
         }
 
         //Buttons
@@ -158,15 +158,15 @@ function templateEngine(jsonData: object): void {
           if (dButton[0]) blockButtAct.textContent = dButton[0];
           if (dButton[1]) blockButtIna.textContent = dButton[1];
 
-          blockButt.classList.remove("event-buttons_hide"); //show event buttons block
+          blockButt.classList.remove("EventButtons_hide"); //show event buttons block
         }
       }
 
       /* Fill Template */
-      block.className = "event event_size-" + size + " event_type-" + type;
+      block.className = "Event Event_size_" + size + " Event_type_" + type;
       blockIcon.setAttribute("src", "img/" + icon + ".svg");
       blockIcon.setAttribute("alt", icon);
-      blockClose.className = "event__close event__close_type-" + type;
+      blockClose.className = "Event-Close Event-Close_type_" + type;
       blockTitle.textContent = title;
       blockSource.textContent = source;
       blockTime.textContent = time;
@@ -174,8 +174,8 @@ function templateEngine(jsonData: object): void {
 
       //hide event info block if empry data
       !description
-        ? blockInfo.classList.add("event-info_hide")
-        : blockInfo.classList.remove("event-info_hide");
+        ? blockInfo.classList.add("EventInfo_hide")
+        : blockInfo.classList.remove("EventInfo_hide");
 
       container.appendChild(content.cloneNode(true));
     });
@@ -185,17 +185,17 @@ function templateEngine(jsonData: object): void {
 
   if (page == "videomonitoring") {
     let videos = ev.videos;
-    videos.forEach(function(el) {
+    videos.forEach(function (el) {
       let elts = el as Video,
         id = elts.id,
         url = elts.url;
 
       let template = <HTMLTemplateElement>(
-          document.querySelector(".video-template")
-        ),
+        document.querySelector(".VideoTemplate")
+      ),
         content = template.content,
-        video = <HTMLElement>content.querySelector(".container__video"),
-        canvBlock = <HTMLElement>content.querySelector(".canv-video-block");
+        video = <HTMLElement>content.querySelector(".Container-Video"),
+        canvBlock = <HTMLElement>content.querySelector(".CanvVideoBlock");
 
       video.id = id;
       canvBlock.id = id + "-block";
