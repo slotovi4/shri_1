@@ -1,0 +1,10 @@
+@media screen and (max-width: 900px) {
+  .Html {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 800px) {
+  .Html {
+    font-size: 12px;
+  }
+}

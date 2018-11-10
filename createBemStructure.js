@@ -10,7 +10,6 @@ const touch = _bemPath + 'touch/';
  * header_hide  -> Header_hide
 */
 
-
 /* Common: общие(глобальные) компоненты  */
 
 //Header
@@ -106,8 +105,6 @@ create(common + 'CanvVideoBlock-SoundVolume_active.css');
 create(common + 'CanvVideoBlock-SoundMute.css');
 create(common + 'CanvVideoBlock-SoundMute_active.css');
 
-
-
 /* Desktop */
 
 //EventMusic-Track
@@ -116,6 +113,8 @@ create(desktop + 'EventMusic-Time.css');
 
 /* Touch */
 
+//Html
+create(touch + 'Html.css');
 //HeaderMobileBtn
 create(touch + 'HeaderMobileBtn.css');
 create(touch + 'HeaderMobileBtn-Line.css');
