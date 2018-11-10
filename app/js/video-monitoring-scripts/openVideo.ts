@@ -46,7 +46,7 @@ function openVideo(): void {
   });
 }
 
-function getActiveVideo(item, className) {
+function getActiveVideo(item: NodeListOf<Element>, className: string) {
   dataDispatcher.dispatch([
     {
       actionType: "itemStatus",

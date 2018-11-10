@@ -124,7 +124,6 @@
     <script src="js/main.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            //let dataDispatcher = new Dispatcher();
             //Init page
             dataDispatcher.dispatch([{
                 actionType: "setDefaultPage",
@@ -177,8 +176,6 @@
                     }
                 });
             });
-
-            console.log(dataDispatcher.store);
 
             function clearActiveLink(links) {
                 links.forEach(item => {
