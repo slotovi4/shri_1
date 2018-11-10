@@ -3,15 +3,15 @@ module.exports = {
 
     levels: [
         { 
-            path: 'common',
+            path: 'app/bem/common',
             naming: 'react'
         },
         { 
-            path: 'desktop',
+            path: 'app/bem/desktop',
             naming: 'react'
         },
         { 
-            path: 'touch',
+            path: 'app/bem/touch',
             naming: 'react'
         }
     ],
@@ -23,29 +23,21 @@ module.exports = {
                     // Настройки уровней, которые используются только
                     // в `bem-tools-create`
                     levels: {
-                        common: {
+                        'app/bem/common': {
                             // Уровень по умолчанию, создаём сущности тут,
                             // если уровень не задан
                             default: true,
 
                             // Технологии по умолчанию для создания блоков на уровне
-                            techs: ['css', 'js'],
+                            techs: ['css'],
                         },
-                        desktop: {
-                            // Уровень по умолчанию, создаём сущности тут,
-                            // если уровень не задан
+                        'app/bem/desktop': {
                             default: true,
-
-                            // Технологии по умолчанию для создания блоков на уровне
-                            techs: ['css', 'js'],
+                            techs: ['css'],
                         },
-                        touch: {
-                            // Уровень по умолчанию, создаём сущности тут,
-                            // если уровень не задан
+                        'app/bem/touch': {
                             default: true,
-
-                            // Технологии по умолчанию для создания блоков на уровне
-                            techs: ['css', 'js'],
+                            techs: ['css'],
                         }
                     }
                 }
