@@ -14,8 +14,6 @@ function openVideo(): void {
         ".CanvVideoBlock-SoundVolume"
       );
 
-      let openVideo = dataDispatcher.getActiveItems();
-
       /* Close Button */
       button.addEventListener("click", function () {
         parentBlock.classList.remove("CanvVideoBlock-CanvasBlock_open");
@@ -25,35 +23,19 @@ function openVideo(): void {
         soundIndicator.classList.remove(
           "CanvVideoBlock-SoundVolume_active"
         );
-
-        getActiveVideo(videoBlock, "CanvVideoBlock-CanvasBlock_open");
       });
 
       /* Open Video */
       if (
         !parentBlock.classList.contains(
           "CanvVideoBlock-CanvasBlock_open"
-        ) &&
-        !openVideo
+        )
       ) {
         parentBlock.classList.add("CanvVideoBlock-CanvasBlock_open");
         button.classList.add("CanvVideoBlock-Button_open");
         controllBlock.classList.add("CanvVideoBlock-ControllBlock_open");
         soundIndicator.classList.add("CanvVideoBlock-SoundVolume_active");
-        getActiveVideo(videoBlock, "CanvVideoBlock-CanvasBlock_open");
       }
     });
   });
-}
-
-function getActiveVideo(item: NodeListOf<Element>, className: string) {
-  dataDispatcher.dispatch([
-    {
-      actionType: "itemStatus",
-      data: {
-        dataActive: item,
-        activeClass: className
-      }
-    }
-  ]);
 }

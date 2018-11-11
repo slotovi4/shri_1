@@ -18,15 +18,15 @@
 }
 
 @media screen and (max-width: 800px) {
-  .Event {
-    margin-bottom: 16px;
-    width: 100%;
+  .EventButtons {
+    display: flex;
   }
 }
 
 @media screen and (max-width: 800px) {
-  .EventButtons {
-    display: flex;
+  .Event {
+    margin-bottom: 16px;
+    width: 100%;
   }
 }
 
@@ -165,17 +165,17 @@
   }
 }
 
-@media screen and (max-width: 800px) {
-  .Event-Source {
-    font-size: 1rem;
-    line-height: 1.15rem;
-  }
-}
-
 @media screen and (max-width: 900px) {
   .Event-Icon {
     width: 35px;
     height: 32px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .Event-Source {
+    font-size: 1rem;
+    line-height: 1.15rem;
   }
 }
 

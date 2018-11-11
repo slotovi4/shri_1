@@ -496,7 +496,6 @@ function openVideo() {
             let controllBlock = parentBlock.querySelector(".CanvVideoBlock-ControllBlock");
             let button = parentBlock.querySelector(".CanvVideoBlock-Button");
             let soundIndicator = parentBlock.querySelector(".CanvVideoBlock-SoundVolume");
-            let openVideo = dataDispatcher.getActiveItems();
             /* Close Button */
             button.addEventListener("click", function () {
                 parentBlock.classList.remove("CanvVideoBlock-CanvasBlock_open");
@@ -504,30 +503,16 @@ function openVideo() {
                 button.classList.remove("CanvVideoBlock-Button_open");
                 controllBlock.classList.remove("CanvVideoBlock-ControllBlock_open");
                 soundIndicator.classList.remove("CanvVideoBlock-SoundVolume_active");
-                getActiveVideo(videoBlock, "CanvVideoBlock-CanvasBlock_open");
             });
             /* Open Video */
-            if (!parentBlock.classList.contains("CanvVideoBlock-CanvasBlock_open") &&
-                !openVideo) {
+            if (!parentBlock.classList.contains("CanvVideoBlock-CanvasBlock_open")) {
                 parentBlock.classList.add("CanvVideoBlock-CanvasBlock_open");
                 button.classList.add("CanvVideoBlock-Button_open");
                 controllBlock.classList.add("CanvVideoBlock-ControllBlock_open");
                 soundIndicator.classList.add("CanvVideoBlock-SoundVolume_active");
-                getActiveVideo(videoBlock, "CanvVideoBlock-CanvasBlock_open");
             }
         });
     });
-}
-function getActiveVideo(item, className) {
-    dataDispatcher.dispatch([
-        {
-            actionType: "itemStatus",
-            data: {
-                dataActive: item,
-                activeClass: className
-            }
-        }
-    ]);
 }
 /* Click Event To Mute Button */
 function soundMuteButton(button, video) {

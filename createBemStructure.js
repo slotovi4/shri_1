@@ -13,14 +13,14 @@ const touch = _bemPath + 'touch/';
 /* Common: общие(глобальные) компоненты  */
 
 //Header
-create(common + 'Header.css');
+create(common + 'Header.{css,jsx}');
 create(common + 'Header-Logo.css');
 create(common + 'Header-Link.css');
 create(common + 'Header-Link_active.css');
 create(common + 'Header-Menu.css');
 create(common + 'Header-Menu_show.css');
 //Footer
-create(common + 'Footer.css');
+create(common + 'Footer.{css,jsx}');
 create(common + 'Footer-Text.css');
 //Event
 create(common + 'Event.css');
