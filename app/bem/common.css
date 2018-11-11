@@ -34,14 +34,14 @@
   opacity: 1;
 }
 
+.EventCam {
+  overflow: hidden;
+}
+
 .EventButtons {
   display: inline-block;
   width: 100%;
   margin-top: 30px;
-}
-
-.EventCam {
-  overflow: hidden;
 }
 
 .EventCamInfo {
@@ -50,17 +50,17 @@
   padding-top: 16px;
 }
 
+.EventClimate {
+  display: block;
+  margin-top: 20px;
+}
+
 .EventHeader {
   display: flex;
   align-items: center;
   padding: 20px 20px 0;
   margin-bottom: 16px;
   flex: 1 0 auto;
-}
-
-.EventClimate {
-  display: block;
-  margin-top: 20px;
 }
 
 .EventInfo {
@@ -353,6 +353,14 @@
   background: #f3f3f3;
 }
 
+.EventCam-Image {
+  margin-top: 16px;
+  touch-action: none;
+  background-repeat: repeat-x;
+  height: 430px;
+  background-size: cover;
+}
+
 .EventButtons-Button {
   display: flex;
   justify-content: center;
@@ -372,15 +380,13 @@
   display: none !important;
 }
 
-.EventCam-Image {
-  margin-top: 16px;
-  touch-action: none;
-  background-repeat: repeat-x;
-  height: 430px;
-  background-size: cover;
+.EventCamInfo-Bright {
+  font-size: 1.125rem;
+  line-height: 1.3rem;
+  color: #333333;
 }
 
-.EventCamInfo-Bright {
+.EventCamInfo-Zoom {
   font-size: 1.125rem;
   line-height: 1.3rem;
   color: #333333;
@@ -388,12 +394,6 @@
 
 .EventCamInfo_hide {
   display: none;
-}
-
-.EventCamInfo-Zoom {
-  font-size: 1.125rem;
-  line-height: 1.3rem;
-  color: #333333;
 }
 
 .EventClimate_hide {
@@ -603,6 +603,10 @@
   display: none;
 }
 
+.EventCam-Image_hide {
+  display: none !important;
+}
+
 .EventButtons-Button_active {
   background-color: #ffd93e;
 }
@@ -610,10 +614,6 @@
 .EventButtons-Button_inactive {
   background-color: #e5e5e5;
   margin-left: 18px;
-}
-
-.EventCam-Image_hide {
-  display: none !important;
 }
 
 .Header-Link_active {

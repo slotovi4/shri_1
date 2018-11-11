@@ -3,11 +3,10 @@ const gulp = require("gulp"), //gulp
   concat = require("gulp-concat"), //конкатанация
   cssnano = require("gulp-cssnano"), //сжатие css
   rename = require("gulp-rename"), //ренейм
-  babel = require('gulp-babel'),
   browserify = require('browserify'),
   babelify = require('babelify'),
-  sourcestream = require('vinyl-source-stream');
-ts = require("gulp-typescript"); //TypeScript
+  sourcestream = require('vinyl-source-stream'),
+  ts = require("gulp-typescript"); //TypeScript
 
 const source = "./app/",
   dist = "./dist/",
@@ -116,78 +115,20 @@ gulp.task("reactComponents", function () {
     .src(path.src.reactjs)
     .pipe(concat("reactComponents.js"))
     .pipe(gulp.dest(path.src.components));
-  /* return gulp
-    .src(path.src.reactjsx)
-    .pipe(babel({
-      plugins: ['transform-react-jsx', "react-html-attrs"],
-    }))
-    .pipe(concat("reactComponents.js"))
-    .pipe(gulp.dest(path.dev.js)); */
 });
 
 //Сборка renderComponents
 gulp.task("renderComponents", ["reactComponents"], function () {
-  /* return gulp
-    .src(path.src.components + 'renderComponents.js')
-    .pipe(babel({
-      plugins: ["react-html-attrs"],
-      presets: ["@babel/preset-env", "@babel/react"]
-    }))
-    .pipe(gulp.dest(path.dev.js)); */
-
-
-  let b = browserify({
+  return browserify({
     entries: path.src.components + 'renderComponents.js',
     debug: true,
     transform: [babelify.configure({
       plugins: ["react-html-attrs"],
       presets: ["@babel/preset-env", "@babel/react"]
     })]
-  });
-
-  return b.bundle()
+  }).bundle()
     .pipe(sourcestream('renderComponents.js'))
     .pipe(gulp.dest(path.dev.js));
-
-
-  /* return  gulp.src(path.src.components + 'renderComponents.js')
-  .pipe(browserify({
-    transform: ['babelify'],
-  }))
-  .pipe(gulp.dest('./public/js'))   */
-
-  /* return browserify({
-    entries: path.src.components + 'renderComponents.js',
-    extensions: ['.js'],
-    debug: true
-  }).transform('babelify', {
-      plugins: ["react-html-attrs"],
-      presets: ["@babel/preset-env", "@babel/react"]
-    })
-    .bundle()
-    .pipe(gulp.dest(path.dev.js)); */
-
-
-
-
-  /* return browserify({ entries: './app.jsx', extensions: ['.jsx'], debug: true })
-    .transform('babelify', { presets: ["@babel/preset-env", "@babel/react"], plugins: ["react-html-attrs"] })
-    .bundle()
-    .pipe(source('bundle.js'))
-    .pipe(gulp.dest('dist')); */
-
-  /* return browserify({
-    entries: path.src.jsx + 'renderComponents.jsx',
-    extensions: ['.jsx'],
-    debug: true
-  })
-    .transform('babelify', {
-      //presets: ['es2015', 'react'],
-      plugins: ['transform-react-jsx', "react-html-attrs"]
-    })
-    .bundle()
-    .pipe(sourcestream('bundle.js'))
-    .pipe(gulp.dest(path.dev.js)); */
 });
 
 

@@ -1,26 +1,3 @@
-/* Event handling "click" on the button ".header-mobile-btn": animate button & show/hide mobile menu */
-const menu = document.querySelector(".Header-Menu");
-const menuBtn = document.querySelector(".HeaderMobileBtn");
-const menuBtnLine = document.querySelectorAll(".HeaderMobileBtn-Line");
-/* Set Initial State Of Menu */
-let showMenu = false;
-menuBtn.addEventListener("click", toggleMenu);
-function toggleMenu() {
-    if (!showMenu) {
-        menu.classList.add("Header-Menu_show");
-        menuBtn.classList.add("HeaderMobileBtn_close");
-        menuBtnLine.forEach(item => item.classList.add("HeaderMobileBtn-Line_close"));
-        /* Set Menu State */
-        showMenu = true;
-    }
-    else {
-        menu.classList.remove("Header-Menu_show");
-        menuBtn.classList.remove("HeaderMobileBtn_close");
-        menuBtnLine.forEach(item => item.classList.remove("HeaderMobileBtn-Line_close"));
-        /* Set Menu State */
-        showMenu = false;
-    }
-}
 function templateEngine(jsonData) {
     let data = jsonData;
     let ev = data;
@@ -263,6 +240,29 @@ function touchEvets() {
                 break;
             }
         }
+    }
+}
+/* Event handling "click" on the button ".header-mobile-btn": animate button & show/hide mobile menu */
+const menu = document.querySelector(".Header-Menu");
+const menuBtn = document.querySelector(".HeaderMobileBtn");
+const menuBtnLine = document.querySelectorAll(".HeaderMobileBtn-Line");
+/* Set Initial State Of Menu */
+let showMenu = false;
+menuBtn.addEventListener("click", toggleMenu);
+function toggleMenu() {
+    if (!showMenu) {
+        menu.classList.add("Header-Menu_show");
+        menuBtn.classList.add("HeaderMobileBtn_close");
+        menuBtnLine.forEach(item => item.classList.add("HeaderMobileBtn-Line_close"));
+        /* Set Menu State */
+        showMenu = true;
+    }
+    else {
+        menu.classList.remove("Header-Menu_show");
+        menuBtn.classList.remove("HeaderMobileBtn_close");
+        menuBtnLine.forEach(item => item.classList.remove("HeaderMobileBtn-Line_close"));
+        /* Set Menu State */
+        showMenu = false;
     }
 }
 /* Draw Canvas Video & Video Effects */
