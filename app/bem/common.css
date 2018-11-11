@@ -50,17 +50,17 @@
   padding-top: 16px;
 }
 
-.EventClimate {
-  display: block;
-  margin-top: 20px;
-}
-
 .EventHeader {
   display: flex;
   align-items: center;
   padding: 20px 20px 0;
   margin-bottom: 16px;
   flex: 1 0 auto;
+}
+
+.EventClimate {
+  display: block;
+  margin-top: 20px;
 }
 
 .EventInfo {
@@ -123,6 +123,15 @@
   display: none;
 }
 
+.CanvVideoBlock-CanvasBlock {
+  position: relative;
+}
+
+.CanvVideoBlock-Contrast {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 .CanvVideoBlock-CanvasMove {
   position: absolute;
   left: 0;
@@ -131,15 +140,6 @@
   width: 100%;
   height: auto;
   top: 0;
-}
-
-.CanvVideoBlock-CanvasBlock {
-  position: relative;
-}
-
-.CanvVideoBlock-Contrast {
-  margin-left: 10px;
-  margin-right: 10px;
 }
 
 .CanvVideoBlock-ControllBlock {
@@ -386,14 +386,14 @@
   color: #333333;
 }
 
+.EventCamInfo_hide {
+  display: none;
+}
+
 .EventCamInfo-Zoom {
   font-size: 1.125rem;
   line-height: 1.3rem;
   color: #333333;
-}
-
-.EventCamInfo_hide {
-  display: none;
 }
 
 .EventClimate_hide {

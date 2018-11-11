@@ -1,4 +1,4 @@
-function Footer() {
+export function Footer() {
     return (
         <div class="Footer">
             <div class="Footer-LeftSection">
@@ -14,5 +14,3 @@ function Footer() {
         </div>
     )
 }
-
-ReactDOM.render(<Footer />, document.querySelector('footer'));
