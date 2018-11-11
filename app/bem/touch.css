@@ -18,15 +18,15 @@
 }
 
 @media screen and (max-width: 800px) {
-  .EventButtons {
-    display: flex;
+  .Event {
+    margin-bottom: 16px;
+    width: 100%;
   }
 }
 
 @media screen and (max-width: 800px) {
-  .Event {
-    margin-bottom: 16px;
-    width: 100%;
+  .EventButtons {
+    display: flex;
   }
 }
 
@@ -165,6 +165,13 @@
   }
 }
 
+@media screen and (max-width: 800px) {
+  .Event-Source {
+    font-size: 1rem;
+    line-height: 1.15rem;
+  }
+}
+
 @media screen and (max-width: 900px) {
   .Event-Icon {
     width: 35px;
@@ -173,9 +180,9 @@
 }
 
 @media screen and (max-width: 800px) {
-  .Event-Source {
-    font-size: 1rem;
-    line-height: 1.15rem;
+  .Event-Title {
+    font-size: 1.15rem;
+    font-family: Helvetica, Arial sans-serif;
   }
 }
 
@@ -183,13 +190,6 @@
   .Event-Time {
     font-size: 1rem;
     line-height: 1.15rem;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .Event-Title {
-    font-size: 1.15rem;
-    font-family: Helvetica, Arial sans-serif;
   }
 }
 

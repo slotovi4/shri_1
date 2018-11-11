@@ -137,4 +137,5 @@ gulp.task("ts", function () {
 
 gulp.task("watch", ["mainCss", "ts", 'reactComponents'], function () {
   gulp.watch([path.src.ts], ["ts"]);
+  gulp.watch([path.src.reactjsx], ["reactComponents"]);
 });
