@@ -3,6 +3,7 @@ const gulp = require("gulp"), //gulp
   concat = require("gulp-concat"), //конкатанация
   cssnano = require("gulp-cssnano"), //сжатие css
   rename = require("gulp-rename"), //ренейм
+  babel = require('gulp-babel'),
   ts = require("gulp-typescript"); //TypeScript
 
 const source = "./app/",
@@ -20,6 +21,7 @@ const source = "./app/",
       touchcss: source + "bem/touch.css",
       bem: source + "bem/",
       globalcss: source + "bem/global.css",
+      reactjsx: source + "bem/**/*.jsx"
     },
     dev: {
       js: dist + "js",
@@ -104,6 +106,17 @@ gulp.task("mainCss", ['commonCss', "desktopMinCss", "touchMinCss"], function () 
     .pipe(gulp.dest(path.dev.css)); //Результат
 });
 
+//Сборка reactComponents
+gulp.task("reactComponents", function () {
+  return gulp
+    .src(path.src.reactjsx)
+    .pipe(babel({
+      plugins: ['transform-react-jsx', "react-html-attrs"],
+    }))
+    .pipe(concat("reactComponents.js"))
+    .pipe(gulp.dest(path.dev.js));
+});
+
 
 //Сборка ts
 gulp.task("ts", function () {
@@ -120,6 +133,8 @@ gulp.task("ts", function () {
     .pipe(gulp.dest(path.dev.js));
 });
 
-gulp.task("watch", ["mainCss", "ts"], function () {
+//min js
+
+gulp.task("watch", ["mainCss", "ts", 'reactComponents'], function () {
   gulp.watch([path.src.ts], ["ts"]);
 });

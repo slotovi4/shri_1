@@ -2,10 +2,16 @@
   grid-column: span 3;
 }
 
-.EventButtons {
-  display: inline-block;
-  width: 100%;
-  margin-top: 30px;
+.Container {
+  max-width: 1075px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-flow: dense;
+  justify-content: center;
+  grid-gap: 20px;
+  align-items: flex-start;
+  padding: 0 20px 80px;
 }
 
 .Event {
@@ -28,20 +34,14 @@
   opacity: 1;
 }
 
-.EventCam {
-  overflow: hidden;
+.EventButtons {
+  display: inline-block;
+  width: 100%;
+  margin-top: 30px;
 }
 
-.Container {
-  max-width: 1075px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-auto-flow: dense;
-  justify-content: center;
-  grid-gap: 20px;
-  align-items: flex-start;
-  padding: 0 20px 80px;
+.EventCam {
+  overflow: hidden;
 }
 
 .EventCamInfo {
@@ -123,6 +123,10 @@
   display: none;
 }
 
+.CanvVideoBlock-CanvasBlock {
+  position: relative;
+}
+
 .CanvVideoBlock-CanvasMove {
   position: absolute;
   left: 0;
@@ -131,10 +135,6 @@
   width: 100%;
   height: auto;
   top: 0;
-}
-
-.CanvVideoBlock-CanvasBlock {
-  position: relative;
 }
 
 .CanvVideoBlock-Contrast {
@@ -200,23 +200,20 @@
   cursor: pointer;
 }
 
-.EventButtons-Button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 132px;
+.Container-Title {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  display: inline-block;
   width: 100%;
-  height: 54px;
-  border-radius: 8px;
-  color: black;
-  font-weight: 600;
-  font-size: 1.25rem;
-  float: left;
-  line-height: 1.4rem;
+  margin-top: 34px;
+  margin-bottom: 12px;
+  grid-column: span 6;
 }
 
-.EventButtons_hide {
-  display: none !important;
+.Container-Video {
+  grid-column: span 3;
+  width: 100%;
+  height: auto;
 }
 
 .Event-Close {
@@ -356,28 +353,31 @@
   background: #f3f3f3;
 }
 
+.EventButtons-Button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 132px;
+  width: 100%;
+  height: 54px;
+  border-radius: 8px;
+  color: black;
+  font-weight: 600;
+  font-size: 1.25rem;
+  float: left;
+  line-height: 1.4rem;
+}
+
+.EventButtons_hide {
+  display: none !important;
+}
+
 .EventCam-Image {
   margin-top: 16px;
   touch-action: none;
   background-repeat: repeat-x;
   height: 430px;
   background-size: cover;
-}
-
-.Container-Title {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
-  display: inline-block;
-  width: 100%;
-  margin-top: 34px;
-  margin-bottom: 12px;
-  grid-column: span 6;
-}
-
-.Container-Video {
-  grid-column: span 3;
-  width: 100%;
-  height: auto;
 }
 
 .EventCamInfo-Bright {
@@ -591,15 +591,6 @@
   display: inline-block;
 }
 
-.EventButtons-Button_active {
-  background-color: #ffd93e;
-}
-
-.EventButtons-Button_inactive {
-  background-color: #e5e5e5;
-  margin-left: 18px;
-}
-
 .Event-Close_type_critical {
   background-image: url("../img/close-white.png");
 }
@@ -610,6 +601,15 @@
 
 .Event-Image_hide {
   display: none;
+}
+
+.EventButtons-Button_active {
+  background-color: #ffd93e;
+}
+
+.EventButtons-Button_inactive {
+  background-color: #e5e5e5;
+  margin-left: 18px;
 }
 
 .EventCam-Image_hide {

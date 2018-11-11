@@ -12,26 +12,14 @@
     <link rel="stylesheet" href="css/touch.min.css" media="(max-width: 900px)" />
     <link rel="shortcut icon" href="favicon.png" type="image/png">
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="framework/frame.min.js"></script>
 </head>
 
 <body>
 
-    <header class="Header">
-        <div class="Header-Logo"></div>
-        <div class="Header-Menu">
-            <a class="Header-Link Header-Link_active" data-page-title="Лента событий" data-page="events.json" href="#">События</a>
-            <a class="Header-Link" href="#">Сводка</a>
-            <a class="Header-Link" href="#">Устройства</a>
-            <a class="Header-Link" href="#">Сценарии</a>
-            <a class="Header-Link" data-page-title="Видеонаблюдение" data-page="videos.json" href="#">Видеонаблюдение</a>
-        </div>
-        <div class="HeaderMobileBtn">
-            <div class="HeaderMobileBtn-Line"></div>
-            <div class="HeaderMobileBtn-Line"></div>
-            <div class="HeaderMobileBtn-Line"></div>
-        </div>
-    </header>
+    <header></header>
 
     <main class="Container">
         <h1 class="Container-Title"></h1>
@@ -123,6 +111,7 @@
         </section>
     </template>
 
+    <script src="js/reactComponents.js"></script>
     <script src="js/main.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
