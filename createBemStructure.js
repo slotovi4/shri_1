@@ -87,7 +87,7 @@ create(common + 'Container.css');
 create(common + 'Container-Title.css');
 create(common + 'Container-Video.css');
 //CanvVideoBlock
-create(common + 'CanvVideoBlock.css');
+create(common + 'CanvVideoBlock.{css,js}');
 create(common + 'CanvVideoBlock-CanvasMove.css');
 create(common + 'CanvVideoBlock-Info.css');
 create(common + 'CanvVideoBlock-Video.css');

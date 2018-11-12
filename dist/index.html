@@ -21,9 +21,7 @@
 
     <header></header>
 
-    <main class="Container">
-        <h1 class="Container-Title"></h1>
-    </main>
+    <main class="Container"></main>
 
     <footer></footer>
 
@@ -80,90 +78,39 @@
         </section>
     </template>
 
-    <template class="VideoTemplate">
-        <section class="CanvVideoBlock">
-            <video class="Container-Video" poster="img/yandex.jpg" controls="controls" loop="loop" muted autoplay></video>
-            <div class="CanvVideoBlock-CanvasBlock">
-                <span class="CanvVideoBlock-Info"></span>
-                <div class="CanvVideoBlock-SoundVolume"></div>
-                <canvas class="CanvVideoBlock-Video"></canvas>
-                <canvas class="CanvVideoBlock-CanvasMove"></canvas>
-                <div class="CanvVideoBlock-ControllBlock">
-                    <span class="CanvVideoBlock-Text">Яркость</span>
-                    <input class="CanvVideoBlock-Luminance" type="range" value="5" min="0" max="10">
-                    <span class="CanvVideoBlock-Text">Контраст</span>
-                    <input class="CanvVideoBlock-Contrast" type="range" value="1" min="1" max="5">
-                    <span class="CanvVideoBlock-Button">Все камеры</span>
-                    <div class="CanvVideoBlock-SoundMute">♪</div>
-                </div>
-            </div>
-        </section>
-    </template>
-
     <script src="js/renderComponents.js"></script>
     <script src="js/main.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            //Init page
-            dataDispatcher.dispatch([{
-                actionType: "setDefaultPage",
-                data: {
-                    pageName: "События",
-                    dataName: "events.json",
-                    dataPath: "/dist/data/",
-                    dataFunc: templateEngine
+            let request = new XMLHttpRequest();
+            request.open("GET", '/dist/data/videos.json', false);
+
+            request.onload = function () {
+                if (request.status >= 200 && request.status < 400) {
+                    let data = JSON.parse(request.responseText);
+                    let videos = data.videos;
+
+                    videos.forEach(function (el) {
+                        let id = el.id,
+                            url = el.url;
+
+                        initVideo(document.getElementById(id), url);
+                        canvasVideo(id);
+                        canvasVideoSound(id);
+                    });
+
+                    openVideo();
+
+                } else {
+                    throw "Error: data not received";
                 }
-            }, {
-                actionType: "setPageTitle",
-                data: {
-                    el: ".Container-Title",
-                    title: "Лента событий"
-                }
+            };
+
+            request.send();
+
+            if (request.status != 200) {
+                alert(request.status + ": " + request.statusText);
             }
-            ]);
-
-            //New page
-            const menuLinks = document.querySelectorAll('.Header-Link');
-            menuLinks.forEach(link => {
-                link.addEventListener('click', function () {
-                    clearActiveLink(menuLinks);
-                    link.classList.add('Header-Link_active');
-
-                    let pageData = link.getAttribute('data-page');
-                    let pageTitle = link.getAttribute('data-page-title');
-                    let currentPage = dataDispatcher.getCurrentPage();
-
-                    if (pageData) {
-                        dataDispatcher.dispatch([{
-                            actionType: "setNewPage",
-                            data: {
-                                pageName: link.textContent,
-                                dataName: pageData,
-                                dataPath: "/dist/data/",
-                                dataFunc: templateEngine
-                            }
-                        }]);
-                    }
-
-                    if (pageTitle) {
-                        dataDispatcher.dispatch([{
-                            actionType: "setPageTitle",
-                            data: {
-                                el: ".Container-Title",
-                                title: pageTitle
-                            }
-                        }]);
-                    }
-                });
-            });
-
-            function clearActiveLink(links) {
-                links.forEach(item => {
-                    if (item.classList.contains('Header-Link_active'))
-                        item.classList.remove('Header-Link_active');
-                });
-            }
-
         });
     </script>
 </body>

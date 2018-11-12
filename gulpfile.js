@@ -141,6 +141,7 @@ gulp.task("ts", function () {
         noImplicitAny: true,
         target: "es6",
         module: "amd",
+        allowSyntheticDefaultImports: true,
         outFile: "main.js"
       })
     )
