@@ -21,3 +21,5 @@ export class Header extends React.Component {
         )
     }
 }
+
+export const AppHeader = withBemMod(cnHeader(), cnHeaderMobileBtn())(Header)

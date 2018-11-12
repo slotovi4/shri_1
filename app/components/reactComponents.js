@@ -1,4 +1,5 @@
 import { cn } from '@bem-react/classname';
+import { withBemMod } from '@bem-react/core';
 const cnCanvVideoBlock = cn('CanvVideoBlock');
 
 export function CanvVideoBlock(props) {
@@ -30,6 +31,8 @@ export function CanvVideoBlock(props) {
     return videoContent
 }
 
+export const AppCanvVideoBlock = withBemMod(cnCanvVideoBlock())(CanvVideoBlock)
+
 
 const cnFooter = cn('Footer');
 
@@ -49,6 +52,8 @@ export function Footer() {
         </div>
     )
 }
+
+export const AppFooter = withBemMod(cnFooter())(Footer)
 const cnHeader = cn('Header');
 const cnHeaderMobileBtn = cn('HeaderMobileBtn');
 export class Header extends React.Component {
@@ -72,3 +77,5 @@ export class Header extends React.Component {
         )
     }
 }
+
+export const AppHeader = withBemMod(cnHeader(), cnHeaderMobileBtn())(Header)

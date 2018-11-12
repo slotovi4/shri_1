@@ -4,24 +4,25 @@ import { Header, Footer, CanvVideoBlock } from './reactComponents';
 ReactDOM.render(<Header />, document.querySelector('header'));
 ReactDOM.render(<Footer />, document.querySelector('footer'));
 
+let videos = getData('/dist/data/videos.json');
+ReactDOM.render(<CanvVideoBlock videos={videos} />, document.querySelector('.Container'));
 
-let request = new XMLHttpRequest();
-request.open("GET", '/dist/data/videos.json', false);
+function getData(url) {
+  let request = new XMLHttpRequest();
+  let videosData;
+  request.open("GET", url, false);
 
-request.onload = function () {
-  if (request.status >= 200 && request.status < 400) {
-    let data = JSON.parse(request.responseText);
-    let videos = data.videos;
+  request.onload = function () {
+    if (request.status >= 200 && request.status < 400) {
+      let data = JSON.parse(request.responseText);
+      videosData = data.videos;
 
-    ReactDOM.render(<CanvVideoBlock videos={videos} />, document.querySelector('.Container'));
+    } else {
+      throw "Error: data not received";
+    }
+  };
 
-  } else {
-    throw "Error: data not received";
-  }
-};
+  request.send();
 
-request.send();
-
-if (request.status != 200) {
-  alert(request.status + ": " + request.statusText);
+  return videosData;
 }

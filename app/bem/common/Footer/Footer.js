@@ -16,3 +16,5 @@ export function Footer() {
         </div>
     )
 }
+
+export const AppFooter = withBemMod(cnFooter())(Footer)
