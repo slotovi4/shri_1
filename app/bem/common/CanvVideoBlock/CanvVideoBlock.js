@@ -1,8 +1,9 @@
 import { cn } from '@bem-react/classname';
 import { withBemMod } from '@bem-react/core';
+
 const cnCanvVideoBlock = cn('CanvVideoBlock');
 
-export function CanvVideoBlock(props) {
+function CanvVideoBlock(props) {
     const { videos } = props;
     const videoContent = [<h1 class="Container-Title">Видеонаблюдение</h1>];
 
@@ -31,5 +32,5 @@ export function CanvVideoBlock(props) {
     return videoContent
 }
 
-export const AppCanvVideoBlock = withBemMod(cnCanvVideoBlock())(CanvVideoBlock)
+export const CanvVideoBlockComponent = withBemMod(cnCanvVideoBlock(), { app: "common" })(CanvVideoBlock)
 

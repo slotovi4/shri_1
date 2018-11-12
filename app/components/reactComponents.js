@@ -1,8 +1,9 @@
 import { cn } from '@bem-react/classname';
 import { withBemMod } from '@bem-react/core';
+
 const cnCanvVideoBlock = cn('CanvVideoBlock');
 
-export function CanvVideoBlock(props) {
+function CanvVideoBlock(props) {
     const { videos } = props;
     const videoContent = [<h1 class="Container-Title">Видеонаблюдение</h1>];
 
@@ -31,12 +32,12 @@ export function CanvVideoBlock(props) {
     return videoContent
 }
 
-export const AppCanvVideoBlock = withBemMod(cnCanvVideoBlock())(CanvVideoBlock)
+export const CanvVideoBlockComponent = withBemMod(cnCanvVideoBlock(), { app: "common" })(CanvVideoBlock)
 
 
 const cnFooter = cn('Footer');
 
-export function Footer() {
+function Footer() {
     return (
         <div className={cnFooter()}>
             <div className={cnFooter('LeftSection')}>
@@ -53,29 +54,28 @@ export function Footer() {
     )
 }
 
-export const AppFooter = withBemMod(cnFooter())(Footer)
+export const FooterComponent = withBemMod(cnFooter(), { app: "common" })(Footer)
 const cnHeader = cn('Header');
 const cnHeaderMobileBtn = cn('HeaderMobileBtn');
-export class Header extends React.Component {
-    render() {
-        return (
-            <div className={cnHeader()}>
-                <div className={cnHeader('Logo')}></div>
-                <div className={cnHeader('Menu')}>
-                    <a className={cnHeader('Link', { active: true })} data-page-title="Лента событий" data-page="events.json" href="#">События</a>
-                    <a className={cnHeader('Link')} href="#">Сводка</a>
-                    <a className={cnHeader('Link')} href="#">Устройства</a>
-                    <a className={cnHeader('Link')} href="#">Сценарии</a>
-                    <a className={cnHeader('Link')} data-page-title="Видеонаблюдение" data-page="videos.json" href="#">Видеонаблюдение</a>
-                </div>
-                <div className={cnHeaderMobileBtn()}>
-                    <div className={cnHeaderMobileBtn('Line')}></div>
-                    <div className={cnHeaderMobileBtn('Line')}></div>
-                    <div className={cnHeaderMobileBtn('Line')}></div>
-                </div>
-            </div >
-        )
-    }
+
+function Header(props) {
+    return (
+        <div className={cnHeader()}>
+            <div className={cnHeader('Logo')}></div>
+            <div className={cnHeader('Menu')}>
+                <a className={cnHeader('Link', { active: true })} data-page-title="Лента событий" data-page="events.json" href="#">События</a>
+                <a className={cnHeader('Link')} href="#">Сводка</a>
+                <a className={cnHeader('Link')} href="#">Устройства</a>
+                <a className={cnHeader('Link')} href="#">Сценарии</a>
+                <a className={cnHeader('Link')} data-page-title="Видеонаблюдение" data-page="videos.json" href="#">Видеонаблюдение</a>
+            </div>
+            <div className={cnHeaderMobileBtn()}>
+                <div className={cnHeaderMobileBtn('Line')}></div>
+                <div className={cnHeaderMobileBtn('Line')}></div>
+                <div className={cnHeaderMobileBtn('Line')}></div>
+            </div>
+        </div >
+    )
 }
 
-export const AppHeader = withBemMod(cnHeader(), cnHeaderMobileBtn())(Header)
+export const HeaderComponent = withBemMod(cnHeader(), { app: "common" })(Header)

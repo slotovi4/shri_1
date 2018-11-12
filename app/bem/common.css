@@ -50,17 +50,17 @@
   padding-top: 16px;
 }
 
+.EventClimate {
+  display: block;
+  margin-top: 20px;
+}
+
 .EventHeader {
   display: flex;
   align-items: center;
   padding: 20px 20px 0;
   margin-bottom: 16px;
   flex: 1 0 auto;
-}
-
-.EventClimate {
-  display: block;
-  margin-top: 20px;
 }
 
 .EventInfo {
@@ -119,12 +119,12 @@
   position: relative;
 }
 
-.CanvVideoBlock-CanvasBlock {
-  position: relative;
-}
-
 .CanvVideoBlock-Button {
   display: none;
+}
+
+.CanvVideoBlock-CanvasBlock {
+  position: relative;
 }
 
 .CanvVideoBlock-CanvasMove {
@@ -268,13 +268,13 @@
   line-height: 1.31rem;
 }
 
-.Event-Time {
+.Event-Temperature {
+  color: black;
   font-size: 1.125rem;
   line-height: 1.31rem;
 }
 
-.Event-Temperature {
-  color: black;
+.Event-Time {
   font-size: 1.125rem;
   line-height: 1.31rem;
 }
@@ -556,16 +556,6 @@
     
 }
 
-.CanvVideoBlock-CanvasBlock_open {
-  position: fixed;
-  width: 100%;
-  z-index: 1000;
-  background: white;
-  left: 0;
-  height: 100vh;
-  top: 0;
-}
-
 .CanvVideoBlock-Button_open {
   display: inline-block;
   color: #333333;
@@ -576,6 +566,16 @@
   border: 1px solid gray;
   border-radius: 10px;
   cursor: pointer;
+}
+
+.CanvVideoBlock-CanvasBlock_open {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  background: white;
+  left: 0;
+  height: 100vh;
+  top: 0;
 }
 
 .CanvVideoBlock-ControllBlock_open {

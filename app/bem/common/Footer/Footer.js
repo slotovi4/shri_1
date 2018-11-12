@@ -1,6 +1,6 @@
 const cnFooter = cn('Footer');
 
-export function Footer() {
+function Footer() {
     return (
         <div className={cnFooter()}>
             <div className={cnFooter('LeftSection')}>
@@ -17,4 +17,4 @@ export function Footer() {
     )
 }
 
-export const AppFooter = withBemMod(cnFooter())(Footer)
+export const FooterComponent = withBemMod(cnFooter(), { app: "common" })(Footer)
