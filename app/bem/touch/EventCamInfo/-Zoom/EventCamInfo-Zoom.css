@@ -1,0 +1,6 @@
+@media screen and (max-width: 800px) {
+  .EventCamInfo-Zoom {
+    font-size: 1rem;
+    line-height: 1.15rem;
+  }
+}

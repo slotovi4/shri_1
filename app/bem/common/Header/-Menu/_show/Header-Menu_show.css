@@ -1,0 +1,4 @@
+.Header-Menu_show {
+  visibility: visible !important;
+  transform: translateZ(0) !important;
+}

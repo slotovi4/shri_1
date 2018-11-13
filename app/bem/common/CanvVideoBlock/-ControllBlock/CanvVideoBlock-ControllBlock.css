@@ -1,0 +1,9 @@
+.CanvVideoBlock-ControllBlock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: row wrap;
+  padding: 10px 0;
+  position: relative;
+  height: 50px;
+}

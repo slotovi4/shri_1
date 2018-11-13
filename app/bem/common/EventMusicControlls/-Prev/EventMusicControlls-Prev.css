@@ -1,0 +1,13 @@
+.EventMusicControlls-Prev {
+  width: 53px;
+  height: 52px;
+  background: url("../img/Prev.svg");
+  display: inline-block;
+  border-radius: 50%;
+  transition: all .3s ease-out;
+  flex: none;
+}
+
+.EventMusicControlls-Prev:hover {
+  background-color: rgba(black, 0.1);
+}

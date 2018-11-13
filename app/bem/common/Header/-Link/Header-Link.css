@@ -1,0 +1,11 @@
+.Header-Link {
+  line-height: 1.25rem;
+  color: rgba(51,51,51,.6);
+  padding-right: 22px;
+  font-weight: 600;
+  transition: all .3s ease-out;
+}
+
+.Header-Link:hover {
+  color: red;
+}

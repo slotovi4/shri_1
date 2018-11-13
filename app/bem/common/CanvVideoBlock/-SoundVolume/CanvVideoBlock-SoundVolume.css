@@ -1,0 +1,9 @@
+.CanvVideoBlock-SoundVolume {
+  display: none;
+  position: absolute;
+  width: 5px;
+  background-color: blue;
+  min-height: 10px;
+  right: 0;
+  z-index: 100;
+}

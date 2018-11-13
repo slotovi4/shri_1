@@ -1,0 +1,8 @@
+.HeaderMobileBtn-Line {
+  width: 16px;
+  height: 3px;
+  background-color: #333333;
+  transition: all .5s ease-out;
+  margin-bottom: 3px;
+  border-radius: 5px;
+}

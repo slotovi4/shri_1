@@ -1,0 +1,8 @@
+.EventInfo {
+  transition: all .3s ease-out;
+  padding: 20px;
+  border-radius: 18px;
+  background: #fafafa;
+  flex: 0 0 auto;
+  width: 100%;
+}

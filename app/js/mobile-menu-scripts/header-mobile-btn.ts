@@ -1,8 +1,8 @@
 /* Event handling "click" on the button ".header-mobile-btn": animate button & show/hide mobile menu */
 
-const menu = <HTMLElement>document.querySelector(".header__menu");
-const menuBtn = <HTMLElement>document.querySelector(".header-mobile-btn");
-const menuBtnLine = document.querySelectorAll(".header-mobile-btn__line");
+const menu = <HTMLElement>document.querySelector(".Header-Menu");
+const menuBtn = <HTMLElement>document.querySelector(".HeaderMobileBtn");
+const menuBtnLine = document.querySelectorAll(".HeaderMobileBtn-Line");
 
 /* Set Initial State Of Menu */
 let showMenu = false;
@@ -11,19 +11,19 @@ menuBtn.addEventListener("click", toggleMenu);
 
 function toggleMenu() {
   if (!showMenu) {
-    menu.classList.add("header__menu_show");
-    menuBtn.classList.add("header-mobile-btn_close");
+    menu.classList.add("Header-Menu_show");
+    menuBtn.classList.add("HeaderMobileBtn_close");
     menuBtnLine.forEach(item =>
-      item.classList.add("header-mobile-btn__line_close")
+      item.classList.add("HeaderMobileBtn-Line_close")
     );
 
     /* Set Menu State */
     showMenu = true;
   } else {
-    menu.classList.remove("header__menu_show");
-    menuBtn.classList.remove("header-mobile-btn_close");
+    menu.classList.remove("Header-Menu_show");
+    menuBtn.classList.remove("HeaderMobileBtn_close");
     menuBtnLine.forEach(item =>
-      item.classList.remove("header-mobile-btn__line_close")
+      item.classList.remove("HeaderMobileBtn-Line_close")
     );
 
     /* Set Menu State */

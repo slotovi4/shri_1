@@ -1,0 +1,6 @@
+@media screen and (max-width: 900px) {
+  .CanvVideoBlock-Contrast {
+    width: calc(100% - 80px);
+    margin: 0;
+  }
+}

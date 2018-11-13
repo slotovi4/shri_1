@@ -1,0 +1,7 @@
+.EventHeader {
+  display: flex;
+  align-items: center;
+  padding: 20px 20px 0;
+  margin-bottom: 16px;
+  flex: 1 0 auto;
+}

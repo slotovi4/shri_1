@@ -1,59 +1,41 @@
 /* Zoom(Click) Event To Video */
 function openVideo(): void {
-  let canvasVid = document.querySelectorAll(".canv-video-block__video");
-  let videoBlock = document.querySelectorAll(".canv-video-block__canvas-block");
+  let canvasVid = document.querySelectorAll(".CanvVideoBlock-Video");
+  let videoBlock = document.querySelectorAll(".CanvVideoBlock-CanvasBlock");
 
-  canvasVid.forEach(function(canvas) {
-    canvas.addEventListener("click", function() {
+  canvasVid.forEach(function (canvas) {
+    canvas.addEventListener("click", function () {
       let parentBlock = this.parentNode;
       let controllBlock = parentBlock.querySelector(
-        ".canv-video-block__controll-block"
+        ".CanvVideoBlock-ControllBlock"
       );
-      let button = parentBlock.querySelector(".canv-video-block__button");
+      let button = parentBlock.querySelector(".CanvVideoBlock-Button");
       let soundIndicator = parentBlock.querySelector(
-        ".canv-video-block__sound-volume"
+        ".CanvVideoBlock-SoundVolume"
       );
-
-      let openVideo = dataDispatcher.getActiveItems();
 
       /* Close Button */
-      button.addEventListener("click", function() {
-        parentBlock.classList.remove("canv-video-block__canvas-block_open");
-        button.classList.remove("canv-video-block__button_open");
-        button.classList.remove("canv-video-block__button_open");
-        controllBlock.classList.remove("canv-video-block__controll-block_open");
+      button.addEventListener("click", function () {
+        parentBlock.classList.remove("CanvVideoBlock-CanvasBlock_open");
+        button.classList.remove("CanvVideoBlock-Button_open");
+        button.classList.remove("CanvVideoBlock-Button_open");
+        controllBlock.classList.remove("CanvVideoBlock-ControllBlock_open");
         soundIndicator.classList.remove(
-          "canv-video-block__sound-volume_active"
+          "CanvVideoBlock-SoundVolume_active"
         );
-
-        getActiveVideo(videoBlock, "canv-video-block__canvas-block_open");
       });
 
       /* Open Video */
       if (
         !parentBlock.classList.contains(
-          "canv-video-block__canvas-block_open"
-        ) &&
-        !openVideo
+          "CanvVideoBlock-CanvasBlock_open"
+        )
       ) {
-        parentBlock.classList.add("canv-video-block__canvas-block_open");
-        button.classList.add("canv-video-block__button_open");
-        controllBlock.classList.add("canv-video-block__controll-block_open");
-        soundIndicator.classList.add("canv-video-block__sound-volume_active");
-        getActiveVideo(videoBlock, "canv-video-block__canvas-block_open");
+        parentBlock.classList.add("CanvVideoBlock-CanvasBlock_open");
+        button.classList.add("CanvVideoBlock-Button_open");
+        controllBlock.classList.add("CanvVideoBlock-ControllBlock_open");
+        soundIndicator.classList.add("CanvVideoBlock-SoundVolume_active");
       }
     });
   });
-}
-
-function getActiveVideo(item, className) {
-  dataDispatcher.dispatch([
-    {
-      actionType: "itemStatus",
-      data: {
-        dataActive: item,
-        activeClass: className
-      }
-    }
-  ]);
 }
