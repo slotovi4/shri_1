@@ -35,12 +35,12 @@ const FooterElem = () => (
   </RegistryConsumer>
 );
 
+let videos = getData('https://slotovi4.github.io/shri_1/dist/data/videos.json');
 const VideoElem = () => (
   <RegistryConsumer>
     {registries => {
       const registry = registries[cnApp()];
       const VideoNew = registry.get(cnCanvVideoBlock());
-      let videos = getData('/dist/data/videos.json');
 
       return <VideoNew videos={videos} />;
     }}
