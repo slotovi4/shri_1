@@ -31,21 +31,8 @@
 }
 
 @media screen and (max-width: 800px) {
-  .EventClimate {
-    display: flex;
-    justify-content: space-between;
-  }
-}
-
-@media screen and (max-width: 800px) {
   .EventHeader {
     padding: 16px 16px 0;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .EventInfo {
-    padding: 16px 16px 20px;
   }
 }
 
@@ -56,11 +43,24 @@
 }
 
 @media screen and (max-width: 800px) {
+  .EventClimate {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 800px) {
   .Footer {
     padding: 20px;
     height: auto;
     flex-direction: column;
     text-align: center;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .EventInfo {
+    padding: 16px 16px 20px;
   }
 }
 
