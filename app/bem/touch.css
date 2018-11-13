@@ -159,16 +159,16 @@
   }
 }
 
+@media screen and (max-width: 800px) {
+  .Event-Humidity {
+    padding-left: 0;
+  }
+}
+
 @media screen and (max-width: 900px) {
   .Event-Icon {
     width: 35px;
     height: 32px;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .Event-Humidity {
-    padding-left: 0;
   }
 }
 
