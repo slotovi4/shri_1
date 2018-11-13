@@ -1,0 +1,5 @@
+.Container-Video {
+  grid-column: span 3;
+  width: 100%;
+  height: auto;
+}

@@ -1,0 +1,12 @@
+.Event_type_info {
+  background-color: #fafafa;
+}
+
+.Event_type_info .EventInfo {
+  padding-top: 0;
+}
+
+.Event_type_info:hover,
+.Event_type_info:hover .EventInfo {
+  background: #f3f3f3;
+}

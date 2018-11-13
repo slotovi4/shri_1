@@ -1,0 +1,11 @@
+.EventMusic-Name {
+  font-size: 1.25rem;
+  line-height: 1.4rem;
+  color: black;
+  display: inline-block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
+  padding-bottom: 20px;
+}

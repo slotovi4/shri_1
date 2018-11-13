@@ -1,0 +1,7 @@
+@media screen and (max-width: 800px) {
+  .Header-Link {
+    padding: 0;
+    line-height: 30px;
+    color: white;
+  }
+}

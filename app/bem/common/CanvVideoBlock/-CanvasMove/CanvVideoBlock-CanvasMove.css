@@ -1,0 +1,9 @@
+.CanvVideoBlock-CanvasMove {
+  position: absolute;
+  left: 0;
+  opacity: .2;
+  pointer-events: none;
+  width: 100%;
+  height: auto;
+  top: 0;
+}

@@ -1,0 +1,15 @@
+.Event_size_l {
+  grid-column: span 4;
+  grid-row-end: span 3;
+}
+
+.Event_size_l .EventSystem {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Event_size_l .Event-Desc {
+  font-size: 1.5rem;
+  line-height: 1.75rem;
+  color: #333333;
+}

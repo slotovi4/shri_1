@@ -2,10 +2,10 @@
 function touchEvets(): void {
   let cam = <HTMLDivElement>document.querySelector("#cam");
   let camParent = <HTMLDivElement>document.querySelector("#camParent");
-  let camInfo = <HTMLDivElement>camParent.querySelector(".event-cam-info");
-  let camZoom = <HTMLSpanElement>camInfo.querySelector(".event-cam-info__zoom");
+  let camInfo = <HTMLDivElement>camParent.querySelector(".EventCamInfo");
+  let camZoom = <HTMLSpanElement>camInfo.querySelector(".EventCamInfo-Zoom");
   let camBright = <HTMLSpanElement>(
-    camInfo.querySelector(".event-cam-info__bright")
+    camInfo.querySelector(".EventCamInfo-Bright")
   );
 
   let conXstart: number; //start X touch position
@@ -27,7 +27,7 @@ function touchEvets(): void {
   }
 
   if ("ontouchstart" in <HTMLElement>document.documentElement) {
-    camInfo.classList.remove("event-cam-info_hide"); //if touch device show cam info block
+    camInfo.classList.remove("EventCamInfo_hide"); //if touch device show cam info block
     camZoom.textContent = "Приближение: 0%";
     camBright.textContent = "Яркость: 0%";
 
@@ -91,7 +91,7 @@ function touchEvets(): void {
         /* Rotate */
         touchAngle = Math.round(
           Math.atan2(eEv.clientX - imgCenterX, -(eEv.clientY - imgCenterY)) *
-            (180 / Math.PI)
+          (180 / Math.PI)
         );
 
         if (touchAngle > 0) {
@@ -142,7 +142,7 @@ function touchEvets(): void {
   //rotate if one touch move & one stay
   function checkВrightness(e: object) {
     let status = false;
-    touchedPoints.forEach(function(point) {
+    touchedPoints.forEach(function (point) {
       //if current touch move & second touch not move
       let pPoint = point as PointEvent;
       let eEv = e as PointEvent;

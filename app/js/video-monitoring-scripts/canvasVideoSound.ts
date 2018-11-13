@@ -7,13 +7,13 @@ function canvasVideoSound(videoId: string): void {
     let video = <HTMLVideoElement>document.querySelector("#" + videoId), //video
       block = <HTMLElement>document.querySelector("#" + videoId + "-block"), //video block
       muteButton = <HTMLElement>(
-        block.querySelector(".canv-video-block__sound-mute")
+        block.querySelector(".CanvVideoBlock-SoundMute")
       ),
       canvas = <HTMLCanvasElement>(
-        block.querySelector(".canv-video-block__video")
+        block.querySelector(".CanvVideoBlock-Video")
       ), //canvas
       soundIndicator = <HTMLElement>(
-        block.querySelector(".canv-video-block__sound-volume")
+        block.querySelector(".CanvVideoBlock-SoundVolume")
       ), //sound indicator
       ctx = new AudioContext(), //audio
       source = ctx.createMediaElementSource(video), //get video element
@@ -34,7 +34,7 @@ function canvasVideoSound(videoId: string): void {
 
     /* Check Sound Volume(Frequency) */
     let data = new Uint8Array(analyser.frequencyBinCount);
-    processor.onaudioprocess = function() {
+    processor.onaudioprocess = function () {
       analyser.getByteFrequencyData(data);
       soundVolume = getSoundVolumeValue(data);
       if (maxSoundVolume < soundVolume) maxSoundVolume = soundVolume;

@@ -16,31 +16,31 @@ function createCanvasVideoBlock(videoId: string): void {
     contrastText = document.createElement("span");
 
   /* Set Values */
-  canvMove.classList.add("canv-video-block__canvas-move");
-  block.classList.add("canv-video-block");
+  canvMove.classList.add("CanvVideoBlock-CanvasMove");
+  block.classList.add("CanvVideoBlock");
   block.id = videoId + "-block";
-  canvasBlock.classList.add("canv-video-block__canvas-block");
-  controllsBlock.classList.add("canv-video-block__controll-block");
-  prevButton.classList.add("canv-video-block__button");
+  canvasBlock.classList.add("CanvVideoBlock-CanvasBlock");
+  controllsBlock.classList.add("CanvVideoBlock-ControllBlock");
+  prevButton.classList.add("CanvVideoBlock-Button");
   prevButton.textContent = "Все камеры";
-  canvas.classList.add("canv-video-block__video");
-  soundVolume.classList.add("canv-video-block__sound-volume");
-  soundMute.classList.add("canv-video-block__sound-mute");
+  canvas.classList.add("CanvVideoBlock-Cideo");
+  soundVolume.classList.add("CanvVideoBlock-SoundVolume");
+  soundMute.classList.add("CanvVideoBlock-SoundMute");
   soundMute.textContent = "♪";
-  info.classList.add("canv-video-block__info");
-  luminance.classList.add("canv-video-block__luminance");
+  info.classList.add("CanvVideoBlock-Info");
+  luminance.classList.add("CanvVideoBlock-Luminance");
   luminance.setAttribute("type", "range");
   luminance.setAttribute("value", "5");
   luminance.setAttribute("min", "0");
   luminance.setAttribute("max", "10");
-  luminanceText.classList.add("canv-video-block__text");
+  luminanceText.classList.add("CanvVideoBlock-Text");
   luminanceText.textContent = "Яркость";
-  contrast.classList.add("canv-video-block__contrast");
+  contrast.classList.add("CanvVideoBlock-Contrast");
   contrast.setAttribute("type", "range");
   contrast.setAttribute("value", "1");
   contrast.setAttribute("min", "1");
   contrast.setAttribute("max", "5");
-  contrastText.classList.add("canv-video-block__text");
+  contrastText.classList.add("CanvVideoBlock-Text");
   contrastText.textContent = "Контраст";
 
   /* Add Elements To Block */
@@ -57,6 +57,6 @@ function createCanvasVideoBlock(videoId: string): void {
   canvasBlock.appendChild(controllsBlock);
   block.appendChild(canvasBlock);
 
-  let container = <HTMLElement>document.querySelector(".container");
+  let container = <HTMLElement>document.querySelector(".Container");
   container.appendChild(block);
 }

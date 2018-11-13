@@ -1,0 +1,10 @@
+.EventMusic-Image {
+  width: 53px;
+  height: 52px;
+  display: inline-block;
+  background-position: center;
+  background-size: contain;
+  border-radius: 10px;
+  left: 0;
+  position: absolute;
+}
