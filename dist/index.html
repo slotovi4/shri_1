@@ -28,7 +28,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let request = new XMLHttpRequest();
-            request.open("GET", '/dist/data/videos.json', false);
+            request.open("GET", 'https://slotovi4.github.io/shri_1/dist/data/videos.json', false);
 
             request.onload = function () {
                 if (request.status >= 200 && request.status < 400) {
