@@ -1,6 +1,6 @@
 const cnFooter = cn('Footer');
 
-function Footer() {
+function Footer(props) {
     return (
         <div className={cnFooter()}>
             <div className={cnFooter('LeftSection')}>
