@@ -1,0 +1,10 @@
+@media screen and (max-width: 800px) {
+  .Event_size_s .EventSystem {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .Event_size_s .EventSystem .Event-Source {
+    margin: 0;
+  }
+}

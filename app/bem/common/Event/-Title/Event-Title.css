@@ -1,0 +1,11 @@
+.Event-Title {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 1.5rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}

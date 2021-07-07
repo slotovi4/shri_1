@@ -1,0 +1,12 @@
+.CanvVideoBlock-SoundMute {
+  line-height: 18px;
+  cursor: pointer;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  font-size: 18px;
+  color: red;
+  border: 1px solid #333333;
+  border-radius: 50%;
+}

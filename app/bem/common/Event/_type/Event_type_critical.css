@@ -1,0 +1,8 @@
+.Event_type_critical {
+  background-color: #db5341;
+}
+
+.Event_type_critical .EventHeader,
+.Event_type_critical .EventSystem {
+  color: white;
+}

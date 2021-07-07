@@ -1,0 +1,9 @@
+.Event-Continue {
+  background-image: url("../img/continue.png");
+  width: 10px;
+  height: 16px;
+  opacity: 0;
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+}

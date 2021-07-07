@@ -1,0 +1,7 @@
+.CanvVideoBlock-Info {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: 600;
+  z-index: 10;
+}

@@ -1,0 +1,5 @@
+@media screen and (max-width: 800px) {
+  .CanvVideoBlock-CanvasBlock_open {
+    z-index: 10000;
+  }
+}

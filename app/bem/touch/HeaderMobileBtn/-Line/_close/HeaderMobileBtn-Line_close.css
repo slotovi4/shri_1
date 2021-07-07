@@ -1,0 +1,24 @@
+.HeaderMobileBtn-Line_close:nth-child(1) {
+  transform: rotate(45deg) translate(4px, 4px);
+}
+
+.HeaderMobileBtn-Line_close:nth-child(2) {
+  opacity: 0;
+}
+
+.HeaderMobileBtn-Line_close:nth-child(3) {
+  transform: rotate(-45deg) translate(4px, -5px);
+}
+
+.HeaderMobileBtn-Line_close:last-child {
+  margin-bottom: 0;
+}
+
+.HeaderMobileBtn-Line_close {
+  transform: rotate(180deg);
+}
+@media screen and (max-width: 800px) {
+  .HeaderMobileBtn-Line_close {
+    background-color: white;
+  }
+}

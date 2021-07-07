@@ -1,0 +1,8 @@
+.EventMusicTracker {
+  height: 52px;
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 70px;
+}

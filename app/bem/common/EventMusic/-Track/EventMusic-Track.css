@@ -1,0 +1,22 @@
+.EventMusic-Track {
+  display: flex;
+  background-color: #979797;
+  height: 1px;
+  max-width: 350px;
+  width: calc(100% - 30px);
+  position: relative;
+  align-items: center;
+}
+
+.EventMusic-Track::after {
+  content: "";
+  position: absolute;
+  background-color: #d8d8d8;
+  border-radius: 5px;
+  width: 12px;
+  height: 20px;
+  left: 0;
+  top: 0;
+  margin-top: -10px;
+  margin-left: 24px;
+}

@@ -1,0 +1,10 @@
+.Footer-Text {
+  color: #858585;
+  font-size: .75rem;
+  line-height: .875rem;
+  padding-right: 10px;
+}
+
+.Footer-Text:last-child {
+  padding: 0;
+}

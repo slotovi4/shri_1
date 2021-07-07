@@ -1,0 +1,5 @@
+@media screen and (max-width: 800px) {
+  .Header-Link_active {
+    color: #ffd93e;
+  }
+}

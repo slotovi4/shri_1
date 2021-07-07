@@ -1,0 +1,9 @@
+@media screen and (max-width: 800px) {
+  .Event-Desc {
+    font-size: 1.5rem;
+    line-height: 1.85rem;
+    color: #333333;
+    padding-right: 0;
+    font-family: Helvetica, Arial sans-serif;
+  }
+}

@@ -1,0 +1,8 @@
+.Event_size_m {
+  grid-column: span 3;
+}
+
+.Event_size_m .EventSystem {
+  display: flex;
+  justify-content: space-between;
+}
